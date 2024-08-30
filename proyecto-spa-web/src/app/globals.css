@@ -5,50 +5,12 @@
 button:hover {
   text-decoration: underline;
 }
-button.press {
-}
 
 .text {
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
   box-shadow: 0 0 5px #03e9f4, 0 0 15px #03e9f4, 0 0 25px #03e9f4,
     0 0 100px #03e9f4;
   background-color: #03e9f4;
-}
-
-.container {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.hero {
-  position: relative;
-  width: 100%;
-  height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #000;
-}
-
-.hero img {
-  object-fit: cover;
-}
-
-.overlay {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-  text-align: center;
-}
-
-.overlay h1 {
-  margin-top: 20px;
-  font-size: 48px;
-  font-family: "Cursive";
 }
 
 .logo {
@@ -84,16 +46,34 @@ button.press {
   font-size: 16px;
 }
 
+.actions {
+  display: flex;
+  justify-content: space-around;
+  height: 200px;
+}
+
+.actions img {
+  transform: translateY(60px) scaleX(-1);
+  width: 300px;
+  height: 300px;
+}
+
 .actions button {
-  background-color: #ffffff;
+  background: #ffffff;
+  height: 45px;
+  width: 90px;
   color: #3c634a;
   border: none;
   padding: 5px 15px;
   cursor: pointer;
+  transform: translateX(-30px);
+  align-self: center;
+  border-radius: 10px;
 }
 
 .navbar {
   display: flex;
+  height: 105px;
   justify-content: space-between;
   align-items: center;
   background-color: #3c634a;

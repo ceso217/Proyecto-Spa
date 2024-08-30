@@ -38,6 +38,12 @@ export default function Navbar() {
         </li>
       </ul>
       <div className="actions">
+        <Image
+          src="/flor.svg"
+          alt="Descripción de la imagen"
+          width={100}
+          height={4000}
+        />
         <button>Login</button>
       </div>
     </nav>
