@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Proyecto SPA "Sentirse Bien"
 
-## Getting Started
+### Requerimientos
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Información corporativa.
+- Información de contacto con el spa para realizar consultas mediante página web, WhatsApp , redes sociales. Y formulario.
+- La dra. Felicidad debe organizar los turnos para la atención de los clientes.
+- Actualmente, para poder pedir una cita, los clientes llaman a al spa y una contestadora les indica un nro. de
+WhatsApp al que deben enviar un mensaje indicando el servicio solicitado y la fecha en la que desea el mismo.
+Una vez que la secretaria recibe el mensaje se vuelve a comunicar con el cliente para indicarle los turnos disponibles.
+- Por la situación planteada, la doctora necesita habilitar otro medio de comunicación y le ha solicitado a su
+equipo, el desarrollo de una página web para que los clientes puedan:
+1. Conocer todos los tipos de servicios que realiza.
+2. El cliente debe poder enviar la información solicitada para el servicio por la página.
+3. Contestar la consulta.
+4. El cliente debe estar registrado para seleccionar el turno.
+5. Registrar los datos personales referido a los clientes en una base de datos.
+6. Inclusión de una galería imágenes.
+7. Permitir comentarios de la sociedad sin registro previos.
+8. Implementar web service de Google Map.
+9. Login de personal del spa para contestar las consultas.
+10. Respetar la imagen corporativa del spa.
+11. La página web debe mostrar las siguientes secciones:
+    - [ ]  Quienes somos
+    - [ ]  Servicios
+    - [ ]  Noticias
+    - [ ]  Acceso a personal del spa a la aplicación
+    - [ ]  Acceso de los clientes a la aplicación.
+    - [ ]  Empleo
+    - [ ]  Permitir comentarios de la sociedad sin registro previos.

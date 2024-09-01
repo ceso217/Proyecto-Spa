@@ -27,6 +27,7 @@ export default function Home() {
             height={250}
           />
           <h1 className={corinthia.className}>Sentirse Bien</h1>
+          <h1>Frankito</h1>
         </div>
       </div>
     </div>
