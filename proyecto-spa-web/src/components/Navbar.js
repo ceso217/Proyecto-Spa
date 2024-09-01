@@ -15,7 +15,7 @@ export default function Navbar() {
         <Link
           href="/"
           className={corinthia.className}
-          style={{ fontSize: "70px", color: "#F8DCDC", marginTop: "55px" }}
+          style={{ fontSize: "70px", color: "#F8DCDC", marginTop: "55px", textDecoration: "none" }}
         >
           Sentirse Bien
         </Link>
