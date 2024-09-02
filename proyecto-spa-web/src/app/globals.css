@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 body{
   margin: 0;
 }
@@ -108,7 +113,75 @@ button:hover {
   margin-top: -30px;
   font-size: 130px;
   color: #2f2727;
-  transform: translateY(-75px);
+  transform: translateY(-20px);
+}
+
+/*  Sección Quienes Contactanos  */
+
+.cta-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+  background-color: #3C634A; /* Color de fondo como el ejemplo */
+  color: #fff;
+
+}
+
+.cta-content{
+  flex: 1;
+  max-width: 50%;
+  padding: 20px;
+  text-align: left;
+}
+
+.cta-content h2 {
+  font-size: 48px; /* Ajusta según necesidad */
+  font-family: 'Cursive', sans-serif; /* Fuente personalizada */
+  margin-bottom: 20px;
+  position: relative; /* Necesario para la línea decorativa */
+}
+
+.cta-content h2::after {
+  content: "";
+  display: block;
+  width: 150px;
+  height: 5px; /* Cambia según el color deseado */
+  position: absolute;
+  bottom: -10;
+  left: 0;
+}
+
+.cta-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  line-height: 1.5; /* Mejora la legibilidad */
+}
+
+.cta-button {
+  background-color: #6A8F66; /* Color del botón */
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Color al pasar el cursor */
+}
+
+.cta-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  
 }
 
 /*  Sección Quienes Somos  */
@@ -132,6 +205,7 @@ button:hover {
   width: 100%;
   height: auto;
   border-radius: 10px;
+  margin-left: 100px;
 }
 
 .Somos .content{
@@ -144,12 +218,14 @@ button:hover {
   color: #4b9c74;
   font-family: 'Cursive', sans-serif;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .Somos p{
     font-size: 18px;
     color: #4b4b4b;
     margin-top: 0;
+    text-align:  just;
 }
 
 .Somos .item, .Somos .item.i2{

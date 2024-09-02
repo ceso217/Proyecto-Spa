@@ -10,7 +10,7 @@ const corinthia = Corinthia({
 export default function Home() {
   return (
     <>
-    <div className="container">
+    <div className="">
       <div className="hero">
         <Image
           src="/portada.svg"
@@ -19,7 +19,7 @@ export default function Home() {
           objectFit="cover"
           priority
         />
-        <div className="overlay">
+        <div className="absolute text-9xl -translate-y-60">
           <Image
             src="/logo.svg"
             alt="Descripción de la imagen"
@@ -30,6 +30,7 @@ export default function Home() {
         </div>
       </div>
     </div>
+
       <div className="Somos">
         <div className ="item">
             <Image
@@ -53,6 +54,25 @@ export default function Home() {
         </div>
     </div>
 
+    <div className="cta-section">
+      <div className="cta-content">
+        <h2>Pedí tu turno!</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. 
+           Donec tincidunt, quam vestibulum ultricies egestas, dolor sem laoreet orci, quis finibus justo 
+           quam at nibh. Vestibulum ipsum tortor, suscipit non enim vitae. Tincidunt scelerisque augue. 
+           Nunc quis fringilla magna, vel sollicitudin quam.
+        </p>
+        <button className="cta-button">Contactanos</button>
+      </div>
+      <div className="cta-image">
+        <Image
+        src="ctabata.svg"
+        alt="Descripción de la imagen"
+        width={600}
+        height={400}
+        />
+      </div>
+    </div>
 
       <div className="Encuentranos">
         <div className="item">
