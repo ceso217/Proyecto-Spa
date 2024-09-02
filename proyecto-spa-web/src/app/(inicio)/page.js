@@ -1,5 +1,5 @@
 import Image from "next/image";
-import "../globals.css";
+import "../../styles/Home.module.css";
 import { Corinthia } from "@next/font/google";
 
 const corinthia = Corinthia({
