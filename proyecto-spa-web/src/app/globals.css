@@ -107,10 +107,18 @@ button:hover {
   align-items: center;
   text-align: center;
   margin-top: -375px;
+  
 }
 
 .overlay h1 {
   margin-top: -30px;
   font-size: 130px;
-  color: #000;
+  color: #2f2727;
+  transform: translateY(-75px);
+}
+
+/*  Sección Quienes Somos  */
+
+.Somos{
+  display: flex;
 }

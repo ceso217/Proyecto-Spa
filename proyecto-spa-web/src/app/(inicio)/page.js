@@ -9,6 +9,7 @@ const corinthia = Corinthia({
 
 export default function Home() {
   return (
+    <>
     <div className="container">
       <div className="hero">
         <Image
@@ -29,5 +30,27 @@ export default function Home() {
         </div>
       </div>
     </div>
+      <div className="Somos">
+        <div className = "item">
+          <h2>Vive una experiencia inolvidable</h2>
+        </div>
+        <div className = "item">
+            <Image
+              src= "/fotopiedras.svg"
+              alt = "fotos de persona recibiendo masaje"
+              width = {300}
+              height={200}
+            />
+          </div>
+          <div className = "item">
+            <Image
+              src= "/fotomasaje.svg"
+              alt = "fotod de persona recibiendo masaje"
+              width = {300}
+              height={200}
+            />
+          </div>
+    </div>
+    </>
   );
 }
