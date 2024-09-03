@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-body{
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -109,7 +107,6 @@ button:hover {
   align-items: center;
   text-align: center;
   margin-top: -375px;
-  
 }
 
 .overlay h1 {
@@ -119,69 +116,14 @@ button:hover {
   transform: translateY(-20px);
 }
 
-/*  Sección Quienes Contactanos  */
-
-.cta-section{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 50px;
-  background-color: #3C634A; 
-  color: #fff;
-
-}
-
-.cta-content{
-  flex: 1;
-  max-width: 50%;
-  padding: 20px;
-  text-align: left;
-}
-
-.cta-content h2::after {
-  content: "";
-  display: block;
-  width: 150px;
-  height: 5px; 
-  position: absolute;
-  bottom: -10;
-  left: 0;
-}
-
-.cta-button {
-  background-color: #567C49; /* Color del botón */
-  border: none;
-  padding: 15px 30px;
-  font-size: 18px;
-  color: #fff;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-  flex: 1;
-  max-width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Color al pasar el cursor */
-}
-
-.cta-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  
-}
-
 /*  Sección Quienes Somos  */
 
 html {
   scroll-behavior: smooth; /* Animación al hacer scroll para el quien somos del home*/
 }
 
-.Somos{
-  background-color: #FFF1ED;
+.Somos {
+  background-color: #fff1ed;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -189,45 +131,38 @@ html {
   gap: 20px;
 }
 
-.Somos .item{
+.Somos .item {
   flex: 1;
   height: auto;
   padding: 0 20px;
 }
 
-.Somos .item.i2{
+.Somos .item.i2 {
   width: 100%;
   height: auto;
   border-radius: 10px;
   margin-left: 100px;
 }
 
-.Somos .content{
+.Somos .content {
   flex: 1;
   text-align: center;
 }
 
-.Somos h2{
-  font-size: 36px;
-  color: #4b9c74;
-  font-family: 'Cursive', sans-serif;
-  margin-bottom: 10px;
-  text-align: center;
+.Somos p {
+  font-size: 18px;
+  color: #4b4b4b;
+  margin-top: 0;
+  text-align: just;
 }
 
-.Somos p{
-    font-size: 18px;
-    color: #4b4b4b;
-    margin-top: 0;
-    text-align:  just;
-}
-
-.Somos .item, .Somos .item.i2{
+.Somos .item,
+.Somos .item.i2 {
   max-width: 45%;
 }
 
-.Encuentranos{
-  background-color: #F2F1E3;
+.Encuentranos {
+  background-color: #f2f1e3;
   height: 600px;
   display: flex;
   justify-content: space-between;
@@ -235,34 +170,27 @@ html {
   padding: 0 50px;
 }
 
-.Encuentranos .item{
+.Encuentranos .item {
   flex: 1;
   padding: 20px;
   max-width: 45%;
 }
 
-.Encuentranos .item.i2{
+.Encuentranos .item.i2 {
   text-align: center;
 }
 
-.Encuentranos h2{
-  font-size: 36px;
-  color: #4b9c74;
-  font-family:'Cursive', sans-serif;
-}
-
-.Encuentranos p{
+.Encuentranos p {
   font-size: 18px;
   color: #4b4b4b;
 }
 
-.mapa{
+.mapa {
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
-.mapa iframe{
+.mapa iframe {
   height: 450px;
 }
-

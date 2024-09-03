@@ -10,9 +10,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors:{
-        'green-services': '#3C634A',       
-      }
+      colors: {
+        "green-services": {
+          100: "#3C634A",
+          200: "#567C49",
+          300: "#4b9c74",
+        },
+      },
     },
   },
   plugins: [],
