@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 
+
 body{
   margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 button:hover {
@@ -123,7 +126,7 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   padding: 50px;
-  background-color: #3C634A; /* Color de fondo como el ejemplo */
+  background-color: #3C634A; 
   color: #fff;
 
 }
@@ -136,17 +139,17 @@ button:hover {
 }
 
 .cta-content h2 {
-  font-size: 48px; /* Ajusta según necesidad */
-  font-family: 'Cursive', sans-serif; /* Fuente personalizada */
+  font-size: 48px; 
+  font-family: 'Cursive', sans-serif; 
   margin-bottom: 20px;
-  position: relative; /* Necesario para la línea decorativa */
+  position: relative; 
 }
 
 .cta-content h2::after {
   content: "";
   display: block;
   width: 150px;
-  height: 5px; /* Cambia según el color deseado */
+  height: 5px; 
   position: absolute;
   bottom: -10;
   left: 0;
@@ -155,11 +158,11 @@ button:hover {
 .cta-content p {
   font-size: 16px;
   margin-bottom: 20px;
-  line-height: 1.5; /* Mejora la legibilidad */
+  line-height: 1.5; 
 }
 
 .cta-button {
-  background-color: #6A8F66; /* Color del botón */
+  background-color: #567C49; /* Color del botón */
   border: none;
   padding: 15px 30px;
   font-size: 18px;
@@ -185,6 +188,10 @@ button:hover {
 }
 
 /*  Sección Quienes Somos  */
+
+html {
+  scroll-behavior: smooth; /* Animación al hacer scroll para el quien somos del home*/
+}
 
 .Somos{
   background-color: #FFF1ED;
@@ -233,7 +240,7 @@ button:hover {
 }
 
 .Encuentranos{
-  background-color: #fdf5f3;
+  background-color: #F2F1E3;
   height: 600px;
   display: flex;
   justify-content: space-between;
@@ -271,3 +278,4 @@ button:hover {
 .mapa iframe{
   height: 450px;
 }
+

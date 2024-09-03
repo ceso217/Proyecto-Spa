@@ -19,7 +19,7 @@ export default function Home() {
           objectFit="cover"
           priority
         />
-        <div className="absolute text-9xl -translate-y-60">
+        <div className="absolute flex flex-col text-9xl -translate-y-60 items-center">
           <Image
             src="/logo.svg"
             alt="Descripción de la imagen"
@@ -31,7 +31,7 @@ export default function Home() {
       </div>
     </div>
 
-      <div className="Somos">
+      <div className="Somos"  >
         <div className ="item">
             <Image
               src= "/fotopiedras.svg"

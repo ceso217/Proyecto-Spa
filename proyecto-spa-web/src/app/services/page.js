@@ -1,78 +1,17 @@
 import React from "react";
 import Image from "next/image";
-import styles from  "../../styles/Services.module.css";
-import { Corinthia } from "@next/font/google";
+import {ServiciosArticulo} from "../../components/Varios"
 
-const corinthia = Corinthia({
-  weight: "400",
-  subsets: ["latin"],
-});
+
 
 export default function page() {
   return (
-    <div className={styles["services-container"]}>
-    <h1 className={styles["services-header"]}>Servicios</h1>
-      <div className={styles["service-block"]}>
-        <div className={styles["services-titles"]}>
-        <div className={styles["minicont"]}>
-        <h2>Masajes</h2>
-        
-      <Image className="img-services"
-        src="/fotomasajeser.svg"
-        alt="Persona en atuendo médico"
-        width={300}
-        height={200}
-            />
-          
-          </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum ultricies egestas, dolor sem laoreet orci, quis finibus justo quam at nibh. Vestibulum ipsum tortor, suscipit non enim vitae. Tincidunt scelerisque augue. Nunc quis fringilla magna, vel sollicitudin quam.</p>
-          </div>
-          
-    </div>
-      <div className={styles["service-block"]}>
-        <div className={styles["services-titles-r"]}>
-        <div className={styles["minicont"]}>
-        <h2>Belleza</h2>
-      <Image
-        src="/belleza.svg"
-        alt="Manos con gotero"
-        width={300}
-        height={200}
-            />
-            </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum ultricies egestas, dolor sem laoreet orci, quis finibus justo quam at nibh. Vestibulum ipsum tortor, suscipit non enim vitae. Tincidunt scelerisque augue. Nunc quis fringilla magna, vel sollicitudin quam.</p>
-        </div>
-        </div>
-      <div className={styles["service-block"]}>
-        <div className={styles["services-titles"]}>
-        <div className={styles["minicont"]}>
-        <h2>Tratamientos Faciales</h2>
-      <Image
-        src="/tratamientofacial.svg"
-        alt="Artículos de spa"
-        width={300}
-        height={200}
-            />
-            </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum ultricies egestas, dolor sem laoreet orci, quis finibus justo quam at nibh. Vestibulum ipsum tortor, suscipit non enim vitae. Tincidunt scelerisque augue. Nunc quis fringilla magna, vel sollicitudin quam.</p>
-        </div>
-        </div>
-      <div className={styles["service-block"]}>
-        <div className={styles["services-titles-r"]}>
-        <div className={styles["minicont"]}>
-        <h2>Tratamientos Corporales</h2>
-      <Image
-        src="/tratamientocor.svg"
-        alt="Artículos de spa"
-        width={300}
-        height={200}
-            />
-            </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum ultricies egestas, dolor sem laoreet orci, quis finibus justo quam at nibh. Vestibulum ipsum tortor, suscipit non enim vitae. Tincidunt scelerisque augue. Nunc quis fringilla magna, vel sollicitudin quam.</p>
-    </div>
-    </div>
-        
-  </div>
+    <>
+      <h3 className="bg-green-services text-4xl text-center text-white font-mono border-b-2 border-teal-900"> Servicios </h3>
+      <ServiciosArticulo  titulo="Masajes" imagen="/fotomasajeser.svg" ancho="200" alto="180" texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum ultricies egestas, dolor sem laoreet orci, quis finibus justo quam at nibh. Vestibulum ipsum tortor, suscipit non enim vitae. Tincidunt scelerisque augue. Nunc quis fringilla magna, vel sollicitudin quam." color="bg-green-services" />
+      <ServiciosArticulo titulo="Belleza" imagen="/belleza.svg" ancho="200" alto="200" texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum ultricies egestas, dolor sem laoreet orci, quis finibus justo quam at nibh. Vestibulum ipsum tortor, suscipit non enim vitae. Tincidunt scelerisque augue. Nunc quis fringilla magna, vel sollicitudin quam." color="bg-amber-100" reverse />
+      <ServiciosArticulo titulo="Tratamientos Faciales" imagen="/tratamientocor.svg" ancho="200" alto="200" texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum ultricies egestas, dolor sem laoreet orci, quis finibus justo quam at nibh. Vestibulum ipsum tortor, suscipit non enim vitae. Tincidunt scelerisque augue. Nunc quis fringilla magna, vel sollicitudin quam." color="bg-green-services" />
+      <ServiciosArticulo titulo="Tratamientos Corporales" imagen="/tratamientofacial.svg" ancho="200" alto="200" texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum ultricies egestas, dolor sem laoreet orci, quis finibus justo quam at nibh. Vestibulum ipsum tortor, suscipit non enim vitae. Tincidunt scelerisque augue. Nunc quis fringilla magna, vel sollicitudin quam." color="bg-amber-100" reverse />
+    </>
   );
 }
-

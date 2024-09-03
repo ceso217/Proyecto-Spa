@@ -5,17 +5,20 @@ import Image from "next/image";
 export function ServiciosArticulo({ titulo, imagen, ancho, alto, texto, color, reverse=false }) {
   const isReverse = reverse ? "flex-row-reverse" : "";
   return (
-    <article className={"flex p-10 text-2xl " + color +" "+ isReverse} >
-      <aside className='flex flex-col items-center'>
-        <h3>{titulo}</h3>
-        <Image className="img-services"
+    <div className={color}>
+      <h3 className='text-center text-4xl pt'>{titulo}</h3>
+    <article className={"flex justify-items-center items-center p-10 text-2xl h-96 text-center " +isReverse} >
+      <Image className="rounded-lg"
         src={imagen}
         alt="imagen"
         width={ancho}
         height={alto}
-            />
+        />
+      <aside className={`flex flex-col place-content-between`}>
+        
+        <p className='self-center px-10'>{texto}</p>
       </aside>
-      <p className='self-center px-10'>{texto}</p>
-    </article>
+      </article>
+      </div>
   )
 }

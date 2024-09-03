@@ -8,6 +8,7 @@ const corinthia = Corinthia({
 });
 
 export default function Navbar() {
+
   return (
     <nav className="navbar">
       <div className="logo">
@@ -25,7 +26,7 @@ export default function Navbar() {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/about">Quienes Somos</Link>
+          <Link href="/">Quienes Somos</Link>
         </li>
         <li>
           <Link href="/services">Servicios</Link>
