@@ -1,3 +1,3 @@
-import { Corinthia } from 'next/font/google'
+import {Corinthia } from 'next/font/google'
 
-export const corinthia = Corinthia({subsets:['latin']})
+export const corinthia = Corinthia({subsets:['latin'], weight:'400'})

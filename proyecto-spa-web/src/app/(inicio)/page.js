@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import "../../styles/Home.module.css";
 import { Corinthia } from "@next/font/google";
 
@@ -31,7 +32,7 @@ export default function Home() {
       </div>
     </div>
 
-      <div className="Somos"  >
+      <div className="Somos" id="somos" >
         <div className ="item">
             <Image
               src= "/fotopiedras.svg"
@@ -54,15 +55,21 @@ export default function Home() {
         </div>
     </div>
 
-    <div className="cta-section">
-      <div className="cta-content">
-        <h2>Pedí tu turno!</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. 
+    <div className="flex green-services">
+        <div className="">
+            {/* flex: 1;
+  max-width: 50%;
+  padding: 20px;
+  text-align: left; */}
+        <h2 className="text-5xl font-serif mb-5">Pedí tu turno!</h2>
+        <p className="text-base mb-5 leading-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sed sapien in pretium. 
            Donec tincidunt, quam vestibulum ultricies egestas, dolor sem laoreet orci, quis finibus justo 
            quam at nibh. Vestibulum ipsum tortor, suscipit non enim vitae. Tincidunt scelerisque augue. 
            Nunc quis fringilla magna, vel sollicitudin quam.
         </p>
+        <Link href="/comingsoon">
         <button className="cta-button">Contactanos</button>
+        </Link>
       </div>
       <div className="cta-image">
         <Image

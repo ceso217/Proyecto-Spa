@@ -6,7 +6,7 @@ export function ServiciosArticulo({ titulo, imagen, ancho, alto, texto, color, r
   const isReverse = reverse ? "flex-row-reverse" : "";
   return (
     <div className={color}>
-      <h3 className='text-center text-4xl pt'>{titulo}</h3>
+      <h3 className='text-center text-3xl pt-6 '>{titulo}</h3>
     <article className={"flex justify-items-center items-center p-10 text-2xl h-96 text-center " +isReverse} >
       <Image className="rounded-lg"
         src={imagen}

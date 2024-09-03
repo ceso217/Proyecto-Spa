@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        'green-services': '#98c597',       
+        'green-services': '#3C634A',       
       }
     },
   },

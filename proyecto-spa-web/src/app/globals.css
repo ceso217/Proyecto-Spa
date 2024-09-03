@@ -138,13 +138,6 @@ button:hover {
   text-align: left;
 }
 
-.cta-content h2 {
-  font-size: 48px; 
-  font-family: 'Cursive', sans-serif; 
-  margin-bottom: 20px;
-  position: relative; 
-}
-
 .cta-content h2::after {
   content: "";
   display: block;
@@ -153,12 +146,6 @@ button:hover {
   position: absolute;
   bottom: -10;
   left: 0;
-}
-
-.cta-content p {
-  font-size: 16px;
-  margin-bottom: 20px;
-  line-height: 1.5; 
 }
 
 .cta-button {

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Corinthia } from "@next/font/google";
 
+
 const corinthia = Corinthia({
   weight: "400",
   subsets: ["latin"],
@@ -26,16 +27,16 @@ export default function Navbar() {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/">Quienes Somos</Link>
+          <Link href="/#somos">Quienes Somos</Link>
         </li>
         <li>
           <Link href="/services">Servicios</Link>
         </li>
         <li>
-          <Link href="/news">Noticias</Link>
+          <Link href="/comingsoon">Noticias</Link>
         </li>
         <li>
-          <Link href="/jobs">Empleo</Link>
+          <Link href="/comingsoon">Empleo</Link>
         </li>
       </ul>
       <div className="actions">
