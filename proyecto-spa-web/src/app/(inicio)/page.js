@@ -12,7 +12,7 @@ const corinthia = Corinthia({
 export default function Home() {
   return (
     <>
-      <div className="">
+      <div>
         <div className="hero">
           <Image
             src="/portada.svg"
