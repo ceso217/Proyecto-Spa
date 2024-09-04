@@ -46,8 +46,10 @@ export default function Navbar() {
           width={100}
           height={4000}
         />
-        <button>Login</button>
+
       </div>
+      <Link href="/login">login</Link>
+
     </nav>
   );
 }
