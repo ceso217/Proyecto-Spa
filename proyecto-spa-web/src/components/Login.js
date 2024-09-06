@@ -28,7 +28,7 @@ export default function Login() {
             priority
           />
         </div>
-        <div className="flex justify-center items-center w-600 h-500 bg-green-950">
+        <div className="flex justify-center items-center w-600 h-500 bg-green-950 rounded-3xl shadow-xl">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col justify-evenly w-full h-3/4 items-center "
@@ -57,7 +57,7 @@ export default function Login() {
             </div>
             <div className="relative w-3/5">
               <input
-                className="w-full rounded-3xl z-10 my-1 py-2 px-5 border-solid border-transparent hover:border-black border-2 text-lg"
+                className="w-full bg-orange-50 rounded-3xl z-10 my-1 py-2 px-5 border-solid border-transparent hover:border-black border-2 text-lg"
                 type="password"
                 placeholder="Contraseña"
                 autoComplete="off"
@@ -74,8 +74,8 @@ export default function Login() {
             </div>
             <input
               type="submit"
-              value={"Login ➜"}
-              className="w-48 bg-white text-green-services-100 rounded-3xl z-10 mt-2 -mb-1 p-2 text-lg  hover:bg-green-services-300 hover:text-black hover:-translate-y-1 transition"
+              value={"Login ➜"}  
+              className="w-48 bg-orange-50 text-green-services-100 rounded-3xl z-10 mt-2 -mb-1 p-2 text-lg  hover:bg-green-services-300 shadow-xl hover:text-black hover:-translate-y-1 transition"
             />
           </form>
         </div>
