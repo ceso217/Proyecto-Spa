@@ -16,6 +16,10 @@ body {
   height: 500px;
 }
 
+.h-800 {
+  height: 700px;
+}
+
 button:hover {
   text-decoration: underline;
 }

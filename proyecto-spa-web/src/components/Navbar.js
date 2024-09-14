@@ -1,23 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Corinthia } from "@next/font/google";
-
-
-const corinthia = Corinthia({
-  weight: "400",
-  subsets: ["latin"],
-});
+import { corinthia, cormorant, montserrat } from "@/app/ui/fonts";
 
 export default function Navbar() {
-
   return (
     <nav className="navbar">
       <div className="logo">
         <Image src="/logo.svg" alt="Logo" width={170} height={170} />
         <Link
           href="/"
-          className={corinthia.className}
-          style={{ fontSize: "70px", color: "#F8DCDC", marginTop: "55px", textDecoration: "none" }}
+          className="text-7xl text-orange-100 mt-11"
+          style={corinthia.style}
         >
           Sentirse Bien
         </Link>
@@ -46,10 +39,8 @@ export default function Navbar() {
           width={100}
           height={4000}
         />
-
       </div>
       <Link href="/login">login</Link>
-
     </nav>
   );
 }

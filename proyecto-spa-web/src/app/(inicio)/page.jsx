@@ -1,13 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import "../../styles/Home.module.css";
-import { Corinthia } from "@next/font/google";
-import { cormorant, montserrat } from "../ui/fonts";
-
-const corinthia = Corinthia({
-  weight: "400",
-  subsets: ["latin"],
-});
+import { corinthia, cormorant, montserrat } from "../ui/fonts";
 
 export default function Home() {
   return (
@@ -28,7 +22,7 @@ export default function Home() {
               width={400}
               height={400}
             />
-            <h1 className={corinthia.className}>Sentirse Bien</h1>
+            <h1 style={corinthia.style}>Sentirse Bien</h1>
           </div>
         </div>
       </div>
