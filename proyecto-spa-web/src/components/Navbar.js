@@ -26,7 +26,7 @@ export default function Navbar() {
           <Link href="/services">Servicios</Link>
         </li>
         <li>
-          <Link href="/comingsoon">Noticias</Link>
+          <Link href="/notice">Noticias</Link>
         </li>
         <li>
           <Link href="/comingsoon">Empleo</Link>

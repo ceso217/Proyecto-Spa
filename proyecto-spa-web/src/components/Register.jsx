@@ -23,7 +23,7 @@ export default function Register() {
     try {
       // Envía los datos en formato JSON
       const signupResponse = await axios.post("/api/auth/signup", {
-        username: data.usuario,
+        username: data.username,
         fullname: data.nombreCompleto,
         email: data.email,
         password: data.password,
@@ -102,7 +102,7 @@ export default function Register() {
               />
               {errors.username && (
                 <p className="absolute left-3 -bottom-5 z-20 mt-1 bg-red-500 text-white text-sm px-3 py-1 rounded-xl shadow-lg">
-                  {errors.usuario.message}
+                  {errors.username.message}
                 </p>
               )}
             </div>
