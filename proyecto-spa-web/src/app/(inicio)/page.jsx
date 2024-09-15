@@ -5,6 +5,7 @@ import { corinthia, cormorant, montserrat } from "../ui/fonts";
 import Comments from "@/components/Comments";
 
 
+
 export default function Home() {
   
   return (
@@ -142,7 +143,33 @@ export default function Home() {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
-      <Comments />
+
+      <div className="CajaComentarios">
+        <div className="item">
+          <Image
+            src="/silla.svg"
+            alt="Imagen decorativa"
+            width={400}
+            height={300}
+          />
+        </div>
+        <div className="item i2">
+          <h2
+            className="text-7xl text-green-services-300 pb-8"
+            style={cormorant.style}
+          >
+            ¡Dejanos un comentario!
+          </h2>
+          <p style={montserrat.style}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+            lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum
+            ultricies.
+          </p>
+        </div>
+        <div className="item">
+          <Comments />
+        </div>
+      </div>
     </>
   );
 }
