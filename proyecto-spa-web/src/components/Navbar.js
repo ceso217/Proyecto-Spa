@@ -29,7 +29,7 @@ export default function Navbar() {
           <Link href="/notice">Noticias</Link>
         </li>
         <li>
-          <Link href="/comingsoon">Empleo</Link>
+          <Link href="/employment">Empleo</Link>
         </li>
       </ul>
       <div className="actions">
