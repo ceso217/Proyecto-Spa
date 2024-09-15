@@ -40,7 +40,7 @@ export default function Navbar() {
           height={4000}
         />
       </div>
-      <Link href="/login">login</Link>
+      <Link href="/login" className="btnlogin">Login</Link>
     </nav>
   );
 }

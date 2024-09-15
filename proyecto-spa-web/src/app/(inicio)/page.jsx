@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import "../../styles/Home.module.css";
 import { corinthia, cormorant, montserrat } from "../ui/fonts";
+import '../../styles/landing.css'
 
 export default function Home() {
+  const message = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...";
   return (
     <>
       <div>
@@ -28,36 +30,44 @@ export default function Home() {
       </div>
 
       <div className="Somos" id="somos">
+        
         <div className="item">
-          <Image
-            src="/fotopiedras.svg"
-            alt="fotos de persona recibiendo masaje"
-            width={400}
-            height={600}
-          />
-        </div>
-        <div className="item">
+          
+
+          {/* Sección de "The Team" */}
+          <div className="team-section">
           <h2
             className="text-7xl text-green-services-300 text-center"
-            style={cormorant.style}
-          >
+            style={cormorant.style}>
             Quienes Somos
           </h2>
-          <p className="pt-9" style={montserrat.style}>
-            Buscamos atraer la atención de nuestros clientes a través de
-            experiencias inspiradas en la seducción de los sentidos. Adaptamos
-            las propuestas con el objetivo de que logre desconectarse
-            completamente de la rutina y disfrute de un momento de bienestar, en
-            total armonía con la naturaleza.
-          </p>
-        </div>
-        <div className="item i2">
-          <Image
-            src="/fotomasaje.svg"
-            alt="fotod de persona recibiendo masaje"
-            width={400}
-            height={600}
-          />
+            <div className="row">
+              <div className="team-item">
+                <img src="/logo.svg" className="team-img" alt="LEO" />
+                <h3>LEO</h3>
+                <div className="team-info">
+                  <p className="position">Head of SEO</p>
+                </div>
+                <p className="description">{message}</p>
+              </div>
+              <div className="team-item">
+                <img src="/logo.svg" className="team-img" alt="FRANKITO" />
+                <h3>FRANKITO</h3>
+                <div className="team-info">
+                  <p className="position">Head of SEO</p>
+                </div>
+                <p className="description">{message}</p>
+              </div>
+              <div className="team-item">
+                <img src="/logo.svg" className="team-img" alt="CECI" />
+                <h3>CECI</h3>
+                <div className="team-info">
+                  <p className="position">Head of SEO</p>
+                </div>
+                <p className="description">{message}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
