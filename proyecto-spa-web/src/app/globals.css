@@ -93,13 +93,7 @@ button:hover {
 
 /* estilos home */
 
-.container {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: pink;
-}
+
 
 .hero {
   position: relative;
