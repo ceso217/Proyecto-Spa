@@ -126,4 +126,42 @@ html {
   scroll-behavior: smooth; /* Animación al hacer scroll para el quien somos del home*/
 }
 
+.Somos {
+  background-color: #fff1ed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+  gap: 20px;
+}
+
+.Somos .item {
+  flex: 1;
+  height: auto;
+  padding: 0 20px;
+}
+
+.Somos .item.i2 {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-left: 100px;
+}
+
+.Somos .content {
+  flex: 1;
+  text-align: center;
+}
+
+.Somos p {
+  font-size: 18px;
+  color: #4b4b4b;
+  margin-top: 0;
+  text-align: just;
+}
+
+.Somos .item,
+.Somos .item.i2 {
+  max-width: 45%;
+}
 
