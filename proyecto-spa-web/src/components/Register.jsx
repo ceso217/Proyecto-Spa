@@ -181,7 +181,7 @@ export default function Register() {
             <input
               type="submit"
               value={"Registrarme!"}
-              className="w-48 bg-orange-50 text-green-services-100 rounded-3xl z-10 mt-2 -mb-1 p-2 text-lg hover:bg-green-services-300 shadow-xl hover:text-black hover:-translate-y-1 transition"
+              className="w-48 bg-orange-50 text-green-services-100 rounded-3xl z-10 mt-2 -mb-1 p-2 text-lg hover:bg-green-services-300 shadow-xl hover:text-black hover:-translate-y-1 transition border-solid border-transparent hover:border-white border-2"
             />
           </form>
           <p
