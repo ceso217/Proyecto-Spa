@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { corinthia, cormorant, montserrat } from "@/app/ui/fonts";
+import '../styles/landing.css'
 
 export default function Navbar() {
   return (
@@ -20,7 +21,7 @@ export default function Navbar() {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/#somos">Quienes Somos</Link>
+          <Link href="/about">Quienes Somos</Link>
         </li>
         <li>
           <Link href="/services">Servicios</Link>
@@ -40,7 +41,7 @@ export default function Navbar() {
           height={4000}
         />
       </div>
-      <Link href="/login">login</Link>
+      <Link href="/login" className="btnlogin">Login</Link>
     </nav>
   );
 }

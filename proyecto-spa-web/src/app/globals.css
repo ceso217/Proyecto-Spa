@@ -165,36 +165,3 @@ html {
   max-width: 45%;
 }
 
-.Encuentranos {
-  background-color: #f2f1e3;
-  height: 600px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 50px;
-}
-
-.Encuentranos .item {
-  flex: 1;
-  padding: 20px;
-  max-width: 45%;
-}
-
-.Encuentranos .item.i2 {
-  text-align: center;
-}
-
-.Encuentranos p {
-  font-size: 18px;
-  color: #4b4b4b;
-}
-
-.mapa {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-.mapa iframe {
-  height: 450px;
-}
