@@ -1,17 +1,21 @@
 import React from "react";
 import CardNotice from "@/components/CardNotice";
+import { corinthia, cormorant, montserrat } from "@/app/ui/fonts";
 
 const Notice = () => {
   return (
-    <div className="min-h-screen bg-customBackground flex justify-center items-center py-20">
-      <div className="container mx-auto p-12 bg-gray-100 rounded-xl">
-        <h1 className="text-4xl uppercase font-bold from-current mb-8">
+    <div className="min-h-screen flex justify-center bg-orange-100 items-center py-20">
+      <div className="container mx-auto p-12 bg-orange-50 rounded-xl">
+        <h1
+          className="text-7xl font-bold from-current mb-8 text-green-services-300 text-center"
+          style={cormorant.style}
+        >
           Ultimas Noticias
         </h1>
         <div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 space-y-4 sm:space-y-0">
           <CardNotice
             imageSrc="https://images.pexels.com/photos/3101547/pexels-photo-3101547.jpeg?auto=compress&cs=tinysrgb&w=600"
-            title= "Renovación Holística: El spa ‘Sentirse Bien’ inaugura su nueva ala de terapias alternativas"
+            title="Renovación Holística: El spa ‘Sentirse Bien’ inaugura su nueva ala de terapias alternativas"
             location="Local"
             description="El spa ‘Aguas Serenas’ ha abierto una nueva sección dedicada a terapias alternativas, incluyendo acupuntura, reiki y baños de sonido. Esta renovación busca ofrecer a los clientes una experiencia de bienestar integral."
           />
@@ -31,6 +35,6 @@ const Notice = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Notice;
