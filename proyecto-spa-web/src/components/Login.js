@@ -1,23 +1,22 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { corinthia, montserrat } from "../app/ui/fonts";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm();
 
-  const [error] = useState("");
+  const [error, setError] = useState("");
 
   const router = useRouter();
 
@@ -28,15 +27,11 @@ export default function Login() {
       redirect: false,
     });
 
-    if (res?.error)
-      return setError("credentials", {
-        type: "manual",
-        message: res.error, // El mensaje que viene del backend
-      });
+    console.log(res);
+
+    if (res?.error) return setError(res.error);
 
     if (res?.ok) return router.push("/");
-
-    console.log(res);
   };
 
   return (
@@ -64,9 +59,9 @@ export default function Login() {
               >
                 Bienvenido
               </h1>
-              {errors.credentials && (
+              {error && (
                 <p className="absolute -bottom-2 z-20 mt-1 bg-red-500 text-white text-lg px-12 py-1 rounded-2xl shadow-lg">
-                  {errors.credentials.message}
+                  {error}
                 </p>
               )}
             </div>

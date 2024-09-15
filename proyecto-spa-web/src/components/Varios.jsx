@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { montserrat } from "@/app/ui/fonts";
+import { corinthia, montserrat } from "../app/ui/fonts";
 
 export function ServiciosArticulo({
   titulo,
