@@ -16,7 +16,7 @@ module.exports = {
           200: "#567C49",
           300: "#4b9c74",
         },
-        customBackground: '#fff1ed',
+        crema: "#fff1ed",
       },
     },
   },
