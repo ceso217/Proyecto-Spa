@@ -2,8 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import "../../styles/Home.module.css";
 import { corinthia, cormorant, montserrat } from "../ui/fonts";
+import Comments from "@/components/Comments";
+
 
 export default function Home() {
+  
   return (
     <>
       <div>
@@ -139,6 +142,7 @@ export default function Home() {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
+      <Comments />
     </>
   );
 }
