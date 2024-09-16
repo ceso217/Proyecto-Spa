@@ -38,7 +38,7 @@ function Navbar() {
         </li>
         {session ? (
           <li>
-            <Link href="/dashboard/profile">Perfil</Link>
+            <Link href="/profile">Perfil</Link>
           </li>
         ) : (
           ""
