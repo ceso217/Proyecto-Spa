@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import "../../styles/Home.module.css";
 import { corinthia, cormorant, montserrat } from "../ui/fonts";
+import Comments from "@/components/Comments";
 
 export default function Home() {
+  
   return (
     <>
       <div>
@@ -61,40 +63,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex bg-green-services-100">
-        <div className=" flex items-center w-6/12 text-center text-white">
-          <div className="flex flex-col items-center">
-            <h2 className="text-7xl mb-5" style={cormorant.style}>
-              Pedí tu Turno!
-            </h2>
-            <p
-              className="text-base p-6 mb-5 leading-6 w-3/5"
-              style={montserrat.style}
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-              lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum
-              ultricies egestas, dolor sem laoreet orci, quis finibus justo quam
-              at nibh. Vestibulum ipsum tortor, suscipit non enim vitae.
-              Tincidunt scelerisque augue. Nunc quis fringilla magna, vel
-              sollicitudin quam.
-            </p>
-            <Link href="/comingsoon">
-              <button className="bg-green-services-200 text-2xl hover:no-underline text-white rounded-xl cursor-pointer py-3.5 px-7 transition hover:-translate-y-1 shadow-lg">
-                Contactanos
-              </button>
-            </Link>
-          </div>
-        </div>
-        <div className="w-6/12">
-          <Image
-            src="ctabata.svg"
-            alt="Descripción de la imagen"
-            width={100}
-            height={100}
-            className="w-full h-full"
-          />
-        </div>
-      </div>
+      
+      
 
       <div className="Encuentranos">
         <div className="item">
@@ -138,6 +108,33 @@ export default function Home() {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
+      </div>
+
+      <div className="CajaComentarios">
+        <div className="item">
+          <Image
+            src="/silla.svg"
+            alt="Imagen decorativa"
+            width={400}
+            height={300}
+          />
+        </div>
+        <div className="item i2">
+          <h2
+            className="text-7xl text-green-services-300 pb-8"
+            style={cormorant.style}
+          >
+            ¡Dejanos un comentario!
+          </h2>
+          <p style={montserrat.style}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+            lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum
+            ultricies.
+          </p>
+        </div>
+        <div className="item">
+          <Comments />
+        </div>
       </div>
     </>
   );
