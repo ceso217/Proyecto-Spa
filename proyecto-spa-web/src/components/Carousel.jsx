@@ -24,7 +24,7 @@ const Carousel = () => {
 
   return (
     <div className="relative w-full max-w-6xl mx-auto">
-      <div className="overflow-hidden">
+      <div className="overflow-hidden ">
         <img 
           src={images[currentIndex]} 
           alt={`Image ${currentIndex}`} 
@@ -47,7 +47,7 @@ const Carousel = () => {
       </button>
 
       {/* Indicadores */}
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 pb-20">
         {images.map((_, index) => (
           <button 
             key={index} 

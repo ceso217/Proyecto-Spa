@@ -12,22 +12,22 @@ const Footer = () => {
                 </div>
                 <div className={styles.links}>
                     <div>
-                        <h3>Productos</h3>
-                        <Link href="/skincare">Skincare</Link>
-                        <Link href="/makeup">Make Up</Link>
-                        <Link href="/shampoo">Shampoo</Link>
+                        <h3>Contamos con</h3>
+                        <Link href="/about">Cosmetologa</Link>
+                        <Link href="/about">Especialista</Link>
+                        <Link href="/about">Masajista</Link>
                     </div>
                     <div>
-                        <h3>About Us</h3>
-                        <Link href="/our-shop">Our Shop</Link>
-                        <Link href="/career">Career</Link>
-                        <Link href="/specialists">Specialists</Link>
+                        <h3>Desarrolladores</h3>
+                        <Link href="https://github.com/ceso217">Cecilio Baroni</Link>
+                        <Link href="https://github.com/LeonardoBrabo">Brabo Leonardo</Link>
+                        <Link href="https://github.com/frankito48">Romero Franco</Link>
                     </div>
                     <div>
                         <h3>Support</h3>
-                        <Link href="/blog">Blog</Link>
-                        <Link href="/help">Help</Link>
-                        <Link href="/faqs">FAQs</Link>
+                        <Link href="/comingsoon">Blog</Link>
+                        <Link href="/comingsoon">Help</Link>
+                        <Link href="/comingsoon">FAQs</Link>
                     </div>
                 </div>
                 <div className={styles.social}>

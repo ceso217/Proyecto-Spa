@@ -61,7 +61,7 @@ export default function page() {
         >
           Galeria de Fotos
         </h2>
-        <Carousel />
+        <Carousel/>
       </div>
     </>
   );
