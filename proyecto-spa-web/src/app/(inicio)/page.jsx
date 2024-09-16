@@ -40,7 +40,7 @@ export default function Home() {
         </div>
         <div className="item">
           <h2
-            className="text-7xl text-green-services-300 text-center"
+            className="text-7xl text-green-services-300 text-center  hover:underline decoration-4 hover:text-green-600 "
             style={cormorant.style}
           >
             Quienes Somos
