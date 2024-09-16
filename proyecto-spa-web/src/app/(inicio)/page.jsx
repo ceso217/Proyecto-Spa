@@ -83,9 +83,7 @@ export default function Home() {
             ¡Encuéntranos!
           </h2>
           <p style={montserrat.style}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-            lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum
-            ultricies.
+          En Sentise bien, te invitamos a descubrir un oasis de tranquilidad en el corazón de la ciudad. Sumérgete en la serenidad de nuestras instalaciones y déjate mimar por nuestros expertos en bienestar.¡Visítanos y revitaliza tus sentidos!
           </p>
         </div>
         <div className="item">
@@ -113,9 +111,9 @@ export default function Home() {
       <div className="CajaComentarios">
         <div className="item">
           <Image
-            src="/silla.svg"
+            src="/Pibas.svg"
             alt="Imagen decorativa"
-            width={400}
+            width={500}
             height={300}
           />
         </div>
@@ -127,9 +125,7 @@ export default function Home() {
             ¡Dejanos un comentario!
           </h2>
           <p style={montserrat.style}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-            lobortis sed sapien in pretium. Donec tincidunt, quam vestibulum
-            ultricies.
+          Te invitamos a dejar un comentario sobre tu visita. Cuéntanos qué te ha parecido, qué te ha gustado más y en qué podemos mejorar. ¡Nos encantaría saber tu opinión!
           </p>
         </div>
         <div className="item">

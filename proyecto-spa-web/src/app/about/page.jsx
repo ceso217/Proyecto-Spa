@@ -2,11 +2,15 @@ import React from "react";
 import Image from "next/image";
 import '../../styles/landing.css'
 import { cormorant, montserrat } from "../ui/fonts";
+import Carousel from "@/components/Carousel";
+
+
 
 
 export default function page() {
   const message = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...";
   return (
+    <>
     <div className="AboutUs" id="somos">
         
         <div className="item">
@@ -48,5 +52,15 @@ export default function page() {
           </div>
         </div>
       </div>
+      <div>
+      <h2
+            className="text-7xl text-green-services-300 text-center flex-col py-10"
+            style={cormorant.style}>
+            Galeria de Fotos
+          </h2>
+      <Carousel/>
+      </div>
+    
+    </>
   );
 }
