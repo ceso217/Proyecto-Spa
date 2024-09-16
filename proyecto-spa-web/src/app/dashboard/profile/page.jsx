@@ -5,10 +5,9 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import DateCard from "@/components/DateCard";
-import { redirect } from "next/navigation";
 
 function ProfilePage() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const user = session?.user;
   const isAdmin = user?.admin || false;
 
@@ -39,9 +38,6 @@ function ProfilePage() {
     }
   };
 
-  if (!user) {
-    redirect("/login");
-  }
   return (
     <div className="min-h-screen flex justify-center bg-orange-100 items-center py-20">
       <div
