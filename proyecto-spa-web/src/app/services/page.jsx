@@ -4,22 +4,27 @@ import Image from "next/image";
 import { corinthia } from "../ui/fonts";
 
 // Componente para las tarjetas de servicio
-const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color }) => {
+const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
   const [fecha, setFecha] = useState("");
 
   return (
     <div className={`p-5 ${color} flex flex-col items-center`}>
-      <h3 className="text-5xl font-bold text-green-services-300 mb-4 hover:underline decoration-2 hover:text-green-500" style={corinthia.style}>
+      <h3
+        className="text-5xl font-bold text-green-services-300 mb-4 hover:underline decoration-2 hover:text-green-500"
+        style={corinthia.style}
+      >
         {titulo}
       </h3>
-      
+
       {/* Imagen del servicio */}
       <Image src={imagen} width={ancho} height={alto} alt={titulo} className="mb-4" />
+
+      {/* Mostrar el precio */}
+      <p className="text-2xl font-semibold text-gray-700 mb-4">Precio: ${precio}</p>
 
       <div className="flex-grow"></div>
 
       <div className="w-full flex justify-between items-end mt-4">
-        
         {/* Selector de fecha a la izquierda */}
         <input
           type="date"
@@ -50,33 +55,140 @@ export default function Page() {
         Servicios
       </h3>
 
+      <div className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center pt-7 font-bold"
+        style={corinthia.style}
+      > Masajes</div>
       {/* Sección con fondo de imagen SVG */}
       <div
         className="grid grid-cols-3 gap-4 p-10 bg-orange-100"
 
       >
         <ServiciosArticulo
-          titulo="Masajes"
+          titulo="Anti-stress"
           imagen="/fotomasajeser.svg"
           ancho="300"
           alto="300"
           color="bg-orange-50"
+          precio="2000"
         />
         <ServiciosArticulo
-          titulo="Belleza"
+          titulo="Descontracturantes"
           imagen="/belleza.svg"
           ancho="500"
           alto="300"
           color="bg-orange-50"
+          precio="2000"
         />
         <ServiciosArticulo
-          titulo="Tratamientos Faciales"
+          titulo="Masajes con piedras calientes"
           imagen="/tratamientocor.svg"
           ancho="450"
           alto="300"
           color="bg-orange-50"
+          precio="2000"
         />
       </div>
+
+      <div className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 "
+        style={corinthia.style}
+      > Belleza</div>
+
+      <div
+        className="grid grid-cols-3 gap-4 p-10 bg-orange-100"
+
+      >
+        <ServiciosArticulo
+          titulo="Lifting de pestaña"
+          imagen="/fotomasajeser.svg"
+          ancho="300"
+          alto="300"
+          color="bg-orange-50"
+          precio="2000"
+        />
+        <ServiciosArticulo
+          titulo="Depilación facial"
+          imagen="/belleza.svg"
+          ancho="500"
+          alto="300"
+          color="bg-orange-50"
+          precio="2000"
+        />
+        <ServiciosArticulo
+          titulo="TBelleza de manos y pies"
+          imagen="/tratamientocor.svg"
+          ancho="450"
+          alto="300"
+          color="bg-orange-50"
+          precio="2000"
+        />      
+      </div>
+
+      <div className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 "
+        style={corinthia.style}
+      > Tratamientos Faciales</div>
+
+      <div
+        className="grid grid-cols-3 gap-4 p-10 bg-orange-100"
+
+      >
+        <ServiciosArticulo
+          titulo="Punta de Diamante: Micro exfoliación"
+          imagen="/fotomasajeser.svg"
+          ancho="300"
+          alto="300"
+          color="bg-orange-50"
+          precio="2000"
+        />
+        <ServiciosArticulo
+          titulo="Limpieza profunda + Hidratación"
+          imagen="/belleza.svg"
+          ancho="500"
+          alto="300"
+          color="bg-orange-50"
+          precio="2000"
+        />
+        <ServiciosArticulo
+          titulo="Crio frecuencia facial"
+          imagen="/tratamientocor.svg"
+          ancho="450"
+          alto="300"
+          color="bg-orange-50"
+          precio="2000"
+        />
+      </div>
+      <div className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 "
+        style={corinthia.style}
+      > Tratamientos Corporales</div>
+
+      <div
+        className="grid grid-cols-3 gap-4 p-10 bg-orange-100"
+
+      >
+        <ServiciosArticulo
+          titulo="VelaSlim"
+          imagen="/fotomasajeser.svg"
+          ancho="300"
+          alto="300"
+          color="bg-orange-50"
+          precio="2000"
+        />
+        <ServiciosArticulo
+          titulo="DermoHealth"
+          imagen="/belleza.svg"
+          ancho="500"
+          alto="300"
+          color="bg-orange-50"
+          precio="2000"
+        />
+        <ServiciosArticulo
+          titulo="Criofrecuencia"
+          imagen="/tratamientocor.svg"
+          ancho="450"
+          alto="300"
+          color="bg-orange-50"
+          precio="2000"
+        />
+        </div>
     </>
   );
 }

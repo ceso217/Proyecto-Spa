@@ -39,12 +39,13 @@ export default function Home() {
           />
         </div>
         <div className="item">
-          <h2
+          <Link
             className="text-7xl text-green-services-300 text-center  hover:underline decoration-4 hover:text-green-600 "
             style={cormorant.style}
+            href="/about"
           >
             Quienes Somos
-          </h2>
+          </Link>
           <p className="pt-9" style={montserrat.style}>
             Buscamos atraer la atención de nuestros clientes a través de
             experiencias inspiradas en la seducción de los sentidos. Adaptamos
