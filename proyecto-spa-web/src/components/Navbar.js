@@ -1,9 +1,13 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { corinthia, cormorant, montserrat } from "@/app/ui/fonts";
-import '../styles/landing.css'
+import "../styles/landing.css";
+import { signOut, useSession } from "next-auth/react";
 
-export default function Navbar() {
+function Navbar() {
+  const { data: session } = useSession();
+
   return (
     <nav className="navbar">
       <div className="logo">
@@ -32,6 +36,13 @@ export default function Navbar() {
         <li>
           <Link href="/employment">Empleo</Link>
         </li>
+        {session ? (
+          <li>
+            <Link href="/dashboard/profile">Perfil</Link>
+          </li>
+        ) : (
+          ""
+        )}
       </ul>
       <div className="actions">
         <Image
@@ -41,7 +52,22 @@ export default function Navbar() {
           height={4000}
         />
       </div>
-      <Link href="/login" className="btnlogin">Login</Link>
+      {session ? (
+        <button
+          className="btnlogin"
+          onClick={() => {
+            signOut();
+          }}
+        >
+          Logout
+        </button>
+      ) : (
+        <Link href="/login">
+          <button className="btnlogin">Login</button>
+        </Link>
+      )}
     </nav>
   );
 }
+
+export default Navbar;
