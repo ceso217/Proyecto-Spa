@@ -8,7 +8,7 @@ import DateCard from "@/components/DateCard";
 import { redirect } from "next/navigation";
 
 function ProfilePage() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const user = session?.user;
   const isAdmin = user?.admin || false;
 
