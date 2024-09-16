@@ -64,6 +64,38 @@ export default function Home() {
         </div>
       </div>
 
+      <div className="flex bg-green-services-100">
+        <div className=" flex items-center w-6/12 text-center text-white">
+          <div className="flex flex-col items-center">
+            <h2 className="text-7xl mb-5" style={cormorant.style}>
+              Pedí tu Turno!
+            </h2>
+            <p
+              className="text-base p-6 mb-5 leading-6 w-3/5"
+              style={montserrat.style}
+            >
+              ¡Te invitamos a reservar tu turno de manera fácil y rápida! Elige el servicio que prefieras y selecciona la fecha que más te convenga. 
+              Nos encargaremos de brindarte la mejor experiencia para tu bienestar.
+
+            </p>
+            <Link href="/services">
+              <button className="bg-green-services-200 text-2xl hover:no-underline text-white rounded-xl cursor-pointer py-3.5 px-7 transition hover:-translate-y-1 shadow-lg">
+                Pedi tu turno!
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div className="w-6/12">
+          <Image
+            src="ctabata.svg"
+            alt="Descripción de la imagen"
+            width={100}
+            height={100}
+            className="w-full h-full"
+          />
+        </div>
+      </div>
+
       
       
 
