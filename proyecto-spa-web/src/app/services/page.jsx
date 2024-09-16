@@ -56,24 +56,27 @@ const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
 
       <div className="flex-grow"></div>
 
-      <div className="w-full flex justify-between items-end mt-4">
-        <div className="flex items-center">
-          <p>Fecha de reserva: </p>
-          <input
-            type="date"
-            value={fecha}
-            onChange={(e) => setFecha(e.target.value)}
-            className="p-2 rounded-lg border-2 border-black text-center bg-green-100 mx-5"
-          />
+      {session ? (
+        <div className="w-full flex justify-between items-end mt-4">
+          <div className="flex items-center">
+            <p>Fecha de reserva: </p>
+            <input
+              type="date"
+              value={fecha}
+              onChange={(e) => setFecha(e.target.value)}
+              className="p-2 rounded-lg border-2 border-black text-center bg-green-100 mx-5"
+            />
+          </div>
+          <button
+            onClick={handlePedirTurno}
+            className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full"
+          >
+            Pedir turno
+          </button>
         </div>
-
-        <button
-          onClick={handlePedirTurno}
-          className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full"
-        >
-          Pedir turno
-        </button>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
