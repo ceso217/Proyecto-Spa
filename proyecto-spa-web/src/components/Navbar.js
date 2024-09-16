@@ -56,7 +56,7 @@ function Navbar() {
         <button
           className="btnlogin"
           onClick={() => {
-            signOut();
+            signOut({ callbackUrl: "/login" });
           }}
         >
           Logout
