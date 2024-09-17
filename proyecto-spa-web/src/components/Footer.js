@@ -24,13 +24,13 @@ const Footer = () => {
                         <Link href="https://github.com/frankito48">Romero Franco</Link>
                     </div>
                     <div>
-                        <h3>Support</h3>
+                        <h3>Contactos</h3>
                         <Link href="/comingsoon">Blog</Link>
-                        <Link href="/comingsoon">Help</Link>
-                        <Link href="/comingsoon">FAQs</Link>
+                        <Link href="mailto:spa-sentirse-bien@gmail.com">spa-sentirse-bien@gmail.com</Link>
+                        <Link href="https://wa.me/3794202082">+3794202082</Link>
                     </div>
                 </div>
-                <div className={styles.social}>
+                <div className="">
                     {/* Aquí colocarás tus iconos de redes sociales */}
                     <a href="https://www.facebook.com"><i className="fab fa-facebook"></i></a>
                     <a href="https://www.instagram.com"><i className="fab fa-instagram"></i></a>
