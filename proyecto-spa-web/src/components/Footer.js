@@ -8,10 +8,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { montserrat } from "@/app/ui/fonts";
 
 const Footer = () => {
   return (
-    <footer className="bg-green-services-100 py-12 text-white">
+    <footer
+      className="bg-green-services-100 py-12 text-white"
+      style={montserrat.style}
+    >
       <div className="container mx-auto flex mb-12 h-40">
         <div className="w-1/5 flex justify-center h-full">
           <Image

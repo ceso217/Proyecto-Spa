@@ -46,7 +46,7 @@ export default function Login() {
             priority
           />
         </div>
-        <div className="flex flex-col justify-center items-center w-600 h-500 bg-green-950 rounded-3xl shadow-xl">
+        <div className="flex flex-col justify-center items-center w-[600px] h-[500px] bg-green-950 rounded-3xl shadow-xl">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col justify-evenly w-full h-3/4 items-center "
