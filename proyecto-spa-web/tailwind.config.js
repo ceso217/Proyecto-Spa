@@ -16,6 +16,7 @@ module.exports = {
           300: "#4b9c74",
         },
         crema: "#fff1ed",
+        gris: "#6f8d74",
       },
     },
   },

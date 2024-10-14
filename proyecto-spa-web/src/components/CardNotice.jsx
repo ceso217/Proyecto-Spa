@@ -3,7 +3,7 @@ import React from "react";
 
 export default function CardNotice({ imageSrc, title, location, description }) {
   return (
-    <div className="bg-white flex flex-col h-700 shadow-lg hover:shadow-xl transform transition duration-500 hover:scale-105 rounded-md">
+    <div className="bg-white flex flex-col h-auto shadow-lg hover:shadow-xl transform transition duration-500 hover:scale-105 rounded-md">
       <div>
         <img className="w-full h-96 object-cover" src={imageSrc} alt={title} />
       </div>
@@ -44,7 +44,7 @@ export default function CardNotice({ imageSrc, title, location, description }) {
         <p className="text-sm tracking-normal" style={montserrat.style}>
           {description}
         </p>
-        <button className="w-full text-center text-orange-50 bg-green-services-300 py-2 rounded-lg hover:no-underline border-dashed border-transparent hover:border-green-services-100 border-2">
+        <button className="w-full text-center text-orange-50 bg-green-services-300 py-2 my-4 rounded-lg hover:no-underline border-dashed border-transparent hover:border-green-services-100 border-2">
           Leer más
         </button>
       </div>

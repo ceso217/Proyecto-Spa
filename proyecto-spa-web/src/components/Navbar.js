@@ -28,7 +28,7 @@ function Navbar() {
           <Link href="/about">Quienes Somos</Link>
         </li>
         <li>
-          <Link href="/services">Servicios</Link>
+          <Link href="/servicios">Servicios</Link>
         </li>
         <li>
           <Link href="/notice">Noticias</Link>

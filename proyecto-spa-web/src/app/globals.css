@@ -8,18 +8,6 @@ body {
   height: 100%;
 }
 
-.w-600 {
-  width: 600px;
-}
-
-.h-500 {
-  height: 500px;
-}
-
-.h-700 {
-  height: 700px;
-}
-
 button:hover {
   text-decoration: underline;
 }
