@@ -1,5 +1,13 @@
 import { Schema, model, models } from "mongoose";
 
+// Función para formatear la fecha
+const formatFecha = (fecha) =>
+  new Date(fecha).toLocaleDateString("es-ES", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
 const userSchema = new Schema({
   username: {
     type: String,
@@ -29,6 +37,7 @@ const userSchema = new Schema({
   birthdate: {
     type: String,
     required: [true, "Birthday is required"],
+    set: formatFecha, // Aplica el setter para formatear la fecha
   },
 });
 

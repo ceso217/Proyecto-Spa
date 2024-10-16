@@ -9,8 +9,11 @@ function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <nav className="navbar">
-      <div className="logo">
+    <nav
+      className="w-full h-28 bg-green-services-100 flex overflow-hidden justify-between"
+      style={montserrat.style}
+    >
+      <div className="w-[560px] flex items-center">
         <Image src="/logo.svg" alt="Logo" width={170} height={170} />
         <Link
           href="/"
@@ -20,52 +23,66 @@ function Navbar() {
           Sentirse Bien
         </Link>
       </div>
-      <ul className="navLinks">
-        <li>
+      <ul className="w-[700px] flex justify-around items-center text-lg justify-self-center text-orange-50 ">
+        <li className="transition hover:-translate-y-1">
           <Link href="/">Home</Link>
         </li>
-        <li>
+        <li className="transition hover:-translate-y-1">
           <Link href="/about">Quienes Somos</Link>
         </li>
-        <li>
+        <li className="transition hover:-translate-y-1">
           <Link href="/servicios">Servicios</Link>
         </li>
-        <li>
+        <li className="transition hover:-translate-y-1">
           <Link href="/notice">Noticias</Link>
         </li>
-        <li>
+        <li className="transition hover:-translate-y-1">
           <Link href="/employment">Empleo</Link>
         </li>
         {session ? (
-          <li>
+          <li className="transition hover:-translate-y-1">
             <Link href="/profile">Perfil</Link>
           </li>
         ) : (
           ""
         )}
       </ul>
-      <div className="actions">
+      <div className="w-[210px]">
         <Image
           src="/flor.svg"
           alt="Descripción de la imagen"
           width={100}
           height={4000}
+          className="translate-x-32 translate-y-4"
         />
       </div>
-      {session ? (
-        <button
-          className="btnlogin"
-          onClick={() => {
-            signOut({ callbackUrl: "/login" });
-          }}
-        >
-          Logout
-        </button>
-      ) : (
-        <Link href="/login">
-          <button className="btnlogin">Login</button>
-        </Link>
-      )}
+      <div className="w-[350px] flex items-center justify-end no-underline justify-self-end">
+        {session ? (
+          <button
+            className="px-4 py-2 mr-4 bg-orange-100 rounded-3xl text-lg shadow-2xl transition hover:-translate-y-1"
+            onClick={() => {
+              signOut({ callbackUrl: "/login" });
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <>
+            <Link
+              href="/register"
+              className="px-4 py-2 mr-4 bg-orange-100 rounded-3xl text-lg shadow-2xl transition hover:-translate-y-1"
+            >
+              Registrarse
+            </Link>
+            <Link
+              href="/login"
+              className="px-4 py-2 mr-4 bg-orange-100 rounded-3xl text-lg shadow-2xl transition hover:-translate-y-1"
+            >
+              Login
+            </Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }

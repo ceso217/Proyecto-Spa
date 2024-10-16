@@ -81,7 +81,7 @@ function ProfilePage() {
           datos={
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {collection
-                .filter((item) => item.user === user.username) // Filtra los elementos que cumplen la condición
+                .filter((item) => item.client === user.fullname) // Filtra los elementos que cumplen la condición
                 .map((item) => (
                   <div key={item._id} className="p-4 bg-white shadow rounded ">
                     <DateCard date={item} onDelete={handleDelete} />

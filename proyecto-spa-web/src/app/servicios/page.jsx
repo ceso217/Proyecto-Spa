@@ -22,6 +22,10 @@ const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
         service: titulo,
         date: fecha,
         user: user?.username, // Asigna el usuario que pidió el turno
+        client: user?.fullname,
+        time: "18:00",
+        professional: "Dr. Felicidad",
+        accept: 0,
       });
 
       if (response.status === 201) {

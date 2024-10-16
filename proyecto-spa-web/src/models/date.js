@@ -11,8 +11,21 @@ const dateSchema = new Schema(
       type: String,
       required: [true, "Date is required"],
     },
+    time: {
+      type: String,
+      required: [true, "Time is required"],
+    },
     user: {
       type: String,
+    },
+    client: {
+      type: String,
+    },
+    professional: {
+      type: String,
+    },
+    accept: {
+      type: Number,
     },
   },
   {

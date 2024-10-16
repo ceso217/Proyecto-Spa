@@ -27,19 +27,19 @@ const Footer = () => {
         </div>
         <div className="flex justify-around w-3/5 ">
           <div className="flex flex-col justify-around items-center">
-            <h3 className="text-black text-xl">Contamos con</h3>
+            <h3 className="text-black text-xl pb-2">Contamos con</h3>
             <Link href="/about">Cosmetologa</Link>
             <Link href="/about">Especialista</Link>
             <Link href="/about">Masajista</Link>
           </div>
           <div className="flex flex-col justify-around items-center text-white">
-            <h3 className="text-black text-xl">Desarrolladores</h3>
+            <h3 className="text-black text-xl pb-2">Desarrolladores</h3>
             <Link href="https://github.com/ceso217">Cecilio Baroni</Link>
             <Link href="https://github.com/LeonardoBrabo">Leonardo Brabo</Link>
             <Link href="https://github.com/frankito48">Franco Romero</Link>
           </div>
           <div className="flex flex-col justify-around items-center text-white">
-            <h3 className="text-black text-xl">Support</h3>
+            <h3 className="text-black text-xl pb-2">Support</h3>
             <Link href="/comingsoon">Blog</Link>
             <Link href="/comingsoon">Help</Link>
             <Link href="/comingsoon">FAQs</Link>
