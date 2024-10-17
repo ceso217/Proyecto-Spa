@@ -27,6 +27,9 @@ const dateSchema = new Schema(
     accept: {
       type: Number,
     },
+    rejectedReason: {
+      type: String,
+    },
   },
   {
     timestamps: true,

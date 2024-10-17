@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios"; // Asegúrate de importar axios
 import Image from "next/image";
-import { corinthia } from "../ui/fonts";
+import { cormorant, montserrat } from "../ui/fonts";
 import { useSession } from "next-auth/react";
 
 const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
@@ -40,8 +40,8 @@ const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
   return (
     <div className={`p-5 ${color} flex flex-col items-center`}>
       <h3
-        className="text-5xl font-bold text-green-services-300 mb-4 hover:underline decoration-2 hover:text-green-500"
-        style={corinthia.style}
+        className="text-5xl font-bold text-black mb-4"
+        style={cormorant.style}
       >
         {titulo}
       </h3>
@@ -87,22 +87,23 @@ const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
 
 export default function Page() {
   return (
-    <>
+    <div
+      className="bg-orange-100 text-green-services-300"
+      style={montserrat.style}
+    >
       <h3
-        className="bg-green-services-100 text-7xl text-center text-white font-mono border-y-2 pt-3 border-teal-900"
-        style={corinthia.style}
+        className="text-7xl text-center text-green-services-300 font-mono pt-8 pb-4"
+        style={cormorant.style}
       >
         Servicios
       </h3>
 
       <div
-        className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center pt-7 font-bold"
-        style={corinthia.style}
+        className="text-6xl flex-col text-center pt-7 font-bold"
+        style={cormorant.style}
       >
-        {" "}
         Masajes
       </div>
-      {/* Sección con fondo de imagen SVG */}
       <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
         <ServiciosArticulo
           titulo="Anti-stress"
@@ -130,13 +131,12 @@ export default function Page() {
         />
       </div>
 
-      <div
+      <h2
         className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 "
-        style={corinthia.style}
+        style={cormorant.style}
       >
-        {" "}
         Belleza
-      </div>
+      </h2>
 
       <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
         <ServiciosArticulo
@@ -156,7 +156,7 @@ export default function Page() {
           precio="2000"
         />
         <ServiciosArticulo
-          titulo="TBelleza de manos y pies"
+          titulo="Belleza de manos y pies"
           imagen="/tratamientocor.svg"
           ancho="450"
           alto="300"
@@ -167,7 +167,7 @@ export default function Page() {
 
       <div
         className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 "
-        style={corinthia.style}
+        style={cormorant.style}
       >
         {" "}
         Tratamientos Faciales
@@ -201,7 +201,7 @@ export default function Page() {
       </div>
       <div
         className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 "
-        style={corinthia.style}
+        style={cormorant.style}
       >
         {" "}
         Tratamientos Corporales
@@ -233,6 +233,6 @@ export default function Page() {
           precio="2000"
         />
       </div>
-    </>
+    </div>
   );
 }
