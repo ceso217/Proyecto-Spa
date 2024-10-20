@@ -8,12 +8,8 @@ const dateSchema = new Schema(
       trim: true,
     },
     date: {
-      type: String,
+      type: Date,
       required: [true, "Date is required"],
-    },
-    time: {
-      type: String,
-      required: [true, "Time is required"],
     },
     user: {
       type: String,
@@ -36,5 +32,5 @@ const dateSchema = new Schema(
   }
 );
 
-const Date = models.Date || model("Date", dateSchema);
-export default Date;
+const DateModel = models.Date || model("Date", dateSchema);
+export default DateModel;

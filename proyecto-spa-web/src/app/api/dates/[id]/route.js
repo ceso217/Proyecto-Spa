@@ -1,11 +1,11 @@
 import { connectDB } from "@/libs/mongodb";
-import Date from "@/models/date";
+import DateModel from "@/models/date";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
   try {
     connectDB();
-    const dateFound = await Date.findById(params.id);
+    const dateFound = await DateModel.findById(params.id);
 
     if (!dateFound)
       return NextResponse.json(
@@ -26,7 +26,7 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    const dateDeleted = await Date.findByIdAndDelete(params.id);
+    const dateDeleted = await DateModel.findByIdAndDelete(params.id);
 
     if (!dateDeleted)
       return NextResponse.json(
@@ -49,7 +49,7 @@ export async function DELETE(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     const data = await request.json();
-    const dateUpdated = await Date.findByIdAndUpdate(params.id, data, {
+    const dateUpdated = await DateModel.findByIdAndUpdate(params.id, data, {
       new: true,
     });
     return NextResponse.json(dateUpdated);
@@ -64,7 +64,7 @@ export async function PUT(request, { params }) {
 export async function PATCH(request, { params }) {
   try {
     const data = await request.json(); // Los campos a actualizar
-    const dateUpdated = await Date.findByIdAndUpdate(params.id, data, {
+    const dateUpdated = await DateModel.findByIdAndUpdate(params.id, data, {
       new: true, // Devuelve el documento actualizado
       runValidators: true, // Asegura que los datos cumplan con las validaciones del esquema
     });

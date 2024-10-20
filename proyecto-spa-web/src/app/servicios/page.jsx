@@ -65,7 +65,7 @@ const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
           <div className="flex items-center">
             <p>Fecha de reserva: </p>
             <input
-              type="date"
+              type="datetime-local"
               value={fecha}
               onChange={(e) => setFecha(e.target.value)}
               className="p-2 rounded-lg border-2 border-black text-center bg-green-100 mx-5"

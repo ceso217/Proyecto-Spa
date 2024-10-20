@@ -1,4 +1,5 @@
 import React from "react";
+import { format } from "date-fns";
 
 export default function TurnoConfirmado({ item }) {
   return (
@@ -10,10 +11,10 @@ export default function TurnoConfirmado({ item }) {
         <p>{item.service}</p>
       </div>
       <div className="w-1/5">
-        <p>{item.date}</p>
+        <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
       </div>
       <div className="w-1/5">
-        <p>{item.time}</p>
+        <p>{format(new Date(item.date), "HH:mm")}</p>
       </div>
       <div className="w-1/5">
         <p>{item.professional}</p>

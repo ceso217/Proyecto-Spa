@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Modal from "../components/Modal";
+import { format } from "date-fns";
 
 export default function TurnoConfirmar({ item, onUpdate }) {
   const [profesional, setProfesional] = useState("Elige una opción");
@@ -32,10 +33,10 @@ export default function TurnoConfirmar({ item, onUpdate }) {
         <p>{item.service}</p>
       </div>
       <div className="w-1/6">
-        <p>{item.date}</p>
+        <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
       </div>
       <div className="w-1/6">
-        <p>{item.time}</p>
+        <p>{format(new Date(item.date), "HH:mm")}</p>
       </div>
       <div className="w-1/6">
         <select
