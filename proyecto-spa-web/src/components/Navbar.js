@@ -45,13 +45,13 @@ function Navbar() {
         <li className="transition hover:-translate-y-1">
           <Link href="/employment">Empleo</Link>
         </li>
-        {session ? (
+        {/* {session ? (
           <li className="transition hover:-translate-y-1">
             <Link href="/profile">Perfil</Link>
           </li>
         ) : (
           ""
-        )}
+        )} */}
       </ul>
       <div className="w-[210px]">
         <Image

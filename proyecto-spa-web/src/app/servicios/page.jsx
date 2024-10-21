@@ -39,6 +39,25 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
     }
   };
 
+  const handleGuardarPago = async () => {
+
+    try {
+      const hoy = new Date();
+      const fechaCompleta = hoy.toISOString().replace('T', ' ').substring(0, 19);
+      // Hacer una petición POST a la API para guardar la fecha y el servicio
+      const response = await axios.post("/api/pagos", {
+        monto: item.precio / 100,
+        cliente: user?.fullname,
+        correo: user?.email, // Asigna el usuario que pidió el turno
+        servicio: item.titulo,
+        fecha: fechaCompleta,
+      });
+    } catch (error) {
+      console.error("Error al guardar el pago:", error);
+      alert("Hubo un error al guardar el pago. Intenta de nuevo.");
+    }
+  };
+
   const handleCheckout = async (servicio) => {
     if (!fecha) {
       alert("Por favor selecciona una fecha.");
@@ -103,6 +122,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
           <button
             onClick={async () => {
               handlePedirTurno();
+              handleGuardarPago();
               await handleCheckout(item);
             }}
             className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full"

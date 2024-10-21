@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { corinthia } from "@/app/ui/fonts";
 import Image from "next/image";
-import { FaHome, FaInfoCircle, FaConciergeBell, FaNewspaper, FaBriefcase } from "react-icons/fa";
+import { FaHome, FaInfoCircle, FaConciergeBell, FaNewspaper, FaBriefcase, FaArchive, FaPersonBooth } from "react-icons/fa";
 
 const SideBar = () => {
   const [open, setOpen] = useState(false);
@@ -74,44 +74,66 @@ const SideBar = () => {
 
           <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
             <Link
-              href="/about"
+              href="/profile"
               onClick={() => setOpen(false)}
               className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
             >
-              <FaInfoCircle className="mr-3" /> Quienes Somos
+              <FaInfoCircle className="mr-3" /> Mi Perfil
               <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
             </Link>
           </div>
 
           <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
             <Link
-              href="/servicios"
+              href="/clientes"
               onClick={() => setOpen(false)}
               className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
             >
-              <FaConciergeBell className="mr-3" /> Servicios
+              <FaPersonBooth className="mr-3" /> Todos los Clientes
               <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
             </Link>
           </div>
 
           <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
             <Link
-              href="/notice"
+              href="/mis_turnos"
               onClick={() => setOpen(false)}
               className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
             >
-              <FaNewspaper className="mr-3" /> Noticias
+              <FaConciergeBell className="mr-3" /> Mis Turnos
               <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
             </Link>
           </div>
 
           <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
             <Link
-              href="/employment"
+              href="/turnos_hoy"
               onClick={() => setOpen(false)}
               className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
             >
-              <FaBriefcase className="mr-3" /> Empleo
+              <FaNewspaper className="mr-3" /> Turnos para Hoy
+              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
+            </Link>
+          </div>
+
+          <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
+            <Link
+              href="/turnos"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
+            >
+              <FaBriefcase className="mr-3" /> Todos los turnos
+              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
+            </Link>
+          </div>
+
+          <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
+            <Link
+              href="/pagos"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
+            >
+              <FaArchive className="mr-3" /> Pagos
               <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
             </Link>
           </div>

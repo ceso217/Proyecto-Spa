@@ -76,7 +76,7 @@ function ProfilePage() {
             </>
           }
         />
-        <ExpandableSection
+        {/* <ExpandableSection
           titulo={"Mis turnos"}
           datos={
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -103,7 +103,7 @@ function ProfilePage() {
               </div>
             }
           />
-        ) : null}
+        ) : null} */}
       </div>
     </div>
   );

@@ -2,13 +2,17 @@
 import React from "react";
 import { cormorant, montserrat } from "@/app/ui/fonts";
 import { useState, useEffect } from "react";
+import { useSession } from 'next-auth/react';
 import axios from "axios";
 import TurnoConfirmado from "@/components/TurnoConfirmado";
-import TurnoConfirmar from "@/components/TurnoConfirmar";
-import TurnoRechazado from "@/components/TurnoRechazado";
 
 export default function Clientes() {
   const [collection, setCollection] = useState([]);
+  const { data: session, status } = useSession();
+  const user = session?.user;
+
+  const hoy = new Date();
+  const fechaDeHoy = hoy.toISOString().split('T')[0]; // Formato: "YYYY-MM-DD"
 
   // Definimos fetchData fuera del useEffect para que sea accesible globalmente en el componente
   const fetchData = async () => {
@@ -75,43 +79,11 @@ export default function Clientes() {
           className="text-7xl mt-10 text-green-services-300"
           style={cormorant.style}
         >
-          Todos los Turnos
+          Turnos para hoy
         </h1>
 
         <div className="w-full py-16 text-center">
-          <h2 className="py-4 text-3xl">Turnos a confirmar</h2>
-          <div className="flex p-4 bg-orange-100 shadow rounded-t">
-            <div className="w-1/6">
-              <p>Cliente</p>
-            </div>
-            <div className="w-1/6">
-              <p>Servicio</p>
-            </div>
-            <div className="w-1/6">
-              <p>Fecha</p>
-            </div>
-            <div className="w-1/6">
-              <p>Horario</p>
-            </div>
-            <div className="w-1/6">
-              <p>Profesional</p>
-            </div>
-            <div className="w-1/6">
-              <p>Decisión</p>
-            </div>
-          </div>
-          {/* Turnos confirmados */}
-          {collection
-            .filter((item) => item.accept === 0) // Filtra los elementos que cumplen la condición
-            .map((item) => (
-              <div key={item._id}>
-                <TurnoConfirmar item={item} onUpdate={handleUpdate} />
-              </div>
-            ))}
-        </div>
-
-        <div className="w-full py-16 text-center">
-          <h2 className="py-4 text-3xl">Turnos confirmados</h2>
+          <h2 className="py-4 text-3xl">Mis Turnos a atender hoy</h2>
           <div className="flex p-4 bg-orange-100 shadow rounded-t ">
             <div className="w-1/5">
               <p>Cliente</p>
@@ -131,39 +103,10 @@ export default function Clientes() {
           </div>
           {/* Turnos confirmados */}
           {collection
-            .filter((item) => item.accept === 1) // Filtra los elementos que cumplen la condición
+            .filter((item) => item.accept === 1 && item.professional.includes(user.fullname) && item.date.split('T')[0] === fechaDeHoy) // Filtra los elementos que cumplen la condición
             .map((item) => (
               <div key={item._id}>
                 <TurnoConfirmado item={item} />
-              </div>
-            ))}
-        </div>
-
-        <div className="w-full py-16 text-center">
-          <h2 className="py-4 text-3xl">Turnos rechazados</h2>
-          <div className="flex p-4 bg-orange-100 shadow rounded-t ">
-            <div className="w-1/5">
-              <p>Cliente</p>
-            </div>
-            <div className="w-1/5">
-              <p>Servicio</p>
-            </div>
-            <div className="w-1/5">
-              <p>Fecha</p>
-            </div>
-            <div className="w-1/5">
-              <p>Horario</p>
-            </div>
-            <div className="w-1/5">
-              <p>Motivo</p>
-            </div>
-          </div>
-          {/* Turnos rechazados */}
-          {collection
-            .filter((item) => item.accept === 2) // Filtra los elementos que cumplen la condición
-            .map((item) => (
-              <div key={item._id}>
-                <TurnoRechazado item={item} />
               </div>
             ))}
         </div>

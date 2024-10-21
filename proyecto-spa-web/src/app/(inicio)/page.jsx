@@ -5,7 +5,7 @@ import { corinthia, cormorant, montserrat } from "../ui/fonts";
 import Comments from "@/components/Comments";
 
 export default function Home() {
-  
+
   return (
     <>
       <div>
@@ -29,7 +29,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="Somos" id="somos">
+      {/* <div className="Somos" id="somos">
         <div className="item">
           <Image
             src="/fotopiedras.svg"
@@ -62,7 +62,7 @@ export default function Home() {
             height={600}
           />
         </div>
-      </div>
+      </div> */}
 
       <div className="flex bg-green-services-100">
         <div className=" flex items-center w-6/12 text-center text-white">
@@ -74,7 +74,7 @@ export default function Home() {
               className="text-base p-6 mb-5 leading-6 w-3/5"
               style={montserrat.style}
             >
-              ¡Te invitamos a reservar tu turno de manera fácil y rápida! Elige el servicio que prefieras y selecciona la fecha que más te convenga. 
+              ¡Te invitamos a reservar tu turno de manera fácil y rápida! Elige el servicio que prefieras y selecciona la fecha que más te convenga.
               Nos encargaremos de brindarte la mejor experiencia para tu bienestar.
 
             </p>
@@ -96,8 +96,8 @@ export default function Home() {
         </div>
       </div>
 
-      
-      
+
+
 
       <div className="Encuentranos">
         <div className="item">
@@ -116,7 +116,7 @@ export default function Home() {
             ¡Encuéntranos!
           </h2>
           <p style={montserrat.style}>
-          En Sentise bien, te invitamos a descubrir un oasis de tranquilidad en el corazón de la ciudad. Sumérgete en la serenidad de nuestras instalaciones y déjate mimar por nuestros expertos en bienestar.¡Visítanos y revitaliza tus sentidos!
+            En Sentise bien, te invitamos a descubrir un oasis de tranquilidad en el corazón de la ciudad. Sumérgete en la serenidad de nuestras instalaciones y déjate mimar por nuestros expertos en bienestar.¡Visítanos y revitaliza tus sentidos!
           </p>
         </div>
         <div className="item">
@@ -158,7 +158,7 @@ export default function Home() {
             ¡Dejanos un comentario!
           </h2>
           <p style={montserrat.style}>
-          Te invitamos a dejar un comentario sobre tu visita. Cuéntanos qué te ha parecido, qué te ha gustado más y en qué podemos mejorar. ¡Nos encantaría saber tu opinión!
+            Te invitamos a dejar un comentario sobre tu visita. Cuéntanos qué te ha parecido, qué te ha gustado más y en qué podemos mejorar. ¡Nos encantaría saber tu opinión!
           </p>
         </div>
         <div className="item">
