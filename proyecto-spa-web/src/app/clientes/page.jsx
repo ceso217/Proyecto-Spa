@@ -3,6 +3,7 @@ import React from "react";
 import { cormorant, montserrat } from "@/app/ui/fonts";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import CheckoutButton from "@/components/CheckoutButton";
 
 export default function Clientes() {
   const [collection, setCollection] = useState([]);
@@ -25,6 +26,9 @@ export default function Clientes() {
         <h1 className="text-7xl mt-10" style={cormorant.style}>
           Clientes
         </h1>
+        <div className="flex items-center justify-center bg-gray-100">
+          <CheckoutButton />
+        </div>
         <div className="w-full py-16">
           <div className="flex p-4 bg-orange-100 shadow rounded-t text-center">
             <div className="w-1/4">

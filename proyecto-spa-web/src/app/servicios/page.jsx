@@ -1,30 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios"; // Asegúrate de importar axios
 import Image from "next/image";
 import { cormorant, montserrat } from "../ui/fonts";
 import { useSession } from "next-auth/react";
+import { loadStripe } from "@stripe/stripe-js"; // Importa la función
 
-const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
+// Configura la promesa de Stripe con tu clave pública
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+
+const ServiciosArticulo = ({ item, ancho, alto }) => {
   const { data: session, status } = useSession();
   const user = session?.user;
   const [fecha, setFecha] = useState("");
 
   const handlePedirTurno = async () => {
-    if (!fecha) {
-      alert("Por favor selecciona una fecha.");
-      return;
-    }
+    // if (!fecha) {
+    //   alert("Por favor selecciona una fecha.");
+    //   return;
+    // }
 
     try {
       // Hacer una petición POST a la API para guardar la fecha y el servicio
       const response = await axios.post("/api/dates", {
-        service: titulo,
+        service: item.titulo,
         date: fecha,
         user: user?.username, // Asigna el usuario que pidió el turno
         client: user?.fullname,
-        time: "18:00",
-        professional: "Dr. Felicidad",
         accept: 0,
       });
 
@@ -37,25 +39,52 @@ const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
     }
   };
 
+  const handleCheckout = async (servicio) => {
+    if (!fecha) {
+      alert("Por favor selecciona una fecha.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ servicio }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        const stripe = await stripePromise; // Cargar Stripe
+        await stripe.redirectToCheckout({ sessionId: data.id });
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Hubo un error al procesar el pago.");
+    }
+  };
+
   return (
-    <div className={`p-5 ${color} flex flex-col items-center`}>
+    <div className="p-5 bg-orange-50 flex flex-col items-center h-[700px]">
       <h3
-        className="text-5xl font-bold text-black mb-4"
+        className="text-5xl font-bold text-black mb-4 h-[100px]"
         style={cormorant.style}
       >
-        {titulo}
+        {item.titulo}
       </h3>
 
       <Image
-        src={imagen}
+        src={item.imagen}
         width={ancho}
         height={alto}
-        alt={titulo}
+        alt={item.titulo}
         className="mb-4"
       />
 
       <p className="text-2xl font-semibold text-gray-700 mb-4">
-        Precio: ${precio}
+        Precio: ${item.precio / 100}
       </p>
 
       <div className="flex-grow"></div>
@@ -72,7 +101,10 @@ const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
             />
           </div>
           <button
-            onClick={handlePedirTurno}
+            onClick={async () => {
+              handlePedirTurno();
+              await handleCheckout(item);
+            }}
             className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full"
           >
             Pedir turno
@@ -86,6 +118,19 @@ const ServiciosArticulo = ({ titulo, imagen, ancho, alto, color, precio }) => {
 };
 
 export default function Page() {
+  const [collection, setCollection] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/servicios");
+        setCollection(response.data);
+      } catch (error) {
+        console.error("Error fetching collection:", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div
       className="bg-orange-100 text-green-services-300"
@@ -105,30 +150,13 @@ export default function Page() {
         Masajes
       </div>
       <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
-        <ServiciosArticulo
-          titulo="Anti-stress"
-          imagen="/fotomasajeser.svg"
-          ancho="300"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
-        <ServiciosArticulo
-          titulo="Descontracturantes"
-          imagen="/belleza.svg"
-          ancho="500"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
-        <ServiciosArticulo
-          titulo="Masajes con piedras calientes"
-          imagen="/tratamientocor.svg"
-          ancho="450"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
+        {collection
+          .filter((item) => item.tipo === "Masaje") // Filtra los elementos que cumplen la condición
+          .map((item) => (
+            <div key={item._id}>
+              <ServiciosArticulo item={item} ancho={500} alto={300} />
+            </div>
+          ))}
       </div>
 
       <h2
@@ -139,30 +167,13 @@ export default function Page() {
       </h2>
 
       <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
-        <ServiciosArticulo
-          titulo="Lifting de pestaña"
-          imagen="/fotomasajeser.svg"
-          ancho="300"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
-        <ServiciosArticulo
-          titulo="Depilación facial"
-          imagen="/belleza.svg"
-          ancho="500"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
-        <ServiciosArticulo
-          titulo="Belleza de manos y pies"
-          imagen="/tratamientocor.svg"
-          ancho="450"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
+        {collection
+          .filter((item) => item.tipo === "Belleza") // Filtra los elementos que cumplen la condición
+          .map((item) => (
+            <div key={item._id}>
+              <ServiciosArticulo item={item} ancho={500} alto={300} />
+            </div>
+          ))}
       </div>
 
       <div
@@ -174,30 +185,13 @@ export default function Page() {
       </div>
 
       <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
-        <ServiciosArticulo
-          titulo="Punta de Diamante: Micro exfoliación"
-          imagen="/fotomasajeser.svg"
-          ancho="300"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
-        <ServiciosArticulo
-          titulo="Limpieza profunda + Hidratación"
-          imagen="/belleza.svg"
-          ancho="500"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
-        <ServiciosArticulo
-          titulo="Crio frecuencia facial"
-          imagen="/tratamientocor.svg"
-          ancho="450"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
+        {collection
+          .filter((item) => item.tipo === "Tratamientos faciales") // Filtra los elementos que cumplen la condición
+          .map((item) => (
+            <div key={item._id}>
+              <ServiciosArticulo item={item} ancho={500} alto={300} />
+            </div>
+          ))}
       </div>
       <div
         className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 "
@@ -208,30 +202,13 @@ export default function Page() {
       </div>
 
       <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
-        <ServiciosArticulo
-          titulo="VelaSlim"
-          imagen="/fotomasajeser.svg"
-          ancho="300"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
-        <ServiciosArticulo
-          titulo="DermoHealth"
-          imagen="/belleza.svg"
-          ancho="500"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
-        <ServiciosArticulo
-          titulo="Criofrecuencia"
-          imagen="/tratamientocor.svg"
-          ancho="450"
-          alto="300"
-          color="bg-orange-50"
-          precio="2000"
-        />
+        {collection
+          .filter((item) => item.tipo === "Tratamientos corporales") // Filtra los elementos que cumplen la condición
+          .map((item) => (
+            <div key={item._id}>
+              <ServiciosArticulo item={item} ancho={500} alto={300} />
+            </div>
+          ))}
       </div>
     </div>
   );

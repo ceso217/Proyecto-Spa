@@ -32,5 +32,5 @@ const dateSchema = new Schema(
   }
 );
 
-const DateModel = models.Date || model("Date", dateSchema);
+const DateModel = models.DateModel || model("DateModel", dateSchema);
 export default DateModel;
