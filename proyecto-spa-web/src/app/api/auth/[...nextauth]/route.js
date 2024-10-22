@@ -10,17 +10,25 @@ const handler = NextAuth({
       name: "Credentials",
 
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
+        identifier: {
+          label: "Usuario o Correo",
+          type: "text",
+          placeholder: "jsmith o jsmith@example.com",
+        }, // Cambiamos a 'identifier'
+        password: { label: "Contraseña", type: "password" },
       },
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
         await connectDB();
         console.log(credentials);
 
+        // Busca al usuario por nombre de usuario o correo
         const userFound = await User.findOne({
-          username: credentials?.username,
+          $or: [
+            { username: credentials?.identifier }, // Busca por nombre de usuario
+            { email: credentials?.identifier }, // Busca por correo
+          ],
         }).select("+password");
+
         if (!userFound) throw new Error("Credenciales inválidas");
         console.log(userFound);
 
