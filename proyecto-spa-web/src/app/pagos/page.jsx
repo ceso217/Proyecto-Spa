@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useSession } from 'next-auth/react';
 import axios from "axios";
 import PagosComp from "@/components/PagosComp";
+import { jsPDF } from "jspdf";  // Importa jsPDF
+import "jspdf-autotable"; // Importa la extensión para tablas
 
 export default function Pagos() {
   const [collection, setCollection] = useState([]);
@@ -24,6 +26,43 @@ export default function Pagos() {
     fetchData(); // Llamada inicial para obtener los datos
   }, []);
 
+  // Función para generar el PDF
+  const generarPDF = () => {
+    const doc = new jsPDF();
+
+    // Título del PDF
+    doc.setFontSize(18);
+    doc.text("Resumen de Pagos", 14, 22);
+
+    // Generar tabla
+    const tableColumn = ["Cliente", "Correo", "Servicio", "Pago", "Fecha de pago"];
+    const tableRows = [];
+
+    // Insertar datos en el PDF
+    collection.forEach(item => {
+      const pagoData = [
+        item.cliente,
+        item.correo,
+        item.servicio,
+        `$${item.monto}`, // Formato de pago en dólares
+        item.fecha
+      ];
+      tableRows.push(pagoData);
+    });
+
+    // Agregar tabla al PDF
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 30,
+      theme: 'grid',
+      headStyles: { fillColor: [22, 160, 133] },  // Color verde
+    });
+
+    // Descargar el PDF
+    doc.save("resumen_pagos.pdf");
+  };
+
   return (
     <div className="w-full h-auto bg-orange-50 p-2" style={montserrat.style}>
       <div className="m-4 flex flex-col items-center">
@@ -35,7 +74,6 @@ export default function Pagos() {
         </h1>
 
         <div className="w-full py-16 text-center">
-          {/* <h2 className="py-4 text-3xl">Turnos pendientes</h2> */}
           <div className="flex p-4 bg-orange-100 shadow rounded-t">
             <div className="w-1/5">
               <p>Cliente</p>
@@ -53,13 +91,21 @@ export default function Pagos() {
               <p>Fecha de pago</p>
             </div>
           </div>
-          {/* Turnos confirmados */}
-          {collection
-            .map((item) => (
-              <div key={item._id}>
-                <PagosComp item={item} />
-              </div>
-            ))}
+
+          {/* Renderizar los componentes de la colección */}
+          {collection.map((item) => (
+            <div key={item._id}>
+              <PagosComp item={item} />
+            </div>
+          ))}
+
+          {/* Botón para descargar el resumen en PDF */}
+          <button
+            onClick={generarPDF}
+            className="mt-6 bg-green-services-300 text-white px-4 py-2 rounded"
+          >
+            Descargar Resumen
+          </button>
         </div>
       </div>
     </div>
