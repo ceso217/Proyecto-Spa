@@ -27,7 +27,9 @@ export default function Login() {
     console.log(res);
 
     if (res?.error) return setError(res.error);
-    if (res?.ok) return router.push("/");
+    if (res?.ok) {
+      window.location.href = "/"; // Redirigir y recargar automáticamente
+    }
   };
 
   return (

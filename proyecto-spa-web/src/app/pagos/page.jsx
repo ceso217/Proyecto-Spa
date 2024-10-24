@@ -7,6 +7,7 @@ import axios from "axios";
 import PagosComp from "@/components/PagosComp";
 import { jsPDF } from "jspdf";  // Importa jsPDF
 import "jspdf-autotable"; // Importa la extensión para tablas
+import { format } from "date-fns";
 
 export default function Pagos() {
   const [collection, setCollection] = useState([]);
@@ -45,7 +46,7 @@ export default function Pagos() {
         item.correo,
         item.servicio,
         `$${item.monto}`, // Formato de pago en dólares
-        item.fecha
+        format(new Date(item.fecha), "dd/MM/yyyy") + "  " + format(new Date(item.fecha), "HH:mm")
       ];
       tableRows.push(pagoData);
     });

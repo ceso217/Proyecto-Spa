@@ -5,7 +5,6 @@ import { corinthia, cormorant, montserrat } from "@/app/ui/fonts";
 import "../styles/landing.css";
 import { signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
-import SideBar from "./SideBar.";
 
 function Navbar() {
   const { data: session } = useSession();
@@ -16,9 +15,7 @@ function Navbar() {
       className="w-full h-28 bg-green-services-100 flex overflow-hidden justify-between"
       style={montserrat.style}
     >
-      <div className="w-[48px] flex ">
-        <SideBar />
-      </div>
+      <div className="w-[48px] flex "></div>
       <div className="w-[512px] flex items-center">
         <Image src="/logo.svg" alt="Logo" width={170} height={170} />
         <Link
@@ -45,13 +42,6 @@ function Navbar() {
         <li className="transition hover:-translate-y-1">
           <Link href="/employment">Empleo</Link>
         </li>
-        {/* {session ? (
-          <li className="transition hover:-translate-y-1">
-            <Link href="/profile">Perfil</Link>
-          </li>
-        ) : (
-          ""
-        )} */}
       </ul>
       <div className="w-[210px]">
         <Image

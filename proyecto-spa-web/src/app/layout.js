@@ -2,18 +2,23 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Providers from "./Providers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import SideBar from "@/components/SideBar.";
 
 export const metadata = {
   title: "Sentirse Bien Spa",
   description: "El Spa donde venís, a sentirte bien :)",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="es">
       <body>
         <Providers>
-          <Navbar />
+          {session ? <SideBar /> : <Navbar />}
           {children}
           <Footer />
         </Providers>
