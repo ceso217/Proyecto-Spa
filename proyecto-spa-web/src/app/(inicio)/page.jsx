@@ -131,7 +131,7 @@ export default function Home() {
 
       <div className="mapa">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3581361.0577490767!2d-64.4921250948583!3d-28.76664233563793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94329977b18b6df7%3A0x8f9c10933bb46db8!2sSENTIRSE%20BIEN%20SPA!5e0!3m2!1ses-419!2sar!4v1725247558743!5m2!1ses-419!2sar"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.381361140757!2d-64.16012346937052!3d-31.376046512425226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94329977b18b6df7%3A0x8f9c10933bb46db8!2sSENTIRSE%20BIEN%20SPA!5e0!3m2!1ses-419!2sar!4v1729833281039!5m2!1ses-419!2sar"
           width="100%"
           height="450"
           style={{ border: 0 }}

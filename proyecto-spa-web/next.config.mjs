@@ -6,6 +6,9 @@ const nextConfig = {
       "images.unsplash.com",
       "media.istockphoto.com",
       "plus.unsplash.com",
+      "www.f1latam.com",
+      "shawellness.com",
+      "img2.rtve.es",
     ], // Asegúrate de incluir ambos dominios
   },
 };

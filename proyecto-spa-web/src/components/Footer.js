@@ -28,7 +28,7 @@ const Footer = () => {
         <div className="flex justify-around w-3/5 ">
           <div className="flex flex-col justify-around items-center">
             <h3 className="text-black text-xl pb-2">Contamos con</h3>
-            <Link href="/about">Cosmetologa</Link>
+            <Link href="/about">Cosmetóloga</Link>
             <Link href="/about">Especialista</Link>
             <Link href="/about">Masajista</Link>
           </div>

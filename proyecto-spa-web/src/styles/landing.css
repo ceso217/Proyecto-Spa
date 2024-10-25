@@ -1,148 +1,133 @@
 /*  Sección Quienes Somos  */
 
-
-  
 .Encuentranos {
-    background-color: #f2f1e3;
-    height: 600px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 50px;
-  }
-  
-  .Encuentranos .item {
-    flex: 1;
-    padding: 20px;
-    max-width: 45%;
-  }
-  
-  .Encuentranos .item.i2 {
-    text-align: center;
-  }
-  
-  .Encuentranos p {
-    font-size: 18px;
-    color: #4b4b4b;
-  }
-  
-  .mapa {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-  
-  .mapa iframe {
-    height: 450px;
-  }
+  background-color: #f2f1e3;
+  height: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+}
 
-  .row {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
+.Encuentranos .item {
+  flex: 1;
+  padding: 20px;
+  max-width: 45%;
+}
+
+.Encuentranos .item.i2 {
+  text-align: center;
+}
+
+.Encuentranos p {
+  font-size: 18px;
+  color: #4b4b4b;
+}
+
+.mapa {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.mapa iframe {
+  height: 450px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .background {
-    background-image: url('/sepiatexture.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
+  background-image: url("/sepiatexture.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 .section-white {
-    padding: 70px 0;
-
-
+  padding: 70px 0;
 }
 
-.title{
-    text-align: center;
+.title {
+  text-align: center;
 }
 
-.subtitle{
-    text-align: center;
+.subtitle {
+  text-align: center;
 }
 
 .team-item {
-    flex: 1 1 calc(33.333% - 40px); ;
-    max-width: 30%;
-    background: #3C634A;
-    text-align: center;
-    margin: 20px 0;
-    padding: 80px 20px ;
-    border-radius: 8px 8px;
-    -webkit-transition: all 0.25s ease-in-out;
-    -moz-transition: all 0.25s ease-in-out;
-    -ms-transition: all 0.25s ease-in-out;
-    -o-transition: all 0.25s ease-in-out;
-    transition: all 0.25s ease-in-out;
-    
+  flex: 1 1 calc(33.333% - 40px);
+  max-width: 30%;
+  background: #3c634a;
+  text-align: center;
+  margin: 20px 0;
+  padding: 45px 20px;
+  border-radius: 40px;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -ms-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .team-item:hover {
-    background: #2e4f3a;
-    color: white;
-    
+  background: #2e4f3a;
+  color: white;
 }
 
 .team-item h3 {
-    margin: 20px 0 1px 0 !important;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 700;
-    text-transform: uppercase;
-    -webkit-transition: all 0.25s ease-in-out;
-    -moz-transition: all 0.25s ease-in-out;
-    transition: all 0.25s ease-in-out;
+  margin: 20px 0 1px 0 !important;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .position {
-    color: #fff;
-    font-style: italic;
+  color: #fff;
+  font-style: italic;
 }
 
 .description {
-    color: #fff;
-        
+  color: #fff;
 }
 
 .team-item:hover {
-    color: #ddd;
+  color: #ddd;
 }
 
 .team-info {
-    display: block;
-    margin-bottom: 0;
+  display: block;
+  margin-bottom: 0;
 }
 
 .team-info {
-    color: #acacac;
-    font-style: italic;
+  color: #acacac;
+  font-style: italic;
 }
 
 .team-info::after {
-    background: #008aff;
-    background: -webkit-linear-gradient(
-        135deg, #6B02FF 0%, #985BEF 100%
-    );
-    background: -o-linear-gradient(
-        135deg, #6B02FF 0%, #985BEF 100%
-    );
-    background: -moz-linear-gradient(
-        135deg, #6B02FF 0%, #985BEF 100%
-    );
-    background: linear-gradient(
-        135deg, #6B02FF 0%, #985BEF 100%
-    );
+  background: #008aff;
+  background: -webkit-linear-gradient(135deg, #6b02ff 0%, #985bef 100%);
+  background: -o-linear-gradient(135deg, #6b02ff 0%, #985bef 100%);
+  background: -moz-linear-gradient(135deg, #6b02ff 0%, #985bef 100%);
+  background: linear-gradient(135deg, #6b02ff 0%, #985bef 100%);
 
-    display: inline-block;
-    vertical-align: middle;
-    content: '';
-    width: 50px;
-    height: 3px;
-    margin-top: -20px;
+  display: inline-block;
+  vertical-align: middle;
+  content: "";
+  width: 50px;
+  height: 3px;
+  margin-top: -20px;
 }
 
 .team-img {
@@ -155,13 +140,13 @@
   display: inline-flex;
 }
 
-.team-section{
-  background-image: url('/sepiatexture.svg');
+.team-section {
+  background-image: url("/sepiatexture.svg");
 }
 
-.btnlogin{
+.btnlogin {
   background: white;
   border-radius: 10%;
-  padding: 6px 6px ;
+  padding: 6px 6px;
   margin: 20px;
 }
