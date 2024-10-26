@@ -12,8 +12,9 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
   const { data: session, status } = useSession();
   const user = session?.user;
   const [fecha, setFecha] = useState("");
-  const [showPopup, setShowPopup] = useState(false); // Estado para mostrar el popup
-  const [selectedMethod, setSelectedMethod] = useState(""); // Estado para el método de pago
+  const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [showPaymentPopup, setShowPaymentPopup] = useState(false);
+  const [selectedMethod, setSelectedMethod] = useState("");
 
   const handlePedirTurno = async () => {
     try {
@@ -36,12 +37,12 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
 
   const handleGuardarPago = async () => {
     try {
-      const response = await axios.post("/api/dates", {
-        service: item.titulo,
-        date: fecha,
-        user: user?.username, // Asigna el usuario que pidió el turno
-        client: user?.fullname,
-        accept: 0,
+      await axios.post("/api/pagos", {
+        monto: item.precio / 100,
+        cliente: user?.fullname,
+        correo: user?.email,
+        servicio: item.titulo,
+        fecha: new Date().toISOString().replace("T", " ").substring(0, 19),
       });
     } catch (error) {
       console.error("Error al guardar el pago:", error);
@@ -50,11 +51,6 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
   };
 
   const handleCheckout = async (servicio) => {
-    if (!fecha) {
-      alert("Por favor selecciona una fecha.");
-      return;
-    }
-
     try {
       const response = await fetch("/api/checkout", {
         method: "POST",
@@ -63,7 +59,6 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
       });
 
       const data = await response.json();
-
       if (response.ok) {
         const stripe = await stripePromise;
         await stripe.redirectToCheckout({ sessionId: data.id });
@@ -81,12 +76,19 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
       alert("Por favor selecciona una fecha.");
       return;
     }
-    setShowPopup(true); // Muestra el popup
+    setShowConfirmPopup(true);
+  };
+
+  const handleConfirmSelection = (confirm) => {
+    setShowConfirmPopup(false);
+    if (confirm) {
+      setShowPaymentPopup(true);
+    }
   };
 
   const handleMethodSelection = async (method) => {
     setSelectedMethod(method);
-    setShowPopup(false); // Oculta el popup
+    setShowPaymentPopup(false);
     await handlePedirTurno();
     await handleGuardarPago();
     await handleCheckout(item);
@@ -124,13 +126,43 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
             Pedir turno
           </button>
         </div>
-      ) : (
-        ""
+      ) : null}
+
+      {showConfirmPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-5 rounded-lg shadow-lg relative">
+            <button
+              onClick={() => setShowConfirmPopup(false)}
+              className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
+            >
+              ×
+            </button>
+            <h2 className="text-2xl font-semibold mb-4">¿Desea pagar ahora?</h2>
+            <button
+              onClick={() => handleConfirmSelection(true)}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
+            >
+              Sí
+            </button>
+            <button
+              onClick={() => handleConfirmSelection(false)}
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+            >
+              No
+            </button>
+          </div>
+        </div>
       )}
 
-      {showPopup && (
+      {showPaymentPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-5 rounded-lg shadow-lg">
+          <div className="bg-white p-5 rounded-lg shadow-lg relative">
+            <button
+              onClick={() => setShowPaymentPopup(false)}
+              className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
+            >
+              ×
+            </button>
             <h2 className="text-2xl font-semibold mb-4">Seleccione el método de pago</h2>
             <button
               onClick={() => handleMethodSelection("Tarjeta de Crédito")}
@@ -166,26 +198,17 @@ export default function Page() {
     fetchData();
   }, []);
   return (
-    <div
-      className="bg-orange-100 text-green-services-300"
-      style={montserrat.style}
-    >
-      <h3
-        className="text-7xl text-center text-green-services-300 font-mono pt-8 pb-4 "
-        style={cormorant.style}
-      >
+    <div className="bg-orange-100 text-green-services-300" style={montserrat.style}>
+      <h3 className="text-7xl text-center text-green-services-300 font-mono pt-8 pb-4 " style={cormorant.style}>
         Servicios
       </h3>
 
-      <div
-        className="text-6xl flex-col text-center pt-7 font-bold "
-        style={cormorant.style}
-      >
+      <div className="text-6xl flex-col text-center pt-7 font-bold " style={cormorant.style}>
         Masajes
       </div>
       <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
         {collection
-          .filter((item) => item.tipo === "Masaje") // Filtra los elementos que cumplen la condición
+          .filter((item) => item.tipo === "Masaje")
           .map((item) => (
             <div key={item._id}>
               <ServiciosArticulo item={item} ancho={500} alto={300} />
@@ -193,16 +216,13 @@ export default function Page() {
           ))}
       </div>
 
-      <h2
-        className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 "
-        style={cormorant.style}
-      >
+      <h2 className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 " style={cormorant.style}>
         Belleza
       </h2>
 
       <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
         {collection
-          .filter((item) => item.tipo === "Belleza") // Filtra los elementos que cumplen la condición
+          .filter((item) => item.tipo === "Belleza")
           .map((item) => (
             <div key={item._id}>
               <ServiciosArticulo item={item} ancho={500} alto={300} />
@@ -210,34 +230,26 @@ export default function Page() {
           ))}
       </div>
 
-      <div
-        className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 "
-        style={cormorant.style}
-      >
-        {" "}
+      <div className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 " style={cormorant.style}>
         Tratamientos Faciales
       </div>
 
       <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
         {collection
-          .filter((item) => item.tipo === "Tratamientos faciales") // Filtra los elementos que cumplen la condición
+          .filter((item) => item.tipo === "Tratamientos faciales")
           .map((item) => (
             <div key={item._id}>
               <ServiciosArticulo item={item} ancho={500} alto={300} />
             </div>
           ))}
       </div>
-      <div
-        className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 "
-        style={cormorant.style}
-      >
-        {" "}
+      <div className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 " style={cormorant.style}>
         Tratamientos Corporales
       </div>
 
       <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
         {collection
-          .filter((item) => item.tipo === "Tratamientos corporales") // Filtra los elementos que cumplen la condición
+          .filter((item) => item.tipo === "Tratamientos corporales")
           .map((item) => (
             <div key={item._id}>
               <ServiciosArticulo item={item} ancho={500} alto={300} />
