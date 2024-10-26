@@ -5,6 +5,7 @@ import Image from "next/image";
 import { cormorant, montserrat } from "../ui/fonts";
 import { useSession } from "next-auth/react";
 import { loadStripe } from "@stripe/stripe-js";
+import PedirTurnoModal from "@/components/PedirTurnoModal";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
@@ -15,6 +16,39 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [showPaymentPopup, setShowPaymentPopup] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  // Fecha actual
+  const hoy = new Date();
+  const año = hoy.getFullYear();
+  const mes = (hoy.getMonth() + 1).toString().padStart(2, '0'); // Mes comienza en 0, así que sumamos 1
+  const dia = hoy.getDate().toString().padStart(2, '0');
+
+  // Crear una nueva fecha sumando un mes
+  const unMesDesdeHoy = new Date(hoy);
+  unMesDesdeHoy.setMonth(hoy.getMonth() + 1); // Aquí usamos hoy.getMonth() en lugar de mes
+
+  // Formato de la fecha de hoy en ISO (YYYY-MM-DD)
+  const fechaHoyISO = `${año}-${mes}-${dia}`;
+
+  // Obtener la fecha un mes después
+  const nuevoAño = unMesDesdeHoy.getFullYear();
+  const nuevoMes = (unMesDesdeHoy.getMonth() + 1).toString().padStart(2, '0'); // Asegura que tenga dos dígitos
+  const nuevoDia = unMesDesdeHoy.getDate().toString().padStart(2, '0');
+
+  // Formato de la fecha un mes después en ISO (YYYY-MM-DD)
+  const fechaUnMesISO = `${nuevoAño}-${nuevoMes}-${nuevoDia}`;
+
+  console.log("Fecha de hoy:", fechaHoyISO); // Ejemplo: "2024-10-26"
+  console.log("Fecha un mes después:", fechaUnMesISO); // Ejemplo: "2024-11-26"
+
+  // comprueba que día es
+  const diaSemana = new Date(fecha).getDay();
+
+  //
+  const fechaSeleccionada = fecha !== "";
 
   const handlePedirTurno = async () => {
     try {
@@ -113,78 +147,131 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
           <div className="flex items-center">
             <p>Fecha de reserva: </p>
             <input
-              type="datetime-local"
+              type="date"
               value={fecha}
               onChange={(e) => setFecha(e.target.value)}
               className="p-2 rounded-lg border-2 border-black text-center bg-green-100 mx-5"
             />
           </div>
           <button
-            onClick={handlePedirTurnoClick}
+            // onClick={handlePedirTurnoClick}
+            onClick={openModal}
             className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full"
           >
             Pedir turno
           </button>
-        </div>
-      ) : null}
+          <PedirTurnoModal isOpen={isModalOpen} onClose={closeModal}>
+            <h2 className="text-xl font-bold mb-4">
+              Selecciona tu turno!
+            </h2>
+            <label className="pr-3">Día:</label>
+            <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} min={fechaHoyISO} max={fechaUnMesISO} className="border border-black rounded-xl p-2 mt-6 mb-10" />
+            <h3>Turnos disponibles:</h3>
 
-      {showConfirmPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-5 rounded-lg shadow-lg relative">
-            <button
-              onClick={() => setShowConfirmPopup(false)}
-              className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
-            >
-              ×
-            </button>
-            <h2 className="text-2xl font-semibold mb-4">¿Desea pagar ahora?</h2>
-            <button
-              onClick={() => handleConfirmSelection(true)}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
-            >
-              Sí
-            </button>
-            <button
-              onClick={() => handleConfirmSelection(false)}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-            >
-              No
-            </button>
-          </div>
+            {fechaSeleccionada ? (
+              diaSemana === 5 || diaSemana === 6 ? (  // 5 = Sábado, 6 = Domingo
+                <p className="text-sm p-2 mt-6 mb-10">No abrimos fines de semana ):</p>
+              ) : (
+                <select name="Turnos disponibles" className="border border-black rounded-xl p-2 mt-4 mb-10">
+                  <option value="8">8:00</option>
+                  <option value="9">9:00</option>
+                  <option value="10">10:00</option>
+                  <option value="16">16:00</option>
+                  <option value="17">17:00</option>
+                  <option value="18">18:00</option>
+                  <option value="19">19:00</option>
+                </select>
+              )
+            ) : (
+              <p className="text-sm p-2 mt-6 mb-10">Por favor, selecciona una fecha.</p>
+            )}
+            <div className="flex justify-evenly">
+              {/* <button
+                onClick={() => {
+                  handleUpdate("rechazar");
+                  closeModal();
+                }}
+                className="bg-green-500 text-white w-28 mt-2 px-2 py-1 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
+              >
+                Enviar
+              </button>
+              <button
+                onClick={closeModal}
+                className="bg-red-500 text-white w-28 mt-2 px-2 py-1 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
+              >
+                Cancelar
+              </button> */}
+            </div>
+          </PedirTurnoModal>
         </div>
-      )}
+      ) : null
+      }
 
-      {showPaymentPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-5 rounded-lg shadow-lg relative">
-            <button
-              onClick={() => setShowPaymentPopup(false)}
-              className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
-            >
-              ×
-            </button>
-            <h2 className="text-2xl font-semibold mb-4">Seleccione el método de pago</h2>
-            <button
-              onClick={() => handleMethodSelection("Tarjeta de Crédito")}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
-            >
-              Tarjeta de Crédito
-            </button>
-            <button
-              onClick={() => handleMethodSelection("Tarjeta de Débito")}
-              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-            >
-              Tarjeta de Débito
-            </button>
+      {
+        showConfirmPopup && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-5 rounded-lg shadow-lg relative">
+              <button
+                onClick={() => setShowConfirmPopup(false)}
+                className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
+              >
+                ×
+              </button>
+              <h2 className="text-2xl font-semibold mb-4">¿Desea pagar ahora?</h2>
+              <button
+                onClick={() => handleConfirmSelection(true)}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
+              >
+                Sí
+              </button>
+              <button
+                onClick={() => handleConfirmSelection(false)}
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+              >
+                No
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+
+      {
+        showPaymentPopup && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-5 rounded-lg shadow-lg relative">
+              <button
+                onClick={() => setShowPaymentPopup(false)}
+                className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
+              >
+                ×
+              </button>
+              <h2 className="text-2xl font-semibold mb-4">Seleccione el método de pago</h2>
+              <button
+                onClick={() => handleMethodSelection("Tarjeta de Crédito")}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
+              >
+                Tarjeta de Crédito
+              </button>
+              <button
+                onClick={() => handleMethodSelection("Tarjeta de Débito")}
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+              >
+                Tarjeta de Débito
+              </button>
+            </div>
+          </div>
+        )
+      }
+    </div >
   );
 };
 
 export default function Page() {
   const [collection, setCollection] = useState([]);
+  const prueba = new Date("2024-10-26T03:00:00Z")
+  console.log(prueba)
+  prueba.setHours(16)
+  console.log(prueba)
 
   useEffect(() => {
     const fetchData = async () => {
