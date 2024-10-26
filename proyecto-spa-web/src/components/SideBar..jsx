@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { corinthia, montserrat } from "@/app/ui/fonts";
 import Image from "next/image";
-import { FaHome, FaInfoCircle, FaConciergeBell, FaNewspaper, FaBriefcase, FaArchive, FaPersonBooth } from "react-icons/fa";
+import { FaHome, FaInfoCircle, FaConciergeBell, FaNewspaper, FaBriefcase, FaArchive, FaPersonBooth, FaInfo } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 import { signOut, useSession } from "next-auth/react";
 
 const SideBar = () => {
@@ -78,13 +79,24 @@ const SideBar = () => {
                 </Link>
               </div>
 
+              <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg ">
+                <Link
+                  href="/about"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
+                >
+                  <FaInfoCircle className="mr-3" /> Quienes Somos
+                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
+                </Link>
+              </div>
+
               <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
                 <Link
                   href="/profile"
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
                 >
-                  <FaInfoCircle className="mr-3" /> Mi Perfil
+                  <CgProfile className="mr-3" /> Mi Perfil
                   <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
                 </Link>
               </div>
@@ -102,6 +114,17 @@ const SideBar = () => {
 
               <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
                 <Link
+                  href="/servicios"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
+                >
+                  <FaConciergeBell className="mr-3" /> Servicios
+                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
+                </Link>
+              </div>
+              
+              <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
+                <Link
                   href="/mis_turnos"
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
@@ -110,6 +133,7 @@ const SideBar = () => {
                   <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
                 </Link>
               </div>
+
 
               <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
                 <Link

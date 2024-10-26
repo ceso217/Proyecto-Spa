@@ -32,7 +32,7 @@ export default function Clientes() {
     <div className="w-full h-auto bg-orange-50 p-2" style={montserrat.style}>
       <div className="m-4 flex flex-col items-center">
         <h1
-          className="text-7xl mt-10 text-green-services-300"
+          className="text-7xl mt-10 text-green-services-300 border-b-4 border-green-services-300 mt-6"
           style={cormorant.style}
         >
           Mis Turnos

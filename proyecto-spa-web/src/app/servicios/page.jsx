@@ -1,37 +1,32 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Asegúrate de importar axios
+import axios from "axios";
 import Image from "next/image";
 import { cormorant, montserrat } from "../ui/fonts";
 import { useSession } from "next-auth/react";
-import { loadStripe } from "@stripe/stripe-js"; // Importa la función
+import { loadStripe } from "@stripe/stripe-js";
 
-// Configura la promesa de Stripe con tu clave pública
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 const ServiciosArticulo = ({ item, ancho, alto }) => {
   const { data: session, status } = useSession();
   const user = session?.user;
   const [fecha, setFecha] = useState("");
+  const [showPopup, setShowPopup] = useState(false); // Estado para mostrar el popup
+  const [selectedMethod, setSelectedMethod] = useState(""); // Estado para el método de pago
 
   const handlePedirTurno = async () => {
-    // if (!fecha) {
-    //   alert("Por favor selecciona una fecha.");
-    //   return;
-    // }
-
     try {
-      // Hacer una petición POST a la API para guardar la fecha y el servicio
       const response = await axios.post("/api/dates", {
         service: item.titulo,
         date: fecha,
-        user: user?.username, // Asigna el usuario que pidió el turno
+        user: user?.username,
         client: user?.fullname,
         accept: 0,
       });
 
       if (response.status === 201) {
-        alert(`Has pedido un turno para el servicio: ${titulo} el ${fecha}`);
+        alert(`Has pedido un turno para el servicio: ${item.titulo} el ${fecha}`);
       }
     } catch (error) {
       console.error("Error al pedir el turno:", error);
@@ -40,17 +35,13 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
   };
 
   const handleGuardarPago = async () => {
-
     try {
-      const hoy = new Date();
-      const fechaCompleta = hoy.toISOString().replace('T', ' ').substring(0, 19);
-      // Hacer una petición POST a la API para guardar la fecha y el servicio
-      const response = await axios.post("/api/pagos", {
-        monto: item.precio / 100,
-        cliente: user?.fullname,
-        correo: user?.email, // Asigna el usuario que pidió el turno
-        servicio: item.titulo,
-        fecha: fechaCompleta,
+      const response = await axios.post("/api/dates", {
+        service: item.titulo,
+        date: fecha,
+        user: user?.username, // Asigna el usuario que pidió el turno
+        client: user?.fullname,
+        accept: 0,
       });
     } catch (error) {
       console.error("Error al guardar el pago:", error);
@@ -74,7 +65,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
       const data = await response.json();
 
       if (response.ok) {
-        const stripe = await stripePromise; // Cargar Stripe
+        const stripe = await stripePromise;
         await stripe.redirectToCheckout({ sessionId: data.id });
       } else {
         alert(`Error: ${data.error}`);
@@ -85,22 +76,29 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
     }
   };
 
+  const handlePedirTurnoClick = () => {
+    if (!fecha) {
+      alert("Por favor selecciona una fecha.");
+      return;
+    }
+    setShowPopup(true); // Muestra el popup
+  };
+
+  const handleMethodSelection = async (method) => {
+    setSelectedMethod(method);
+    setShowPopup(false); // Oculta el popup
+    await handlePedirTurno();
+    await handleGuardarPago();
+    await handleCheckout(item);
+  };
+
   return (
     <div className="p-5 bg-orange-50 flex flex-col items-center h-[700px]">
-      <h3
-        className="text-5xl font-bold text-black mb-4 h-[100px]"
-        style={cormorant.style}
-      >
+      <h3 className="text-5xl font-bold text-black mb-4 h-[100px]" style={cormorant.style}>
         {item.titulo}
       </h3>
 
-      <Image
-        src={item.imagen}
-        width={ancho}
-        height={alto}
-        alt={item.titulo}
-        className="mb-4"
-      />
+      <Image src={item.imagen} width={ancho} height={alto} alt={item.titulo} className="mb-4" />
 
       <p className="text-2xl font-semibold text-gray-700 mb-4">
         Precio: ${item.precio / 100}
@@ -120,11 +118,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
             />
           </div>
           <button
-            onClick={async () => {
-              handlePedirTurno();
-              handleGuardarPago();
-              await handleCheckout(item);
-            }}
+            onClick={handlePedirTurnoClick}
             className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full"
           >
             Pedir turno
@@ -132,6 +126,26 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
         </div>
       ) : (
         ""
+      )}
+
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-5 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold mb-4">Seleccione el método de pago</h2>
+            <button
+              onClick={() => handleMethodSelection("Tarjeta de Crédito")}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
+            >
+              Tarjeta de Crédito
+            </button>
+            <button
+              onClick={() => handleMethodSelection("Tarjeta de Débito")}
+              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Tarjeta de Débito
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
@@ -157,14 +171,14 @@ export default function Page() {
       style={montserrat.style}
     >
       <h3
-        className="text-7xl text-center text-green-services-300 font-mono pt-8 pb-4"
+        className="text-7xl text-center text-green-services-300 font-mono pt-8 pb-4 "
         style={cormorant.style}
       >
         Servicios
       </h3>
 
       <div
-        className="text-6xl flex-col text-center pt-7 font-bold"
+        className="text-6xl flex-col text-center pt-7 font-bold "
         style={cormorant.style}
       >
         Masajes
