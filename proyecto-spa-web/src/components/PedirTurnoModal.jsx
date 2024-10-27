@@ -20,7 +20,7 @@ const PedirTurnoModal = ({ isOpen, onClose, children }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-35 flex justify-center items-center z-50 text-center">
       <div
-        className={`w-[800px] h-[600px] bg-orange-50 p-6 rounded-lg shadow-lg transform transition-all duration-1000 ${isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
+        className={`w-[500px] h-[450px] bg-orange-50 p-6 rounded-lg shadow-lg transform transition-all duration-1000 ${isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
           }`}
       >
         <button className="text-red-500 text-lg float-right" onClick={onClose}>

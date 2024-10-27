@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET(request, { params }) {
   try {
     connectDB();
-    const dayFound = await DayCalendar.findById(params.id);
+    const dayFound = await DiaCalendario.findById(params.id);
 
     if (!dayFound)
       return NextResponse.json(
@@ -26,7 +26,7 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    const dayDeleted = await DayCalendar.findByIdAndDelete(params.id);
+    const dayDeleted = await DiaCalendario.findByIdAndDelete(params.id);
 
     if (!dayDeleted)
       return NextResponse.json(
@@ -49,7 +49,7 @@ export async function DELETE(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     const data = await request.json();
-    const dayUpdated = await DayCalendar.findByIdAndUpdate(params.id, data, {
+    const dayUpdated = await DiaCalendario.findByIdAndUpdate(params.id, data, {
       new: true,
     });
     return NextResponse.json(dayUpdated);
@@ -64,7 +64,7 @@ export async function PUT(request, { params }) {
 export async function PATCH(request, { params }) {
   try {
     const data = await request.json(); // Los campos a actualizar
-    const dayUpdated = await DayCalendar.findByIdAndUpdate(params.id, data, {
+    const dayUpdated = await DiaCalendario.findByIdAndUpdate(params.id, data, {
       new: true, // Devuelve el documento actualizado
       runValidators: true, // Asegura que los datos cumplan con las validaciones del esquema
     });

@@ -19,6 +19,16 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const [collection, setCollection] = useState([]);
+  const itemsFiltrados = collection.filter((item2) => item2.dia.split('T')[0] === fecha);
+  const itemFiltrado = collection.find((item2) => item2.dia.split('T')[0] === fecha);
+  const fechaSeleccionada = fecha !== "";
+  const [eleccionHorario, setEleccionHorario] = useState("Elige un horario");
+
+  const handleChange = (event) => {
+    console.log("Valor seleccionado:", event.target.value); // Para depurar
+    setEleccionHorario(event.target.value);
+  };
 
   // Fecha actual
   const hoy = new Date();
@@ -41,14 +51,8 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
   // Formato de la fecha un mes después en ISO (YYYY-MM-DD)
   const fechaUnMesISO = `${nuevoAño}-${nuevoMes}-${nuevoDia}`;
 
-  console.log("Fecha de hoy:", fechaHoyISO); // Ejemplo: "2024-10-26"
-  console.log("Fecha un mes después:", fechaUnMesISO); // Ejemplo: "2024-11-26"
-
   // comprueba que día es
   const diaSemana = new Date(fecha).getDay();
-
-  //
-  const fechaSeleccionada = fecha !== "";
 
   const handlePedirTurno = async () => {
     try {
@@ -110,7 +114,23 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
       alert("Por favor selecciona una fecha.");
       return;
     }
+    if (eleccionHorario === "Elige un horario") {
+      alert("Por favor selecciona un horario.");
+      return;
+    }
+    handleActualizarDia();
+    closeModal();
     setShowConfirmPopup(true);
+  };
+
+  const handleActualizarDia = async () => {
+    try {
+      await axios.patch(`/api/diasCalendario/${itemFiltrado._id}`, { [eleccionHorario]: true });
+      fetchData();  // Vuelve a cargar las fechas actualizadas
+    } catch (error) {
+      console.error("Error al reservar el horario:", error);
+      alert("Hubo un error al reservar el horario. Intenta de nuevo.");
+    }
   };
 
   const handleConfirmSelection = (confirm) => {
@@ -128,8 +148,38 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
     await handleCheckout(item);
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/diasCalendario");
+      setCollection(response.data); // Actualiza el estado con los datos obtenidos
+    } catch (error) {
+      console.error("Error fetching collection:", error);
+    }
+  };
+
+  useEffect(() => {
+    const handleCrearDia = async () => {
+      try {
+        await axios.post("/api/diasCalendario", { dia: fecha });
+        await fetchData(); // Vuelve a obtener los datos tras crear un nuevo día
+      } catch (error) {
+        console.error("Error al crear la fecha:", error);
+        alert("Hubo un error al crear la fecha. Intenta de nuevo.");
+      }
+    };
+
+    // Llamada inicial para obtener los datos
+    fetchData();
+
+    // Solo crea un nuevo día si no existe, evitando loops infinitos
+    if (fecha && !collection.some((item) => item.dia.split('T')[0] === fecha)) {
+      handleCrearDia();
+    }
+  }, [fecha]); // Ahora solo depende de `fecha`
+
+
   return (
-    <div className="p-5 bg-orange-50 flex flex-col items-center h-[700px]">
+    <div className="p-5 bg-orange-50 flex flex-col items-center h-[640px]">
       <h3 className="text-5xl font-bold text-black mb-4 h-[100px]" style={cormorant.style}>
         {item.titulo}
       </h3>
@@ -140,21 +190,9 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
         Precio: ${item.precio / 100}
       </p>
 
-      <div className="flex-grow"></div>
-
       {session ? (
-        <div className="w-full flex justify-between items-end mt-4">
-          <div className="flex items-center">
-            <p>Fecha de reserva: </p>
-            <input
-              type="date"
-              value={fecha}
-              onChange={(e) => setFecha(e.target.value)}
-              className="p-2 rounded-lg border-2 border-black text-center bg-green-100 mx-5"
-            />
-          </div>
+        <div className="w-full flex justify-center items-start mt-4">
           <button
-            // onClick={handlePedirTurnoClick}
             onClick={openModal}
             className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full"
           >
@@ -168,39 +206,61 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
             <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} min={fechaHoyISO} max={fechaUnMesISO} className="border border-black rounded-xl p-2 mt-6 mb-10" />
             <h3>Turnos disponibles:</h3>
 
-            {fechaSeleccionada ? (
-              diaSemana === 5 || diaSemana === 6 ? (  // 5 = Sábado, 6 = Domingo
-                <p className="text-sm p-2 mt-6 mb-10">No abrimos fines de semana ):</p>
+            <div className="p-4 mb-6">
+              {fechaSeleccionada ? (
+                diaSemana === 5 || diaSemana === 6 ? (  // 5 = Sábado, 6 = Domingo
+                  < p className="text-sm p-2 mt-6 mb-10">No abrimos fines de semana ):</p>
+                ) : (
+                  <>
+                    {console.log(fecha)}
+                    {console.log(itemsFiltrados.length)}
+                    {itemsFiltrados.length === 0 ? (
+                      <p>crear fecha</p>
+                    ) : (
+                      <>
+                        {
+                          collection
+                            .filter((item2) => item2.dia.split('T')[0] === fecha) // Filtra los elementos que cumplen la condición
+                            .map((item2) => (
+                              <div key={item2._id}>
+                                <select name="Turnos disponibles" value={eleccionHorario} onChange={handleChange} className="border border-black rounded-xl p-2 my-2 text-center">
+                                  <option value="Elige un horario" disabled>
+                                    Elige un horario
+                                  </option>
+                                  {item2[8] ? (<option value="8" disabled>8:00</option>) : (<option value="8">8:00</option>)}
+                                  {item2[9] ? (<option value="9" disabled>9:00</option>) : (<option value="9">9:00</option>)}
+                                  {item2[10] ? (<option value="10" disabled>10:00</option>) : (<option value="10">10:00</option>)}
+                                  {item2[16] ? (<option value="16" disabled>16:00</option>) : (<option value="16">16:00</option>)}
+                                  {item2[17] ? (<option value="17" disabled>17:00</option>) : (<option value="17">17:00</option>)}
+                                  {item2[18] ? (<option value="18" disabled>18:00</option>) : (<option value="18">18:00</option>)}
+                                  {item2[19] ? (<option value="19" disabled>19:00</option>) : (<option value="19">19:00</option>)}
+                                </select>
+                                <p className="text-gray-500 text-xs">*los horarios en gris no están disponibles</p>
+                              </div>
+                            ))
+                        }
+                      </>
+                    )
+                    }
+                  </>
+                )
               ) : (
-                <select name="Turnos disponibles" className="border border-black rounded-xl p-2 mt-4 mb-10">
-                  <option value="8">8:00</option>
-                  <option value="9">9:00</option>
-                  <option value="10">10:00</option>
-                  <option value="16">16:00</option>
-                  <option value="17">17:00</option>
-                  <option value="18">18:00</option>
-                  <option value="19">19:00</option>
-                </select>
-              )
-            ) : (
-              <p className="text-sm p-2 mt-6 mb-10">Por favor, selecciona una fecha.</p>
-            )}
+                <p className="text-sm p-2 mt-6 mb-10">Por favor, selecciona una fecha.</p>
+              )}
+            </div>
             <div className="flex justify-evenly">
-              {/* <button
-                onClick={() => {
-                  handleUpdate("rechazar");
-                  closeModal();
-                }}
-                className="bg-green-500 text-white w-28 mt-2 px-2 py-1 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
+              <button
+                onClick={handlePedirTurnoClick}
+                className="bg-green-600 text-white w-32 py-2 px-4 rounded-full transition-transform duration-200 hover:scale-105"
               >
-                Enviar
+                Pedir turno
               </button>
               <button
                 onClick={closeModal}
-                className="bg-red-500 text-white w-28 mt-2 px-2 py-1 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
+                className="bg-red-500 text-white w-32 py-2 px-4 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
               >
                 Cancelar
-              </button> */}
+              </button>
             </div>
           </PedirTurnoModal>
         </div>
@@ -210,26 +270,28 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
       {
         showConfirmPopup && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-5 rounded-lg shadow-lg relative">
+            <div className="bg-orange-50 p-5 rounded-xl shadow-lg relative w-96 text-center">
               <button
                 onClick={() => setShowConfirmPopup(false)}
                 className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
               >
-                ×
+                ✖
               </button>
-              <h2 className="text-2xl font-semibold mb-4">¿Desea pagar ahora?</h2>
-              <button
-                onClick={() => handleConfirmSelection(true)}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
-              >
-                Sí
-              </button>
-              <button
-                onClick={() => handleConfirmSelection(false)}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-              >
-                No
-              </button>
+              <h2 className="text-2xl font-semibold mb-4">¿Deseas pagar ahora?</h2>
+              <div className="flex justify-around">
+                <button
+                  onClick={() => handleConfirmSelection(true)}
+                  className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+                >
+                  Sí, pagar ahora
+                </button>
+                <button
+                  onClick={() => handleConfirmSelection(false)}
+                  className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+                >
+                  No, pagar luego
+                </button>
+              </div>
             </div>
           </div>
         )
@@ -243,7 +305,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
                 onClick={() => setShowPaymentPopup(false)}
                 className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
               >
-                ×
+                ✖
               </button>
               <h2 className="text-2xl font-semibold mb-4">Seleccione el método de pago</h2>
               <button
@@ -268,10 +330,6 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
 
 export default function Page() {
   const [collection, setCollection] = useState([]);
-  const prueba = new Date("2024-10-26T03:00:00Z")
-  console.log(prueba)
-  prueba.setHours(16)
-  console.log(prueba)
 
   useEffect(() => {
     const fetchData = async () => {

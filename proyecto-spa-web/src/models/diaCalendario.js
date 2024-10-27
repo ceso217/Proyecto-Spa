@@ -2,10 +2,10 @@ import { Schema, model, models } from "mongoose";
 
 const dateSchema = new Schema(
   {
-    dia:{
-    type: String,
-      required,
-    }
+    dia: {
+      type: Date,
+      required: [true, "Day is required"],
+    },
     8: {
       type: Boolean,
       default: false,

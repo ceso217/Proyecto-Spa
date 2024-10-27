@@ -27,11 +27,6 @@ export default function Pagos() {
     fetchData();
   }, []);
 
-
-
-
-
-
   //filtra por fecha de inicio y fin...con algunos problemitas
   const filtrarPorFecha = () => {
     const filtered = collection.filter((item) => {

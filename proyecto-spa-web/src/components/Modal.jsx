@@ -20,9 +20,8 @@ const Modal = ({ isOpen, onClose, children }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-35 flex justify-center items-center z-50">
       <div
-        className={`w-96 h-96 bg-white p-6 rounded-lg shadow-lg w-96 transform transition-all duration-1000 ${
-          isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
-        }`}
+        className={`w-96 h-96 bg-white p-6 rounded-lg shadow-lg transform transition-all duration-1000 ${isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
+          }`}
       >
         <button className="text-red-500 text-lg float-right" onClick={onClose}>
           ✖
