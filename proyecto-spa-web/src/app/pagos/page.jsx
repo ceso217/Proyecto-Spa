@@ -66,12 +66,17 @@ export default function Pagos() {
     setFilteredCollection(filtered);
   };
 
+  const filtrarPorMetodoPago = (metodo) => {
+    const filtered = collection.filter(item => item.metodoPago === metodo);
+    setFilteredCollection(filtered);
+  };
+
   const generarPDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
     doc.text("Resumen de Pagos", 14, 22);
 
-    const tableColumn = ["Cliente", "Correo", "Servicio", "Pago", "Método de Pago", "Fecha de pago"]; // Nueva columna
+    const tableColumn = ["Cliente", "Correo", "Servicio", "Pago", "Método de Pago", "Fecha de pago"];
     const tableRows = [];
 
     filteredCollection.forEach(item => {
@@ -79,8 +84,8 @@ export default function Pagos() {
         item.cliente,
         item.correo,
         item.servicio,
-        `$${item.monto}`, // Formato de pago en dólares
-        item.metodoPago, // Mostrar método de pago
+        `$${item.monto}`, 
+        item.metodoPago, 
         format(new Date(item.fecha), "dd/MM/yyyy") + "  " + format(new Date(item.fecha), "HH:mm")
       ];
       tableRows.push(pagoData);
@@ -125,13 +130,35 @@ export default function Pagos() {
           </button>
         </div>
 
+        {/* Botones para filtrar por método de pago */}
+        <div className="flex space-x-4 mb-4">
+          <button
+            onClick={() => filtrarPorMetodoPago("Credito")}
+            className="bg-green-services-300 text-white px-4 py-2 rounded"
+          >
+            Filtrar por Crédito
+          </button>
+          <button
+            onClick={() => filtrarPorMetodoPago("Debito")}
+            className="bg-green-services-300 text-white px-4 py-2 rounded"
+          >
+            Filtrar por Débito
+          </button>
+          <button
+            onClick={() => setFilteredCollection(collection)} // Botón para mostrar todos los pagos
+            className="bg-gray-300 text-black px-4 py-2 rounded"
+          >
+            Mostrar Todos
+          </button>
+        </div>
+
         <div className="w-full py-16 text-center">
           <div className="flex p-4 bg-orange-100 shadow rounded-t">
             <div className="w-1/5"><p>Cliente</p></div>
             <div className="w-1/5"><p>Correo</p></div>
             <div className="w-1/5"><p>Servicio</p></div>
             <div className="w-1/5"><p>Pago</p></div>
-            <div className="w-1/5"><p>Método de Pago</p></div> {/* Nueva columna */}
+            <div className="w-1/5"><p>Método de Pago</p></div>
             <div className="w-1/5"><p>Fecha de pago</p></div>
           </div>
 
