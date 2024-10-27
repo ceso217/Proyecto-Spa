@@ -30,8 +30,8 @@ export default function Pagos() {
   const filtrarPorFecha = () => {
     const filtered = collection.filter((item) => {
       const fechaPago = new Date(item.fecha.split('/').reverse().join('-')); // Convertir la fecha de pago a un objeto Date
-      const start = startDate ? new Date(startDate.split('/').reverse().join('-')) : null; // Convertir la fecha de inicio a un objeto Date
-      const end = endDate ? new Date(endDate.split('/').reverse().join('-')) : null; // Convertir la fecha de fin a un objeto Date
+      const start = startDate ? new Date(`${startDate}T00:00:00`) : null; // Convertir la fecha de inicio a un objeto Date
+      const end = endDate ? new Date(`${endDate}T00:00:00`) : null; // Convertir la fecha de fin a un objeto Date
 
       // Ajustar la hora de fin para incluir todo el día
       if (end) {
@@ -84,8 +84,8 @@ export default function Pagos() {
         item.cliente,
         item.correo,
         item.servicio,
-        `$${item.monto}`, 
-        item.metodoPago, 
+        `$${item.monto}`,
+        item.metodoPago,
         format(new Date(item.fecha), "dd/MM/yyyy") + "  " + format(new Date(item.fecha), "HH:mm")
       ];
       tableRows.push(pagoData);
