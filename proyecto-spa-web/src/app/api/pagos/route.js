@@ -1,11 +1,11 @@
 import { connectDB } from "@/libs/mongodb"; // Asegúrate de que la ruta sea correcta
-import Pago from "@/models/pago"; // Asegúrate de que tienes un modelo de Servicio
+import Pago from "@/models/pago"; // Modelo de pago
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
     await connectDB(); // Conectar a la base de datos
-    const pago = await Pago.find(); // Obtener todos los servicios
+    const pago = await Pago.find(); // Obtener todos los pagos
     return NextResponse.json(pago);
   } catch (error) {
     console.error("Error al obtener los pagos:", error.message);
@@ -21,10 +21,22 @@ export async function POST(request) {
     await connectDB(); // Conectar a la base de datos
     const data = await request.json(); // Obtener los datos de la solicitud
 
-    const newPago = new Pago(data); // Crear un nuevo servicio
-    const savedPago = await newPago.save(); // Guardar el servicio en la base de datos
+    // Extraer los datos, incluyendo el nuevo campo metodoPago
+    const { monto, cliente, correo, servicio, fecha, metodoPago } = data;
 
-    return NextResponse.json(savedPago, { status: 201 }); // Retornar el servicio creado
+    // Crear un nuevo objeto de pago incluyendo metodoPago
+    const newPago = new Pago({
+      monto,
+      cliente,
+      correo,
+      servicio,
+      fecha,
+      metodoPago, // Nuevo campo agregado
+    });
+
+    const savedPago = await newPago.save(); // Guardar el pago en la base de datos
+
+    return NextResponse.json(savedPago, { status: 201 }); // Retornar el pago creado
   } catch (error) {
     console.error("Error al crear el pago:", error.message);
     return NextResponse.json({ error: error.message }, { status: 400 });

@@ -17,6 +17,9 @@ export default function PagosComp({ item }) {
         <p>${item.monto}</p> {/* Si el monto está en centavos */}
       </div>
       <div className="w-1/5">
+        <p>{item.metodoPago}</p> {/* Si el monto está en centavos */}
+      </div>
+      <div className="w-1/5">
         <p>{format(new Date(item.fecha), "dd/MM/yyyy")}</p>
       </div>
     </div>

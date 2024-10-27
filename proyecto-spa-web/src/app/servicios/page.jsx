@@ -73,13 +73,14 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
     }
   };
 
-  const handleGuardarPago = async () => {
+  const handleGuardarPago = async (method) => {
     try {
       await axios.post("/api/pagos", {
         monto: item.precio / 100,
         cliente: user?.fullname,
         correo: user?.email,
         servicio: item.titulo,
+        metodoPago: method, //Guarda el método de pago seleccionado (debito o credito)
         fecha: new Date().toISOString().replace("T", " ").substring(0, 19),
       });
     } catch (error) {
@@ -144,7 +145,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
     setSelectedMethod(method);
     setShowPaymentPopup(false);
     await handlePedirTurno();
-    await handleGuardarPago();
+    await handleGuardarPago(method); //pasar el método de pago seleccionado
     await handleCheckout(item);
   };
 
@@ -309,13 +310,13 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
               </button>
               <h2 className="text-2xl font-semibold mb-4">Seleccione el método de pago</h2>
               <button
-                onClick={() => handleMethodSelection("Tarjeta de Crédito")}
+                onClick={() => handleMethodSelection("Credito")}
                 className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
               >
                 Tarjeta de Crédito
               </button>
               <button
-                onClick={() => handleMethodSelection("Tarjeta de Débito")}
+                onClick={() => handleMethodSelection("Debito")}
                 className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
               >
                 Tarjeta de Débito

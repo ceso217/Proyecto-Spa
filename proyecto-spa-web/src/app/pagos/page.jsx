@@ -27,7 +27,6 @@ export default function Pagos() {
     fetchData();
   }, []);
 
-  //filtra por fecha de inicio y fin...con algunos problemitas
   const filtrarPorFecha = () => {
     const filtered = collection.filter((item) => {
       const fechaPago = new Date(item.fecha.split('/').reverse().join('-')); // Convertir la fecha de pago a un objeto Date
@@ -67,16 +66,12 @@ export default function Pagos() {
     setFilteredCollection(filtered);
   };
 
-
-
-
-
   const generarPDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
     doc.text("Resumen de Pagos", 14, 22);
 
-    const tableColumn = ["Cliente", "Correo", "Servicio", "Pago", "Fecha de pago"];
+    const tableColumn = ["Cliente", "Correo", "Servicio", "Pago", "Método de Pago", "Fecha de pago"]; // Nueva columna
     const tableRows = [];
 
     filteredCollection.forEach(item => {
@@ -85,6 +80,7 @@ export default function Pagos() {
         item.correo,
         item.servicio,
         `$${item.monto}`, // Formato de pago en dólares
+        item.metodoPago, // Mostrar método de pago
         format(new Date(item.fecha), "dd/MM/yyyy") + "  " + format(new Date(item.fecha), "HH:mm")
       ];
       tableRows.push(pagoData);
@@ -135,6 +131,7 @@ export default function Pagos() {
             <div className="w-1/5"><p>Correo</p></div>
             <div className="w-1/5"><p>Servicio</p></div>
             <div className="w-1/5"><p>Pago</p></div>
+            <div className="w-1/5"><p>Método de Pago</p></div> {/* Nueva columna */}
             <div className="w-1/5"><p>Fecha de pago</p></div>
           </div>
 

@@ -19,6 +19,10 @@ const dateSchema = new Schema(
       type: String,
       required: [true, "Service is required"],
     },
+    metodoPago: {
+      type: String,
+      required: [true, "Payment method is required"], // Ahora es requerido
+    },
     fecha: {
       type: Date,
       required: [true, "Date is required"],
