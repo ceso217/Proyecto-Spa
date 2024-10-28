@@ -184,7 +184,7 @@ const SideBar = () => {
               {isAdmin ? (
                 <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
                   <Link
-                    href="/pagos"
+                    href="/clientes"
                     onClick={() => setOpen(false)}
                     className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
                   >

@@ -39,9 +39,9 @@ export default function Clientes() {
           Mis Turnos
         </h1>
 
-        <h2>Turnos pagados</h2>
+        <h2 className="py-4 text-3xl mt-8">Turnos pagados</h2>
 
-        <div className="w-full py-16 text-center">
+        <div className="w-full pb-16 pt-8 text-center">
           <div className="flex p-4 bg-orange-100 shadow rounded-t ">
             <div className="w-1/4">
               <p>Servicio</p>
@@ -65,8 +65,8 @@ export default function Clientes() {
             ))}
         </div>
 
-        <h2>Turnos pendientes de pago</h2>
-        <div className="w-full py-16 text-center">
+        <h2 className="py-4 text-3xl mt-8">Turnos pendientes de pago</h2>
+        <div className="w-full pb-16 pt-8 text-center">
           <div className="flex p-4 bg-orange-100 shadow rounded-t ">
             <div className="w-1/5">
               <p>Servicio</p>
