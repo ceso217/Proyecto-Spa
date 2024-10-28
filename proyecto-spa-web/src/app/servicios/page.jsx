@@ -239,8 +239,8 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
                                   <option value="Elige un horario" disabled>
                                     Elige un horario
                                   </option>
-                                  {item2[8] ? (<option value="8" disabled>8:00</option>) : (<option value="8">8:00</option>)}
-                                  {item2[9] ? (<option value="9" disabled>9:00</option>) : (<option value="9">9:00</option>)}
+                                  {item2["08"] ? (<option value="08" disabled>8:00</option>) : (<option value="08">8:00</option>)}
+                                  {item2["09"] ? (<option value="09" disabled>9:00</option>) : (<option value="09">9:00</option>)}
                                   {item2[10] ? (<option value="10" disabled>10:00</option>) : (<option value="10">10:00</option>)}
                                   {item2[16] ? (<option value="16" disabled>16:00</option>) : (<option value="16">16:00</option>)}
                                   {item2[17] ? (<option value="17" disabled>17:00</option>) : (<option value="17">17:00</option>)}

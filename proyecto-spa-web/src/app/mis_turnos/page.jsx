@@ -7,6 +7,7 @@ import axios from "axios";
 import MisTurnos from "@/components/MisTurnos"
 import MisTurnosConfirmados from "@/components/MisTurnosConfirmados"
 import MisTurnosRechazados from "@/components/MisTurnosRechazados"
+import TurnoConfirmar from "@/components/TurnoConfirmar";
 
 export default function Clientes() {
   const [collection, setCollection] = useState([]);
@@ -38,6 +39,8 @@ export default function Clientes() {
           Mis Turnos
         </h1>
 
+        <h2>Turnos pagados</h2>
+
         <div className="w-full py-16 text-center">
           <div className="flex p-4 bg-orange-100 shadow rounded-t ">
             <div className="w-1/4">
@@ -54,10 +57,38 @@ export default function Clientes() {
             </div>
           </div>
           {collection
-            .filter((item) => item.user === user.username) // Filtra los elementos que cumplen la condición
+            .filter((item) => item.user === user.username && item.pay === true) // Filtra los elementos que cumplen la condición
             .map((item) => (
               <div key={item._id}>
                 <MisTurnosConfirmados item={item} />
+              </div>
+            ))}
+        </div>
+
+        <h2>Turnos pendientes de pago</h2>
+        <div className="w-full py-16 text-center">
+          <div className="flex p-4 bg-orange-100 shadow rounded-t ">
+            <div className="w-1/5">
+              <p>Servicio</p>
+            </div>
+            <div className="w-1/5">
+              <p>Fecha</p>
+            </div>
+            <div className="w-1/5">
+              <p>Horario</p>
+            </div>
+            <div className="w-1/5">
+              <p>Profesional</p>
+            </div>
+            <div className="w-1/5">
+              <p>Pago Diferido</p>
+            </div>
+          </div>
+          {collection
+            .filter((item) => item.user === user.username && item.pay === false) // Filtra los elementos que cumplen la condición
+            .map((item) => (
+              <div key={item._id}>
+                <TurnoConfirmar item={item} />
               </div>
             ))}
         </div>

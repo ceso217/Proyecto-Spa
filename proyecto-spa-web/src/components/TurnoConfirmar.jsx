@@ -1,102 +1,142 @@
 "use client";
-import React, { useState } from "react";
-import Modal from "../components/Modal";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
+import axios from "axios";
+import { useSession } from "next-auth/react"
+import { loadStripe } from "@stripe/stripe-js";
 
-export default function TurnoConfirmar({ item, onUpdate }) {
-  const [profesional, setProfesional] = useState("Elige una opción");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [motivoRechazo, setMotivoRechazo] = useState("");
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+export default function TurnoConfirmar({ item }) {
+  const { data: session, status } = useSession();
+  const user = session?.user;
+  const [showPaymentPopup, setShowPaymentPopup] = useState(false);
+  const [selectedMethod, setSelectedMethod] = useState("");
+  const [collection, setCollection] = useState([]);
 
-  const handleChange = (event) => {
-    setProfesional(event.target.value);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/servicios");
+      setCollection(response.data); // Actualiza el estado con los datos obtenidos
+    } catch (error) {
+      console.error("Error fetching collection:", error);
+    }
   };
 
-  const handleUpdate = async (currentStatus) => {
+  useEffect(() => {
+    fetchData();
+  }, []); // Solo se ejecuta al montar el componente
+
+  const servicioFiltrado = collection.find((item2) => item2.titulo === item.service);
+
+  //método para guardar el pago del turno
+  const handleGuardarPago = async (method) => {
     try {
-      await onUpdate(item._id, profesional, currentStatus, motivoRechazo); // Llama a la función onUpdate pasada como prop
+      await axios.post("/api/pagos", {
+        monto: servicioFiltrado.precio / 100,
+        cliente: user?.fullname,
+        correo: user?.email,
+        servicio: item.service,
+        metodoPago: method, //Guarda el método de pago seleccionado (debito o credito)
+        fecha: new Date().toISOString().replace("T", " ").substring(0, 19),
+      });
     } catch (error) {
-      console.error("Error updating element:", error);
-      alert("Error al actualizar el elemento.");
+      console.error("Error al guardar el pago:", error);
+      alert("Hubo un error al guardar el pago. Intenta de nuevo.");
+    }
+  };
+
+  const handleActualizarPagado = async () => {
+    try {
+      await axios.patch(`/api/dates/${item._id}`, {
+        pay: true,
+      });
+    } catch (error) {
+      console.error("Error al reservar el horario:", error);
+      alert("Hubo un error al reservar el horario. Intenta de nuevo.");
+    }
+  };
+
+  const handleMethodSelection = async (method) => {
+    setSelectedMethod(method);
+    setShowPaymentPopup(false);
+    handleActualizarPagado();
+    await handleGuardarPago(method); //pasar el método de pago seleccionado
+    await handleCheckout(servicioFiltrado);
+  };
+
+  //método para rediccionar al link de pago
+  const handleCheckout = async (servicio) => {
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ servicio }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        const stripe = await stripePromise;
+        await stripe.redirectToCheckout({ sessionId: data.id });
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Hubo un error al procesar el pago.");
     }
   };
 
   return (
     <div className="flex p-4 bg-white shadow text-center">
-      <div className="w-1/6">
-        <p>{item.client}</p>
-      </div>
-      <div className="w-1/6">
+      <div className="w-1/5">
         <p>{item.service}</p>
       </div>
-      <div className="w-1/6">
+      <div className="w-1/5">
         <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
       </div>
-      <div className="w-1/6">
+      <div className="w-1/5">
         <p>{format(new Date(item.date), "HH:mm")}</p>
       </div>
-      <div className="w-1/6">
-        <select
-          id="options"
-          value={profesional}
-          onChange={handleChange}
-          className="w-48 p-2 border rounded"
-        >
-          <option value="Elige una opción" disabled>
-            Elige una opción
-          </option>
-          <option value="Dra. Ana Felicidad">Dra. Ana Felicidad</option>
-          <option value="Dra. Florinda">Dra. Florinda</option>
-          <option value="Dr. Franco Colapinto">Dr. Franco Colapinto</option>
-        </select>
+      <div className="w-1/5">
+        <p>{item.professional}</p>
       </div>
-      <div className="w-1/6 flex justify-evenly">
+      <div className="w-1/5 flex justify-evenly">
         <button
-          onClick={() => handleUpdate("aceptar")}
+          onClick={() => setShowPaymentPopup(true)}
           className="bg-green-500 text-white w-28 mt-2 px-2 py-1 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
         >
-          Aceptar
+          Pagar
         </button>
-        <button
-          onClick={openModal}
-          className="bg-red-500 text-white w-28 mt-2 px-2 py-1 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
-        >
-          Rechazar
-        </button>
-        {/* Ventana modal de rechazar */}
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <h2 className="text-xl font-bold mb-4">
-            Ingrese el motivo del rechazo
-          </h2>
-          <textarea
-            value={motivoRechazo}
-            onChange={(e) => setMotivoRechazo(e.target.value)}
-            placeholder="Escriba aquí el motivo"
-            className="w-11/12 p-2"
-            rows={9}
-          ></textarea>
-          <div className="flex justify-evenly">
-            <button
-              onClick={() => {
-                handleUpdate("rechazar");
-                closeModal();
-              }}
-              className="bg-green-500 text-white w-28 mt-2 px-2 py-1 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
-            >
-              Enviar
-            </button>
-            <button
-              onClick={closeModal}
-              className="bg-red-500 text-white w-28 mt-2 px-2 py-1 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
-            >
-              Cancelar
-            </button>
-          </div>
-        </Modal>
+        {
+          // popup para elegir método de pago
+          showPaymentPopup && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="bg-white p-5 rounded-lg shadow-lg relative">
+                <button
+                  onClick={() => setShowPaymentPopup(false)}
+                  className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
+                >
+                  ✖
+                </button>
+                <h2 className="text-2xl font-semibold mb-4">Seleccione el método de pago</h2>
+                <button
+                  onClick={() => handleMethodSelection("Credito")}
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
+                >
+                  Tarjeta de Crédito
+                </button>
+                <button
+                  onClick={() => handleMethodSelection("Debito")}
+                  className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+                >
+                  Tarjeta de Débito
+                </button>
+              </div>
+            </div>
+          )
+        }
       </div>
-    </div>
+    </div >
   );
 }

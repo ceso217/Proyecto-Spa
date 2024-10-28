@@ -6,11 +6,11 @@ const dateSchema = new Schema(
       type: Date,
       required: [true, "Day is required"],
     },
-    8: {
+    "08": {
       type: Boolean,
       default: false,
     },
-    9: {
+    "09": {
       type: Boolean,
       default: false,
     },
