@@ -20,11 +20,8 @@ const dateSchema = new Schema(
     professional: {
       type: String,
     },
-    accept: {
-      type: Number,
-    },
-    rejectedReason: {
-      type: String,
+    pay: {
+      type: Boolean,
     },
   },
   {

@@ -20,9 +20,9 @@ export default function Clientes() {
   }, []);
 
   return (
-    <div className="w-full h-screen bg-orange-50 p-2" style={montserrat.style}>
+    <div className="w-full h-auto bg-orange-50 p-2" style={montserrat.style}>
       <div className="m-4 flex flex-col items-center">
-        <h1 className="text-7xl mt-10" style={cormorant.style}>
+        <h1 className="text-7xl mt-10 text-green-services-300" style={cormorant.style}>
           Clientes
         </h1>
         <div className="w-full py-16">

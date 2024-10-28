@@ -32,37 +32,13 @@ export default function Clientes() {
     <div className="w-full h-auto bg-orange-50 p-2" style={montserrat.style}>
       <div className="m-4 flex flex-col items-center">
         <h1
-          className="text-7xl mt-10 text-green-services-300 border-b-4 border-green-services-300 mt-6"
+          className="text-7xl mt-10 text-green-services-300 border-green-services-300"
           style={cormorant.style}
         >
           Mis Turnos
         </h1>
 
         <div className="w-full py-16 text-center">
-          <h2 className="py-4 text-3xl">Turnos pendientes</h2>
-          <div className="flex p-4 bg-orange-100 shadow rounded-t">
-            <div className="w-1/3">
-              <p>Servicio</p>
-            </div>
-            <div className="w-1/3">
-              <p>Fecha</p>
-            </div>
-            <div className="w-1/3">
-              <p>Horario</p>
-            </div>
-          </div>
-          {/* Turnos confirmados */}
-          {collection
-            .filter((item) => item.accept === 0 && item.user === user.username) // Filtra los elementos que cumplen la condición
-            .map((item) => (
-              <div key={item._id}>
-                <MisTurnos item={item} />
-              </div>
-            ))}
-        </div>
-
-        <div className="w-full py-16 text-center">
-          <h2 className="py-4 text-3xl">Turnos confirmados</h2>
           <div className="flex p-4 bg-orange-100 shadow rounded-t ">
             <div className="w-1/4">
               <p>Servicio</p>
@@ -77,38 +53,11 @@ export default function Clientes() {
               <p>Profesional</p>
             </div>
           </div>
-          {/* Turnos confirmados */}
           {collection
-            .filter((item) => item.accept === 1 && item.user === user.username) // Filtra los elementos que cumplen la condición
+            .filter((item) => item.user === user.username) // Filtra los elementos que cumplen la condición
             .map((item) => (
               <div key={item._id}>
                 <MisTurnosConfirmados item={item} />
-              </div>
-            ))}
-        </div>
-
-        <div className="w-full py-16 text-center">
-          <h2 className="py-4 text-3xl">Turnos rechazados</h2>
-          <div className="flex p-4 bg-orange-100 shadow rounded-t ">
-            <div className="w-1/4">
-              <p>Servicio</p>
-            </div>
-            <div className="w-1/4">
-              <p>Fecha</p>
-            </div>
-            <div className="w-1/4">
-              <p>Horario</p>
-            </div>
-            <div className="w-1/4">
-              <p>Motivo</p>
-            </div>
-          </div>
-          {/* Turnos rechazados */}
-          {collection
-            .filter((item) => item.accept === 2 && item.user === user.username) // Filtra los elementos que cumplen la condición
-            .map((item) => (
-              <div key={item._id}>
-                <MisTurnosRechazados item={item} />
               </div>
             ))}
         </div>

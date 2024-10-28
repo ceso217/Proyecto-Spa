@@ -78,7 +78,7 @@ export default function Clientes() {
           Todos los Turnos
         </h1>
 
-        <div className="w-full py-16 text-center">
+        {/* <div className="w-full py-16 text-center">
           <h2 className="py-4 text-3xl">Turnos a confirmar</h2>
           <div className="flex p-4 bg-orange-100 shadow rounded-t">
             <div className="w-1/6">
@@ -100,7 +100,6 @@ export default function Clientes() {
               <p>Decisión</p>
             </div>
           </div>
-          {/* Turnos confirmados */}
           {collection
             .filter((item) => item.accept === 0) // Filtra los elementos que cumplen la condición
             .map((item) => (
@@ -108,10 +107,9 @@ export default function Clientes() {
                 <TurnoConfirmar item={item} onUpdate={handleUpdate} />
               </div>
             ))}
-        </div>
+        </div> */}
 
         <div className="w-full py-16 text-center">
-          <h2 className="py-4 text-3xl">Turnos confirmados</h2>
           <div className="flex p-4 bg-orange-100 shadow rounded-t ">
             <div className="w-1/5">
               <p>Cliente</p>
@@ -129,9 +127,8 @@ export default function Clientes() {
               <p>Profesional</p>
             </div>
           </div>
-          {/* Turnos confirmados */}
+
           {collection
-            .filter((item) => item.accept === 1) // Filtra los elementos que cumplen la condición
             .map((item) => (
               <div key={item._id}>
                 <TurnoConfirmado item={item} />
@@ -139,7 +136,7 @@ export default function Clientes() {
             ))}
         </div>
 
-        <div className="w-full py-16 text-center">
+        {/* <div className="w-full py-16 text-center">
           <h2 className="py-4 text-3xl">Turnos rechazados</h2>
           <div className="flex p-4 bg-orange-100 shadow rounded-t ">
             <div className="w-1/5">
@@ -158,7 +155,6 @@ export default function Clientes() {
               <p>Motivo</p>
             </div>
           </div>
-          {/* Turnos rechazados */}
           {collection
             .filter((item) => item.accept === 2) // Filtra los elementos que cumplen la condición
             .map((item) => (
@@ -166,7 +162,7 @@ export default function Clientes() {
                 <TurnoRechazado item={item} />
               </div>
             ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

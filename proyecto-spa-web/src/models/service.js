@@ -15,6 +15,10 @@ const dateSchema = new Schema(
       type: String,
       required: [true, "Type is required"],
     },
+    professional: {
+      type: String,
+      required: [true, "Professional is required"],
+    },
     imagen: {
       type: String,
       required: [true, "Image is required"],

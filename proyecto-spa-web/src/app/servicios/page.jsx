@@ -54,14 +54,16 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
   // comprueba que día es
   const diaSemana = new Date(fecha).getDay();
 
-  const handlePedirTurno = async () => {
+  // método para pedir turno
+  const handlePedirTurno = async (pay) => {
     try {
       const response = await axios.post("/api/dates", {
         service: item.titulo,
         date: fecha,
         user: user?.username,
         client: user?.fullname,
-        accept: 0,
+        professional: item.professional,
+        pay: pay,
       });
 
       if (response.status === 201) {
@@ -73,6 +75,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
     }
   };
 
+  //método para guardar el pago del turno
   const handleGuardarPago = async (method) => {
     try {
       await axios.post("/api/pagos", {
@@ -89,6 +92,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
     }
   };
 
+  //método para rediccionar al link de pago
   const handleCheckout = async (servicio) => {
     try {
       const response = await fetch("/api/checkout", {
@@ -110,6 +114,18 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
     }
   };
 
+  // método para actualizar los horarios ocupados de un día específico
+  const handleActualizarDia = async () => {
+    try {
+      await axios.patch(`/api/diasCalendario/${itemFiltrado._id}`, { [eleccionHorario]: true });
+      fetchData();  // Vuelve a cargar las fechas actualizadas
+    } catch (error) {
+      console.error("Error al reservar el horario:", error);
+      alert("Hubo un error al reservar el horario. Intenta de nuevo.");
+    }
+  };
+
+  // método que agrupa actualizar horarios, cerrar el modal y mostrar el popup de pago inmediato o diferido
   const handlePedirTurnoClick = () => {
     if (!fecha) {
       alert("Por favor selecciona una fecha.");
@@ -124,31 +140,26 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
     setShowConfirmPopup(true);
   };
 
-  const handleActualizarDia = async () => {
-    try {
-      await axios.patch(`/api/diasCalendario/${itemFiltrado._id}`, { [eleccionHorario]: true });
-      fetchData();  // Vuelve a cargar las fechas actualizadas
-    } catch (error) {
-      console.error("Error al reservar el horario:", error);
-      alert("Hubo un error al reservar el horario. Intenta de nuevo.");
-    }
-  };
-
+  // cierra el popup de pago inmediato o diferido y si elegió inmediato abre el popup de método de pago
   const handleConfirmSelection = (confirm) => {
     setShowConfirmPopup(false);
     if (confirm) {
       setShowPaymentPopup(true);
+    } else {
+      handlePedirTurno(false);
     }
   };
 
+  // guarda el tipo de método que se selecciono, pide el turno y direcciona al link de pago
   const handleMethodSelection = async (method) => {
     setSelectedMethod(method);
     setShowPaymentPopup(false);
-    await handlePedirTurno();
+    await handlePedirTurno(true);
     await handleGuardarPago(method); //pasar el método de pago seleccionado
     await handleCheckout(item);
   };
 
+  // crea una colección con los datos de diasCalendario
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/diasCalendario");
@@ -180,7 +191,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
 
 
   return (
-    <div className="p-5 bg-orange-50 flex flex-col items-center h-[640px]">
+    <div className="p-5 bg-orange-50 flex flex-col items-center h-[640px] shadow-md">
       <h3 className="text-5xl font-bold text-black mb-4 h-[100px]" style={cormorant.style}>
         {item.titulo}
       </h3>
@@ -269,6 +280,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
       }
 
       {
+        // popup para eligir pago inmediato o diferido
         showConfirmPopup && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-orange-50 p-5 rounded-xl shadow-lg relative w-96 text-center">
@@ -299,6 +311,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
       }
 
       {
+        // popup para elegir método de pago
         showPaymentPopup && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-5 rounded-lg shadow-lg relative">

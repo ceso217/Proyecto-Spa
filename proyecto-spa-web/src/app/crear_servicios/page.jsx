@@ -11,11 +11,12 @@ const CrearServicio = () => {
   const [imagen, setImagen] = useState("");
   const [tipo, setTipo] = useState("Elige una opción");
   const [precio, setPrecio] = useState("");
+  const [profesional, setProfesional] = useState("Elige una opción");
 
   const handleCrearServicio = async (e) => {
     e.preventDefault();
 
-    if (!titulo || !imagen || !tipo || !precio) {
+    if (!titulo || !imagen || !tipo || !precio || !profesional) {
       alert("Por favor completa todos los campos.");
       return;
     }
@@ -27,6 +28,7 @@ const CrearServicio = () => {
         imagen: imagen,
         tipo: tipo,
         precio: parseFloat(precio) * 100, // Convertir a centavos
+        professional: profesional,
       });
 
       if (response.status === 201) {
@@ -36,6 +38,7 @@ const CrearServicio = () => {
         setImagen("");
         setTipo("");
         setPrecio("");
+        setProfesional("");
       }
     } catch (error) {
       console.error("Error al crear el servicio:", error);
@@ -43,14 +46,18 @@ const CrearServicio = () => {
     }
   };
 
-  const handleChange = (event) => {
+  const handleChangeTipo = (event) => {
     setTipo(event.target.value);
+  };
+
+  const handleChangeProfesional = (event) => {
+    setProfesional(event.target.value);
   };
 
   return (
     <div className="h-screen bg-orange-100 flex justify-center items-center text-lg" style={montserrat.style}>
       <div className="bg-orange-50 w-1/2 py-6 px-7 rounded-xl shadow-lg">
-        <h2 className="font-bold mb-10 text-center text-7xl text-green-services-300" style={cormorant.style}>Crear Servicio</h2>
+        <h2 className="font-bold mb-10 text-center text-7xl text-green-services-300" style={cormorant.style}>Agregar nuevo Servicio</h2>
         <form onSubmit={handleCrearServicio} className="flex flex-col">
           <label className="mb-2">
             Título:
@@ -61,6 +68,21 @@ const CrearServicio = () => {
               className="p-2 border-2 border-gray-300 rounded-lg w-full mb-4"
               required
             />
+          </label>
+
+          <label className="mb-2">
+            Profesional a cargo:
+            <select
+              id="options"
+              value={profesional}
+              onChange={handleChangeProfesional}
+              className="w-56 p-2 mx-2 border rounded"
+            >
+              <option value="Elige una opción" disabled>Elige una opción</option>
+              <option value="Dra. Ana Felicidad">Dra. Ana Felicidad</option>
+              <option value="Dra. Florinda">Dra. Florinda</option>
+              <option value="Dr. Franco Colapinto">Dr. Franco Colapinto</option>
+            </select>
           </label>
 
           <label className="mb-2">
@@ -79,13 +101,13 @@ const CrearServicio = () => {
             <select
               id="options"
               value={tipo}
-              onChange={handleChange}
-              className="w-48 p-2 mx-2 border rounded"
+              onChange={handleChangeTipo}
+              className="w-60 p-2 mx-2 border rounded"
             >
               <option value="Elige una opción" disabled>
                 Elige una opción
               </option>
-              <option value="Masajes">Masajes</option>
+              <option value="Masaje">Masajes</option>
               <option value="Belleza">Belleza</option>
               <option value="Tratamientos faciales">Tratamientos faciales</option>
               <option value="Tratamientos corporales">Tratamientos corporales</option>
