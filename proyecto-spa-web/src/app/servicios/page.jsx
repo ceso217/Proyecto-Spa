@@ -59,7 +59,7 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
     try {
       const response = await axios.post("/api/dates", {
         service: item.titulo,
-        date: fecha,
+        date: new Date(`${fecha}T${eleccionHorario}:00:00`),
         user: user?.username,
         client: user?.fullname,
         professional: item.professional,
