@@ -30,34 +30,34 @@ export default function Clientes() {
   }, []);
 
   return (
-    <div className="w-full h-auto bg-orange-50 p-2" style={montserrat.style}>
-      <div className="m-4 flex flex-col items-center">
+    <div className="w-full h-auto bg-orange-50 px-4 sm:px-8 py-8" style={montserrat.style}>
+      <div className="max-w-5xl mx-auto flex flex-col items-center">
         <h1
-          className="text-7xl mt-10 text-green-services-300 border-green-services-300"
+          className="text-6xl md:text-7xl mt-10 text-green-services-300 text-center"
           style={cormorant.style}
         >
           Mis Turnos
         </h1>
 
-        <h2 className="py-4 text-3xl mt-8">Turnos pagados</h2>
+        <h2 className="py-4 text-2xl sm:text-3xl mt-8">Turnos pagados</h2>
 
-        <div className="w-full pb-16 pt-8 text-center">
-          <div className="flex p-4 bg-orange-100 shadow rounded-t ">
-            <div className="w-1/4">
+        <div className="w-full pb-16 pt-8">
+          <div className="flex flex-wrap items-center p-4 bg-orange-100 shadow rounded-t text-sm sm:text-base">
+            <div className="flex-1 text-center">
               <p>Servicio</p>
             </div>
-            <div className="w-1/4">
+            <div className="flex-1 text-center">
               <p>Fecha</p>
             </div>
-            <div className="w-1/4">
+            <div className="flex-1 text-center">
               <p>Horario</p>
             </div>
-            <div className="w-1/4">
+            <div className="flex-1 text-center">
               <p>Profesional</p>
             </div>
           </div>
           {collection
-            .filter((item) => item.user === user.username && item.pay === true) // Filtra los elementos que cumplen la condición
+            .filter((item) => item.user === user.username && item.pay === true)
             .map((item) => (
               <div key={item._id}>
                 <MisTurnosConfirmados item={item} />
@@ -65,27 +65,27 @@ export default function Clientes() {
             ))}
         </div>
 
-        <h2 className="py-4 text-3xl mt-8">Turnos pendientes de pago</h2>
-        <div className="w-full pb-16 pt-8 text-center">
-          <div className="flex p-4 bg-orange-100 shadow rounded-t ">
-            <div className="w-1/5">
+        <h2 className="py-4 text-2xl sm:text-3xl mt-8">Turnos pendientes de pago</h2>
+        <div className="w-full pb-16 pt-8">
+          <div className="flex flex-wrap items-center p-4 bg-orange-100 shadow rounded-t text-sm sm:text-base">
+            <div className="flex-1 text-center">
               <p>Servicio</p>
             </div>
-            <div className="w-1/5">
+            <div className="flex-1 text-center">
               <p>Fecha</p>
             </div>
-            <div className="w-1/5">
+            <div className="flex-1 text-center">
               <p>Horario</p>
             </div>
-            <div className="w-1/5">
+            <div className="flex-1 text-center">
               <p>Profesional</p>
             </div>
-            <div className="w-1/5">
+            <div className="flex-1 text-center">
               <p>Pago Diferido</p>
             </div>
           </div>
           {collection
-            .filter((item) => item.user === user.username && item.pay === false) // Filtra los elementos que cumplen la condición
+            .filter((item) => item.user === user.username && item.pay === false)
             .map((item) => (
               <div key={item._id}>
                 <TurnoConfirmar item={item} />
@@ -94,5 +94,6 @@ export default function Clientes() {
         </div>
       </div>
     </div>
+
   );
 }

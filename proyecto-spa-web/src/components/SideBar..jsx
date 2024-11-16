@@ -21,7 +21,7 @@ const SideBar = () => {
         className="w-full h-28 bg-green-services-100 flex overflow-hidden justify-between"
         style={montserrat.style}
       >
-        <div className="w-[48px] flex ">{/* Botón del menú a la izquierda */}
+        <div className="w-[48px] flex">{/* Botón del menú a la izquierda */}
           <button className="text-white ml-4" onClick={() => setOpen(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ const SideBar = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-8 h-8 hover:text-gray-300 transition duration-200"
+              className="w-6 h-6 hover:text-gray-300 transition duration-200 md:w-8 md:h-8"
             >
               <path
                 strokeLinecap="round"
@@ -83,32 +83,6 @@ const SideBar = () => {
                 </Link>
               </div>
 
-              {isProfessional || isAdmin || isSecretary ? (
-                null
-              ) : <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
-                <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg ">
-                  <Link
-                    href="/about"
-                    onClick={() => setOpen(false)}
-                    className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
-                  >
-                    <FaInfoCircle className="mr-3" /> Quienes Somos
-                    <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
-                  </Link>
-                </div>
-              </div>}
-
-              <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
-                <Link
-                  href="/noticias"
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
-                >
-                  <FaNewspaper className="mr-3" /> Noticias
-                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
-                </Link>
-              </div>
-
               <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
                 <Link
                   href="/profile"
@@ -155,19 +129,6 @@ const SideBar = () => {
                 </div>
               ) : null}
 
-              {isProfessional || isAdmin || isSecretary ? (
-                null
-              ) : <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
-                <Link
-                  href="/employment"
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-center text-white text-xl transition-all relative pb-4"
-                >
-                  <FaPaperPlane className="mr-3" /> Mandar mi cv!
-                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 border-b-2 border-white mt-4" />
-                </Link>
-              </div>}
-
               {isAdmin ? (
                 <div className="hover:bg-green-600 cursor-pointer py-4 mb-2 text-lg">
                   <Link
@@ -209,17 +170,17 @@ const SideBar = () => {
             </div>
           </div>
         </div>
-        <div className="w-[512px] flex items-center">
-          <Image src="/logo.svg" alt="Logo" width={170} height={170} />
+        <div className="w-[672px] flex items-center justify-center">
+          <Image src="/logo.svg" alt="Logo" width={70} height={70} className="-translate-y-3 md:w-[170px] md:h-[170px]" />
           <Link
             href="/"
-            className="text-7xl text-orange-100 mt-11"
+            className="absolute text-5xl text-orange-100 mt-11 md:text-7xl md:static"
             style={corinthia.style}
           >
             Sentirse Bien
           </Link>
         </div>
-        <div className="w-[210px]">
+        <div className="w-[110px]">
           <Image
             src="/flor.svg"
             alt="Descripción de la imagen"
@@ -228,10 +189,10 @@ const SideBar = () => {
             className="translate-x-96 translate-y-4"
           />
         </div>
-        <div className="w-[350px] flex items-center justify-end no-underline justify-self-end">
+        <div className="w-[140px] flex items-center justify-end no-underline justify-self-end">
           {session ? (
             <button
-              className="px-4 py-2 mr-4 bg-orange-100 rounded-3xl text-lg shadow-2xl transition hover:-translate-y-1"
+              className="px-4 py-2 mr-4 bg-orange-100 rounded-3xl text-base shadow-2xl transition hover:-translate-y-1 md:text-lg"
               onClick={() => {
                 signOut({ callbackUrl: "/login" });
               }}

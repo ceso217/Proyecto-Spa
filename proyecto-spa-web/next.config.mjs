@@ -1,3 +1,5 @@
+import withPWA from "next-pwa";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -9,8 +11,10 @@ const nextConfig = {
       "www.f1latam.com",
       "shawellness.com",
       "img2.rtve.es",
-    ], // Asegúrate de incluir ambos dominios
+    ],
   },
 };
 
-export default nextConfig;
+export default withPWA({
+  dest: "public", // Configuración específica para PWA
+})(nextConfig); // Aplica únicamente sobre la configuración base

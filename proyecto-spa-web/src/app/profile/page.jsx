@@ -39,13 +39,13 @@ function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center bg-orange-100 items-center py-20">
+    <div className="h-auto flex justify-center bg-orange-100 items-center py-20">
       <div
-        className="flex flex-col w-[900px] min-h-[1000px] mx-auto p-12 bg-orange-50 rounded-xl"
+        className="flex flex-col w-[900px] min-h-[800px] mx-auto p-12 bg-orange-50 rounded-xl"
         style={montserrat.style}
       >
         <h1
-          className="text-8xl text-green-services-300 text-center mb-16"
+          className="text-7xl md:text-8xl text-green-services-300 text-center mb-16"
           style={cormorant.style}
         >
           Mi Perfil

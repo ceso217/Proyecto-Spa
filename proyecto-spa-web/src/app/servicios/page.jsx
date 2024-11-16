@@ -191,154 +191,174 @@ const ServiciosArticulo = ({ item, ancho, alto }) => {
 
 
   return (
-    <div className="p-5 bg-orange-50 flex flex-col items-center h-[640px] shadow-md">
-      <h3 className="text-5xl font-bold text-black mb-4 h-[100px]" style={cormorant.style}>
+    <div className="p-5 bg-orange-50 flex flex-col items-center h-auto sm:h-[640px] shadow-md">
+      <h3
+        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-4 text-center h-auto sm:h-[100px]"
+        style={cormorant.style}
+      >
         {item.titulo}
       </h3>
 
-      <Image src={item.imagen} width={ancho} height={alto} alt={item.titulo} className="mb-4" />
+      <Image
+        src={item.imagen}
+        width={ancho}
+        height={alto}
+        alt={item.titulo}
+        className="mb-4 w-full sm:w-auto"
+      />
 
-      <p className="text-2xl font-semibold text-gray-700 mb-4">
+      <p className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 mb-4">
         Precio: ${item.precio / 100}
       </p>
 
-      {session ? (
-        <div className="w-full flex justify-center items-start mt-4">
+      {session && (
+        <div className="w-full flex flex-col sm:flex-row justify-center items-center sm:items-start mt-4">
           <button
             onClick={openModal}
-            className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full"
+            className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full w-full sm:w-auto text-center"
           >
             Pedir turno
           </button>
           <PedirTurnoModal isOpen={isModalOpen} onClose={closeModal}>
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-lg sm:text-xl font-bold mb-4">
               Selecciona tu turno!
             </h2>
             <label className="pr-3">Día:</label>
-            <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} min={fechaHoyISO} max={fechaUnMesISO} className="border border-black rounded-xl p-2 mt-6 mb-10" />
-            <h3>Turnos disponibles:</h3>
+            <input
+              type="date"
+              value={fecha}
+              onChange={(e) => setFecha(e.target.value)}
+              min={fechaHoyISO}
+              max={fechaUnMesISO}
+              className="border border-black rounded-xl p-2 mt-6 mb-10 w-full sm:w-auto"
+            />
+            <h3 className="text-base sm:text-lg">Turnos disponibles:</h3>
 
             <div className="p-4 mb-6">
               {fechaSeleccionada ? (
-                diaSemana === 5 || diaSemana === 6 ? (  // 5 = Sábado, 6 = Domingo
-                  < p className="text-sm p-2 mt-6 mb-10">No abrimos fines de semana ):</p>
+                diaSemana === 5 || diaSemana === 6 ? (
+                  <p className="text-sm p-2 mt-6 mb-10">
+                    No abrimos fines de semana ):</p>
                 ) : (
                   <>
-                    {console.log(fecha)}
-                    {console.log(itemsFiltrados.length)}
                     {itemsFiltrados.length === 0 ? (
                       <p>crear fecha</p>
                     ) : (
-                      <>
-                        {
-                          collection
-                            .filter((item2) => item2.dia.split('T')[0] === fecha) // Filtra los elementos que cumplen la condición
-                            .map((item2) => (
-                              <div key={item2._id}>
-                                <select name="Turnos disponibles" value={eleccionHorario} onChange={handleChange} className="border border-black rounded-xl p-2 my-2 text-center">
-                                  <option value="Elige un horario" disabled>
-                                    Elige un horario
+                      collection
+                        .filter((item2) => item2.dia.split("T")[0] === fecha)
+                        .map((item2) => (
+                          <div key={item2._id}>
+                            <select
+                              name="Turnos disponibles"
+                              value={eleccionHorario}
+                              onChange={handleChange}
+                              className="border border-black rounded-xl p-2 my-2 text-center w-full sm:w-auto"
+                            >
+                              <option value="Elige un horario" disabled>
+                                Elige un horario
+                              </option>
+                              {["08", "09", "10", "16", "17", "18", "19"].map(
+                                (hora) => (
+                                  <option
+                                    key={hora}
+                                    value={hora}
+                                    disabled={item2[hora]}
+                                  >
+                                    {hora}:00
                                   </option>
-                                  {item2["08"] ? (<option value="08" disabled>8:00</option>) : (<option value="08">8:00</option>)}
-                                  {item2["09"] ? (<option value="09" disabled>9:00</option>) : (<option value="09">9:00</option>)}
-                                  {item2[10] ? (<option value="10" disabled>10:00</option>) : (<option value="10">10:00</option>)}
-                                  {item2[16] ? (<option value="16" disabled>16:00</option>) : (<option value="16">16:00</option>)}
-                                  {item2[17] ? (<option value="17" disabled>17:00</option>) : (<option value="17">17:00</option>)}
-                                  {item2[18] ? (<option value="18" disabled>18:00</option>) : (<option value="18">18:00</option>)}
-                                  {item2[19] ? (<option value="19" disabled>19:00</option>) : (<option value="19">19:00</option>)}
-                                </select>
-                                <p className="text-gray-500 text-xs">*los horarios en gris no están disponibles</p>
-                              </div>
-                            ))
-                        }
-                      </>
-                    )
-                    }
+                                )
+                              )}
+                            </select>
+                            <p className="text-gray-500 text-xs">
+                              *los horarios en gris no están disponibles
+                            </p>
+                          </div>
+                        ))
+                    )}
                   </>
                 )
               ) : (
-                <p className="text-sm p-2 mt-6 mb-10">Por favor, selecciona una fecha.</p>
+                <p className="text-sm p-2 mt-6 mb-10">
+                  Por favor, selecciona una fecha.
+                </p>
               )}
             </div>
-            <div className="flex justify-evenly">
+            <div className="flex flex-col sm:flex-row justify-evenly gap-4 sm:gap-0">
               <button
                 onClick={handlePedirTurnoClick}
-                className="bg-green-600 text-white w-32 py-2 px-4 rounded-full transition-transform duration-200 hover:scale-105"
+                className="bg-green-600 text-white w-full sm:w-32 py-2 px-4 rounded-full transition-transform duration-200 hover:scale-105"
               >
                 Pedir turno
               </button>
               <button
                 onClick={closeModal}
-                className="bg-red-500 text-white w-32 py-2 px-4 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
+                className="bg-red-500 text-white w-full sm:w-32 py-2 px-4 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
               >
                 Cancelar
               </button>
             </div>
           </PedirTurnoModal>
         </div>
-      ) : null
-      }
-
-      {
-        // popup para eligir pago inmediato o diferido
-        showConfirmPopup && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-orange-50 p-5 rounded-xl shadow-lg relative w-96 text-center">
+      )}
+      {/* Ajusta los popups de confirmación y pago */}
+      {showConfirmPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4">
+          <div className="bg-orange-50 p-5 rounded-xl shadow-lg relative w-full sm:w-96 text-center">
+            <button
+              onClick={() => setShowConfirmPopup(false)}
+              className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
+            >
+              ✖
+            </button>
+            <h2 className="text-lg sm:text-2xl font-semibold mb-4">
+              ¿Deseas pagar ahora?
+            </h2>
+            <div className="flex flex-col sm:flex-row justify-around gap-4 sm:gap-0">
               <button
-                onClick={() => setShowConfirmPopup(false)}
-                className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
+                onClick={() => handleConfirmSelection(true)}
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full sm:w-auto"
               >
-                ✖
-              </button>
-              <h2 className="text-2xl font-semibold mb-4">¿Deseas pagar ahora?</h2>
-              <div className="flex justify-around">
-                <button
-                  onClick={() => handleConfirmSelection(true)}
-                  className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-                >
-                  Sí, pagar ahora
-                </button>
-                <button
-                  onClick={() => handleConfirmSelection(false)}
-                  className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-                >
-                  No, pagar luego
-                </button>
-              </div>
-            </div>
-          </div>
-        )
-      }
-
-      {
-        // popup para elegir método de pago
-        showPaymentPopup && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-5 rounded-lg shadow-lg relative">
-              <button
-                onClick={() => setShowPaymentPopup(false)}
-                className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
-              >
-                ✖
-              </button>
-              <h2 className="text-2xl font-semibold mb-4">Seleccione el método de pago</h2>
-              <button
-                onClick={() => handleMethodSelection("Credito")}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
-              >
-                Tarjeta de Crédito
+                Sí, pagar ahora
               </button>
               <button
-                onClick={() => handleMethodSelection("Debito")}
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+                onClick={() => handleConfirmSelection(false)}
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full sm:w-auto"
               >
-                Tarjeta de Débito
+                No, pagar luego
               </button>
             </div>
           </div>
-        )
-      }
-    </div >
+        </div>
+      )}
+      {showPaymentPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4">
+          <div className="bg-white p-5 rounded-lg shadow-lg relative w-full sm:w-96">
+            <button
+              onClick={() => setShowPaymentPopup(false)}
+              className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
+            >
+              ✖
+            </button>
+            <h2 className="text-lg sm:text-2xl font-semibold mb-4">
+              Seleccione el método de pago
+            </h2>
+            <button
+              onClick={() => handleMethodSelection("Credito")}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2 w-full sm:w-auto"
+            >
+              Tarjeta de Crédito
+            </button>
+            <button
+              onClick={() => handleMethodSelection("Debito")}
+              className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full sm:w-auto"
+            >
+              Tarjeta de Débito
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+
   );
 };
 
@@ -358,63 +378,82 @@ export default function Page() {
   }, []);
   return (
     <div className="bg-orange-100 text-green-services-300" style={montserrat.style}>
-      <h3 className="text-7xl text-center text-green-services-300 font-mono pt-8 pb-4 " style={cormorant.style}>
+      {/* Título principal */}
+      <h3
+        className="text-6xl md:text-7xl text-center font-mono pt-8 pb-4"
+        style={cormorant.style}
+      >
         Servicios
       </h3>
 
-      <div className="text-6xl flex-col text-center pt-7 font-bold " style={cormorant.style}>
+      {/* Masajes */}
+      <div
+        className="text-5xl md:text-6xl font-bold flex-col text-center pt-7"
+        style={cormorant.style}
+      >
         Masajes
       </div>
-      <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-5 sm:p-8">
         {collection
           .filter((item) => item.tipo === "Masaje")
           .map((item) => (
             <div key={item._id}>
-              <ServiciosArticulo item={item} ancho={500} alto={300} />
+              <ServiciosArticulo item={item} ancho={400} alto={250} />
             </div>
           ))}
       </div>
 
-      <h2 className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 " style={cormorant.style}>
+      {/* Belleza */}
+      <h2
+        className="text-5xl md:text-6xl text-center py-4"
+        style={cormorant.style}
+      >
         Belleza
       </h2>
-
-      <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-5 sm:p-8">
         {collection
           .filter((item) => item.tipo === "Belleza")
           .map((item) => (
             <div key={item._id}>
-              <ServiciosArticulo item={item} ancho={500} alto={300} />
+              <ServiciosArticulo item={item} ancho={400} alto={250} />
             </div>
           ))}
       </div>
 
-      <div className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 " style={cormorant.style}>
+      {/* Tratamientos Faciales */}
+      <h2
+        className="text-5xl  md:text-6xl text-center py-4"
+        style={cormorant.style}
+      >
         Tratamientos Faciales
-      </div>
-
-      <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-5 sm:p-8">
         {collection
           .filter((item) => item.tipo === "Tratamientos faciales")
           .map((item) => (
             <div key={item._id}>
-              <ServiciosArticulo item={item} ancho={500} alto={300} />
+              <ServiciosArticulo item={item} ancho={400} alto={250} />
             </div>
           ))}
       </div>
-      <div className="bg-orange-100 text-green-services-300 text-6xl flex-col text-center py-3 " style={cormorant.style}>
-        Tratamientos Corporales
-      </div>
 
-      <div className="grid grid-cols-3 gap-4 p-10 bg-orange-100">
+      {/* Tratamientos Corporales */}
+      <h2
+        className="text-5xl md:text-6xl text-center py-4"
+        style={cormorant.style}
+      >
+        Tratamientos Corporales
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-5 sm:p-8">
         {collection
           .filter((item) => item.tipo === "Tratamientos corporales")
           .map((item) => (
             <div key={item._id}>
-              <ServiciosArticulo item={item} ancho={500} alto={300} />
+              <ServiciosArticulo item={item} ancho={400} alto={250} />
             </div>
           ))}
       </div>
     </div>
+
   );
 }

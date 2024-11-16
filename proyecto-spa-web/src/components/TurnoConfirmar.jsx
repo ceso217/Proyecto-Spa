@@ -88,17 +88,17 @@ export default function TurnoConfirmar({ item }) {
   };
 
   return (
-    <div className="flex p-4 bg-white shadow text-center">
-      <div className="w-1/5">
+    <div className="flex text-sm md:text-lg items-center p-4 bg-white shadow">
+      <div className="w-1/5 md:text-base text-center truncate">
         <p>{item.service}</p>
       </div>
-      <div className="w-1/5">
+      <div className="w-1/5 text-center truncate">
         <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
       </div>
-      <div className="w-1/5">
+      <div className="w-1/5 text-center truncate">
         <p>{format(new Date(item.date), "HH:mm")}</p>
       </div>
-      <div className="w-1/5">
+      <div className="w-1/5 text-center truncate">
         <p>{item.professional}</p>
       </div>
       <div className="w-1/5 flex justify-evenly">
@@ -108,35 +108,33 @@ export default function TurnoConfirmar({ item }) {
         >
           Pagar
         </button>
-        {
-          // popup para elegir método de pago
-          showPaymentPopup && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white p-5 rounded-lg shadow-lg relative">
-                <button
-                  onClick={() => setShowPaymentPopup(false)}
-                  className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
-                >
-                  ✖
-                </button>
-                <h2 className="text-2xl font-semibold mb-4">Seleccione el método de pago</h2>
-                <button
-                  onClick={() => handleMethodSelection("Credito")}
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
-                >
-                  Tarjeta de Crédito
-                </button>
-                <button
-                  onClick={() => handleMethodSelection("Debito")}
-                  className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
-                >
-                  Tarjeta de Débito
-                </button>
-              </div>
+        {/* Popup */}
+        {showPaymentPopup && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-5 rounded-lg shadow-lg relative">
+              <button
+                onClick={() => setShowPaymentPopup(false)}
+                className="absolute top-2 right-2 text-gray-700 font-bold text-xl"
+              >
+                ✖
+              </button>
+              <h2 className="text-2xl font-semibold mb-4">Seleccione el método de pago</h2>
+              <button
+                onClick={() => handleMethodSelection("Credito")}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2"
+              >
+                Tarjeta de Crédito
+              </button>
+              <button
+                onClick={() => handleMethodSelection("Debito")}
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+              >
+                Tarjeta de Débito
+              </button>
             </div>
-          )
-        }
+          </div>
+        )}
       </div>
-    </div >
+    </div>
   );
 }

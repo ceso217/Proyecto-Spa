@@ -13,11 +13,13 @@ import { montserrat } from "@/app/ui/fonts";
 const Footer = () => {
   return (
     <footer
-      className="bg-green-services-100 py-12 text-white"
+      className="bg-green-services-100 py-8 text-white"
       style={montserrat.style}
     >
-      <div className="container mx-auto flex mb-12 h-40">
-        <div className="w-1/5 flex justify-center h-full">
+      {/* Contenedor Principal */}
+      <div className="container mx-auto flex flex-wrap lg:flex-nowrap items-center lg:items-start mb-8 lg:mb-12 px-4">
+        {/* Logo */}
+        <div className="w-full lg:w-1/5 flex justify-center mb-6 lg:mb-0">
           <Image
             src="/logo.svg"
             alt="Logotipo Sentirse Bien"
@@ -25,43 +27,93 @@ const Footer = () => {
             height={200}
           />
         </div>
-        <div className="flex justify-around w-3/5 ">
-          <div className="flex flex-col justify-around items-center">
+
+        {/* Links principales */}
+        <div className="w-full lg:w-3/5 flex flex-wrap justify-around">
+          {/* Contamos con */}
+          <div className="flex flex-col items-center text-center mb-6 lg:mb-0">
             <h3 className="text-black text-xl pb-2">Contamos con</h3>
-            <Link href="/about">Cosmetóloga</Link>
-            <Link href="/about">Especialista</Link>
-            <Link href="/about">Masajista</Link>
+            <Link href="/about" className="hover:underline">
+              Cosmetóloga
+            </Link>
+            <Link href="/about" className="hover:underline">
+              Especialista
+            </Link>
+            <Link href="/about" className="hover:underline">
+              Masajista
+            </Link>
           </div>
-          <div className="flex flex-col justify-around items-center text-white">
+
+          {/* Desarrolladores */}
+          <div className="flex flex-col items-center text-center mb-6 lg:mb-0">
             <h3 className="text-black text-xl pb-2">Desarrolladores</h3>
-            <Link href="https://github.com/ceso217">Cecilio Baroni</Link>
-            <Link href="https://github.com/LeonardoBrabo">Leonardo Brabo</Link>
-            <Link href="https://github.com/frankito48">Franco Romero</Link>
+            <Link
+              href="https://github.com/ceso217"
+              className="hover:underline"
+              target="_blank"
+            >
+              Cecilio Baroni
+            </Link>
+            <Link
+              href="https://github.com/LeonardoBrabo"
+              className="hover:underline"
+              target="_blank"
+            >
+              Leonardo Brabo
+            </Link>
+            <Link
+              href="https://github.com/frankito48"
+              className="hover:underline"
+              target="_blank"
+            >
+              Franco Romero
+            </Link>
           </div>
-          <div className="flex flex-col justify-around items-center text-white">
+
+          {/* Support */}
+          <div className="flex flex-col items-center text-center mb-6 lg:mb-0">
             <h3 className="text-black text-xl pb-2">Support</h3>
-            <Link href="/comingsoon">Blog</Link>
-            <Link href="/comingsoon">Help</Link>
-            <Link href="/comingsoon">FAQs</Link>
+            <Link href="/comingsoon" className="hover:underline">
+              Blog
+            </Link>
+            <Link href="/comingsoon" className="hover:underline">
+              Help
+            </Link>
+            <Link href="/comingsoon" className="hover:underline">
+              FAQs
+            </Link>
           </div>
         </div>
-        <div className="w-1/5 flex flex-col justify-around items-center text-black">
+
+        {/* Redes Sociales */}
+        <div className="w-full lg:w-1/5 flex justify-center lg:justify-end items-center space-x-4">
           <a
             href="https://www.facebook.com/p/Sentirse-BIEN-SPA-100078022921559/?_rdr"
             target="_blank"
+            className="hover:text-gray-300"
           >
             <FontAwesomeIcon icon={faFacebook} size="2x" />
           </a>
-          <a href="https://www.instagram.com/sentirsebien.spa/" target="_blank">
+          <a
+            href="https://www.instagram.com/sentirsebien.spa/"
+            target="_blank"
+            className="hover:text-gray-300"
+          >
             <FontAwesomeIcon icon={faInstagram} size="2x" />
           </a>
-          <a href="https://x.com/sentirtebienspa?lang=es" target="_blank">
+          <a
+            href="https://x.com/sentirtebienspa?lang=es"
+            target="_blank"
+            className="hover:text-gray-300"
+          >
             <FontAwesomeIcon icon={faXTwitter} size="2x" />
           </a>
         </div>
       </div>
-      <div className="border-t border-gris h-24 flex justify-center items-center">
-        <p>Copyright © 2024 Infinite Loops</p>
+
+      {/* Copyright */}
+      <div className="border-t border-gray-400 h-16 flex justify-center items-center text-center">
+        <p className="text-sm lg:text-base">Copyright © 2024 Infinite Loops</p>
       </div>
     </footer>
   );

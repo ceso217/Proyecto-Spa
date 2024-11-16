@@ -9,6 +9,11 @@ import SideBar from "@/components/SideBar.";
 export const metadata = {
   title: "Sentirse Bien Spa",
   description: "El Spa donde venís, a sentirte bien :)",
+  manifest: "/manifest.json",
+  icons: {
+    apple: "/icon.png",
+  },
+  themeColor: "#3C634A",
 };
 
 export default async function RootLayout({ children }) {
