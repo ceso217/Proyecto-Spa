@@ -190,31 +190,14 @@ const SideBar = () => {
           />
         </div>
         <div className="w-[140px] flex items-center justify-end no-underline justify-self-end">
-          {session ? (
-            <button
-              className="px-4 py-2 mr-4 bg-orange-100 rounded-3xl text-base shadow-2xl transition hover:-translate-y-1 md:text-lg"
-              onClick={() => {
-                signOut({ callbackUrl: "/login" });
-              }}
-            >
-              Logout
-            </button>
-          ) : (
-            <>
-              <Link
-                href="/register"
-                className="px-4 py-2 mr-4 bg-orange-100 rounded-3xl text-lg shadow-2xl transition hover:-translate-y-1"
-              >
-                Registrarse
-              </Link>
-              <Link
-                href="/login"
-                className="px-4 py-2 mr-4 bg-orange-100 rounded-3xl text-lg shadow-2xl transition hover:-translate-y-1"
-              >
-                Login
-              </Link>
-            </>
-          )}
+          <button
+            className="px-4 py-2 mr-4 bg-orange-100 rounded-3xl text-base shadow-2xl transition hover:-translate-y-1 md:text-lg"
+            onClick={() => {
+              signOut({ callbackUrl: "/login" });
+            }}
+          >
+            Logout
+          </button>
         </div>
       </nav>
     </>

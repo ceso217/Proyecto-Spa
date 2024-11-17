@@ -79,7 +79,7 @@ export default function Register() {
             priority
           />
         </div>
-        <div className="flex flex-col justify-center items-center w-[600px] h-[800px] bg-green-950 rounded-3xl shadow-xl">
+        <div className="flex flex-col justify-center items-center w-[350px] md:w-[600px] h-[800px] bg-green-950 rounded-3xl shadow-xl">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col justify-evenly w-full h-full my-16 items-center"

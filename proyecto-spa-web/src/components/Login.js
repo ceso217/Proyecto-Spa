@@ -33,8 +33,9 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center bg-orange-50 h-screen w-full">
-      <div className="w-screen h-screen flex justify-center items-center absolute">
+    <div className="flex justify-center items-center bg-orange-50 h-auto py-20 md:min-h-screen w-full relative text-xl">
+      {/* Imagen de fondo */}
+      <div className="absolute inset-0">
         <Image
           src="/sepiatexture.svg"
           alt="Background Image"
@@ -43,28 +44,33 @@ export default function Login() {
           priority
         />
       </div>
-      <div className="flex flex-col justify-center items-center w-[600px] h-[500px] bg-green-950 rounded-3xl shadow-xl">
+
+      {/* Contenedor principal */}
+      <div className="relative flex flex-col w-[325px] md:w-[600px] md:h-[500px] justify-center items-center max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl bg-green-950 rounded-3xl shadow-xl px-6 py-8 sm:py-10">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col justify-evenly w-full h-3/4 items-center"
+          className="flex flex-col justify-between w-full space-y-6"
           style={montserrat.style}
         >
-          <div className="relative w-3/5 flex justify-center">
+          {/* Título */}
+          <div className="relative w-full text-center">
             <h1
-              className="text-white text-9xl mb-3 -mt-8"
+              className="text-white text-7xl md:text-9xl mb-3"
               style={corinthia.style}
             >
               Bienvenido
             </h1>
             {error && (
-              <p className="absolute -bottom-2 z-20 mt-1 bg-red-500 text-white text-lg px-12 py-1 rounded-2xl shadow-lg">
+              <p className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white md:text-lg px-4 py-1 rounded-2xl shadow-lg">
                 {error}
               </p>
             )}
           </div>
-          <div className="relative w-3/5">
+
+          {/* Input de usuario */}
+          <div className="relative w-full">
             <input
-              className="w-full rounded-3xl bg-orange-50 z-10 my-1 py-2 px-5 border-solid border-transparent hover:border-black border-2 text-lg"
+              className="w-full rounded-3xl bg-orange-50 py-2 px-4 border-solid border-transparent hover:border-black border-2 text-base md:text-lg focus:outline-none"
               placeholder="Correo o Usuario"
               defaultValue={""}
               {...register("identifier", {
@@ -72,14 +78,16 @@ export default function Login() {
               })}
             />
             {errors.identifier?.type === "required" && (
-              <p className="absolute left-3 -bottom-5 z-20 mt-1 bg-red-500 text-white text-sm px-3 py-1 rounded-xl shadow-lg">
+              <p className="absolute left-4 -bottom-5 bg-red-500 text-white text-xs md:text-sm px-3 py-1 rounded-xl shadow-lg">
                 Ingrese correo o usuario
               </p>
             )}
           </div>
-          <div className="relative w-3/5">
+
+          {/* Input de contraseña */}
+          <div className="relative w-full">
             <input
-              className="w-full bg-orange-50 rounded-3xl z-10 my-1 py-2 px-5 border-solid border-transparent hover:border-black border-2 text-lg"
+              className="w-full rounded-3xl bg-orange-50 py-2 px-4 border-solid border-transparent hover:border-black border-2 text-base md:text-lg focus:outline-none"
               type="password"
               placeholder="Contraseña"
               autoComplete="off"
@@ -89,18 +97,25 @@ export default function Login() {
               })}
             />
             {errors.password?.type === "required" && (
-              <p className="absolute left-3 -bottom-5 z-20 mt-1 bg-red-500 text-white text-sm px-3 py-1 rounded-xl shadow-lg">
+              <p className="absolute left-4 -bottom-5 bg-red-500 text-white text-xs md:text-lg px-3 py-1 rounded-xl shadow-lg">
                 Ingrese contraseña
               </p>
             )}
           </div>
+
+          {/* Botón de envío */}
           <input
             type="submit"
             value={"Login ➜"}
-            className="w-48 bg-orange-50 text-green-services-100 rounded-3xl z-10 mt-2 -mb-1 p-2 text-lg hover:bg-green-services-300 shadow-xl hover:text-black hover:-translate-y-1 transition border-solid border-transparent hover:border-white border-2"
+            className="w-full md:mx-auto sm:w-3/4 lg:w-1/2 bg-orange-50 text-green-services-100 rounded-3xl py-2 text-base md:text-lg font-semibold hover:bg-green-services-300 shadow-lg hover:text-black hover:-translate-y-1 transition-transform duration-300 border-solid border-transparent hover:border-white border-2"
           />
         </form>
-        <p className="z-10 text-orange-50 text-sm" style={montserrat.style}>
+
+        {/* Registro */}
+        <p
+          className="text-orange-50 text-xs md:text-lg mt-4"
+          style={montserrat.style}
+        >
           ¿Aún no estás registrado?{" "}
           <Link href="/register" className="text-red-600 hover:underline">
             Registrarme!

@@ -36,11 +36,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <h1>HOLAAAAAAA</h1>
-      <div>
-        <PWAInstallButton />
-      </div>
-      <h1>HOLAAAAAAA</h1>
+      <PWAInstallButton />
       <div className="flex flex-col lg:flex-row bg-green-services-100 -mt-1">
         <div className="flex items-center justify-center w-full lg:w-6/12 text-center text-white p-6">
           <div className="flex flex-col items-center">
