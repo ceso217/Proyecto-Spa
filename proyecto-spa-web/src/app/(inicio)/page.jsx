@@ -53,7 +53,7 @@ export default function Home() {
               ¡Te invitamos a reservar tu turno de manera fácil y rápida! Elige el servicio que prefieras y selecciona la fecha que más te convenga.
               Nos encargaremos de brindarte la mejor experiencia para tu bienestar.
             </p>
-            <Link href="/services">
+            <Link href="/servicios">
               <button className="bg-green-services-200 text-lg sm:text-xl lg:text-2xl hover:no-underline text-white rounded-xl cursor-pointer py-3.5 px-7 transition hover:-translate-y-1 shadow-lg">
                 Pedi tu turno!
               </button>
