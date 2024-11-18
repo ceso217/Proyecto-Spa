@@ -15,10 +15,6 @@ const nextConfig = {
   },
 };
 
-// export default withPWA({
-//   dest: "public", // Configuración específica para PWA
-// })(nextConfig); // Aplica únicamente sobre la configuración base
-
 export default withPWA({
-  disable: process.env.NODE_ENV === "development", // Configuración específica para PWA
+  dest: "public", // Configuración específica para PWA
 })(nextConfig); // Aplica únicamente sobre la configuración base
