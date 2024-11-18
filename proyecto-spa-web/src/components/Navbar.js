@@ -26,7 +26,7 @@ function Navbar() {
         />
         <Link
           href="/"
-          className="absolute text-5xl text-orange-100 mt-11 md:text-7xl md:static"
+          className="absolute text-4xl text-orange-100 mt-11 md:text-7xl md:static"
           style={corinthia.style}
         >
           Sentirse Bien
@@ -52,7 +52,7 @@ function Navbar() {
         </li>
       </ul>
       {/* Botones de acción (Login / Logout / Registrarse) */}
-      <div className="flex flex xl:flex-row items-center space-x-4 xl:w-[450px] justify-end">
+      <div className="flex xl:flex-row items-center space-x-2 xl:w-[450px] justify-end">
         <>
           <Image
             src="/flor.svg"
@@ -63,13 +63,13 @@ function Navbar() {
           />
           <Link
             href="/login"
-            className="px-4 py-2 -mr-28 bg-orange-100 rounded-3xl text-sm lg:text-lg shadow-md transition hover:-translate-y-1"
+            className="px-3 py-2 -mr-28 bg-orange-100 rounded-3xl text-sm lg:text-lg shadow-md transition hover:-translate-y-1"
           >
             Login
           </Link>
           <Link
             href="/register"
-            className="px-4 py-2 bg-orange-100 rounded-3xl text-sm lg:text-lg shadow-md transition hover:-translate-y-1"
+            className="px-3 py-2 bg-orange-100 rounded-3xl text-sm lg:text-lg shadow-md transition hover:-translate-y-1"
           >
             Registrarse
           </Link>

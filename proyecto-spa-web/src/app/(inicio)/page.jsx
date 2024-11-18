@@ -28,7 +28,7 @@ export default function Home() {
               className="sm:w-72 sm:h-72"
             />
             <h1
-              className="text-8xl md:text-9xl md:-mt-20"
+              className="text-7xl md:text-9xl md:-mt-20"
               style={corinthia.style}
             >
               Sentirse Bien
