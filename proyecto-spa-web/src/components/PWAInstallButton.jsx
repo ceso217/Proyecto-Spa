@@ -1,5 +1,5 @@
-"use cliente"
 import { useEffect, useState } from "react";
+import { corinthia, cormorant, montserrat } from "@/app/ui/fonts";
 
 export default function PWAInstallButton() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
