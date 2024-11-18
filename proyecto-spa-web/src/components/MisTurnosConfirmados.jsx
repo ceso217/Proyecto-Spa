@@ -3,7 +3,7 @@ import { format } from "date-fns";
 
 export default function TurnoConfirmado({ item }) {
   return (
-    <div className="flex items-center p-4 bg-white shadow text-center">
+    <div className="flex text-sm md:text-lg items-center p-4 bg-white shadow text-center break-words hyphens-auto">
       <div className="w-1/4">
         <p>{item.service}</p>
       </div>

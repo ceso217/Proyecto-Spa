@@ -88,23 +88,23 @@ export default function TurnoConfirmar({ item }) {
   };
 
   return (
-    <div className="flex text-sm md:text-lg items-center p-4 bg-white shadow">
-      <div className="w-1/5 md:text-base text-center truncate">
+    <div className="flex text-sm md:text-lg items-center p-4 bg-white shadow break-words hyphens-auto text-center">
+      <div className="w-1/5 text-center">
         <p>{item.service}</p>
       </div>
-      <div className="w-1/5 text-center truncate">
+      <div className="w-1/5 text-center">
         <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
       </div>
-      <div className="w-1/5 text-center truncate">
+      <div className="w-1/5 text-center">
         <p>{format(new Date(item.date), "HH:mm")}</p>
       </div>
-      <div className="w-1/5 text-center truncate">
+      <div className="w-1/5 text-center">
         <p>{item.professional}</p>
       </div>
       <div className="w-1/5 flex justify-evenly">
         <button
           onClick={() => setShowPaymentPopup(true)}
-          className="bg-green-500 text-white w-28 mt-2 px-2 py-1 rounded-3xl text-base transition-transform duration-200 hover:scale-105"
+          className="bg-green-500 text-white w-28 mt-2 md:px-2 md:py-1 rounded-3xl text-sm md:text-lg transition-transform duration-200 hover:scale-105"
         >
           Pagar
         </button>
